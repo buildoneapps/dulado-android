@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#43B02A</color>
+    <color name="colorPrimaryDark">#2A7F3E</color>
+    <color name="colorAccent">#E82243</color>
+    <color name="map_circle_color">#662776AA</color>
+    <color name="map_circle_stroke_color">#CC2A5382</color>
+    <color name="light_gray">#d3d3d3</color>
+    <color name="ligher_gray">#dddddd</color>
+    <color name="dark_gray">#D1D1D1</color>
+</resources>

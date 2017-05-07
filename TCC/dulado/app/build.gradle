@@ -1,0 +1,70 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+        applicationId "com.buildone.dulado"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile supportDependencies.appCompat
+    compile supportDependencies.design
+
+    compile google.location
+    compile google.maps
+
+    compile firebase.core
+
+    compile butterknife.core
+    annotationProcessor butterknife.processor
+
+    compile dagger.core
+    annotationProcessor dagger.compiler
+    compile dagger.support
+    annotationProcessor dagger.processor
+
+    compile calligraphy.core
+
+    compile rxJava.core
+    compile rxJava.android
+
+    compile flexibleAdapter.core
+    compile glide.core
+    compile discreteScrollView.core
+    compile transitionsEverywhere.core
+
+    compile project(':api-retrofit')
+    compile project(':libs-module')
+    compile project(path: ':business-impl-module')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
+    testCompile 'junit:junit:4.12'
+}
+
+apply plugin: 'com.google.gms.google-services'

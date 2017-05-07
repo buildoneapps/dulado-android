@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-retrofit/api-retrofit.iml" filepath="$PROJECT_DIR$/api-retrofit/api-retrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business-impl-module/business-impl-module.iml" filepath="$PROJECT_DIR$/business-impl-module/business-impl-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business-module/business-module.iml" filepath="$PROJECT_DIR$/business-module/business-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-module/data-module.iml" filepath="$PROJECT_DIR$/data-module/data-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dulado.iml" filepath="$PROJECT_DIR$/dulado.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libs-module/libs-module.iml" filepath="$PROJECT_DIR$/libs-module/libs-module.iml" />
+    </modules>
+  </component>
+</project>

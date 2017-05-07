@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "89404651620",
+    "firebase_url": "https://duladu-f135f.firebaseio.com",
+    "project_id": "duladu-f135f",
+    "storage_bucket": "duladu-f135f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89404651620:android:cc44eca71bdee4a8",
+        "android_client_info": {
+          "package_name": "com.buildone.dulado"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89404651620-m81arjr99m7gi02rprfm1oj5o80t2t8q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buildone.dulado",
+            "certificate_hash": "000063e463bf2c94b2ef09806b95d6f918ff5c23"
+          }
+        },
+        {
+          "client_id": "89404651620-jn8bto8sglmkk1hik6lucf76u73s4onp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYSh7ij32BNHBbUAsF6fQj6O0Kw0cpx80"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89404651620-jn8bto8sglmkk1hik6lucf76u73s4onp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
