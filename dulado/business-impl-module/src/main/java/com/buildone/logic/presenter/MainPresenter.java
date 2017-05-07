@@ -17,6 +17,7 @@ public class MainPresenter implements MainContract.Presenter {
     private final int someId;
     private MainContract.View view;
     private ArrayList<LiveObject> liveItems;
+    private boolean inGridMode;
 
     @Inject
     public MainPresenter(MainContract.View view, @Named("someId") int someId) {
@@ -50,14 +51,31 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onButtonMapTouched() {
-        view.switchToMap();
+        inGridMode = !inGridMode;
         view.setMapButtonVisible(false);
+        view.setLiveRecyclerVisible(true);
+        view.switchToMap(inGridMode);
     }
 
     @Override
     public void onButtonListTouched() {
-        view.switchToList();
+        inGridMode = false;
         view.setMapButtonVisible(true);
+        view.setLiveRecyclerVisible(false);
+        view.switchToList(inGridMode);
+    }
+
+    @Override
+    public void onButtonGridTouched() {
+        inGridMode = true;
+        view.setMapButtonVisible(true);
+        view.setLiveRecyclerVisible(false);
+        view.switchToList(inGridMode);
+    }
+
+    @Override
+    public void onButtonSearchTouched() {
+        view.navigateToSearchActivity();
     }
 
 }

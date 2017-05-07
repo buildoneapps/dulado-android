@@ -17,11 +17,14 @@ public interface MainContract {
         void initLiveRecycler();
         void populateLiveRecycler(ArrayList<LiveObject> items);
         void navigateToStoreActivity(int store);
-        int getSomeId();
+        void navigateToSearchActivity();
 
-        void switchToMap();
-        void switchToList();
+        void switchToMap(boolean inGridMode);
+        void switchToList(boolean inGridMode);
         void setMapButtonVisible(boolean visibile);
+        void setLiveRecyclerVisible(boolean visible);
+
+        int getSomeId();
     }
 
     interface Presenter{
@@ -29,5 +32,7 @@ public interface MainContract {
         void onLiveItemTouched(int position);
         void onButtonMapTouched();
         void onButtonListTouched();
+        void onButtonGridTouched();
+        void onButtonSearchTouched();
     }
 }

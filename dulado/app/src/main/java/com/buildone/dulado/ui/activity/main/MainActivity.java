@@ -1,13 +1,16 @@
 package com.buildone.dulado.ui.activity.main;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
@@ -19,6 +22,10 @@ import com.buildone.dulado.ui.adapter.viewpager.MainPagerAdapter;
 import com.buildone.dulado.utils.NonSwipeableViewPager;
 import com.buildone.dulado.utils.RecyclerItemClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.transitionseverywhere.ChangeBounds;
+import com.transitionseverywhere.Slide;
+import com.transitionseverywhere.Transition;
+import com.transitionseverywhere.TransitionManager;
 
 import java.util.ArrayList;
 
@@ -42,12 +49,15 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     RecyclerView rvLive;
     @BindView(R.id.viewPager)
     NonSwipeableViewPager viewPager;
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
 
     FlexibleAdapter<LiveHolder> liveAdapter;
     private int someId;
 
     private MainPagerAdapter vpAdapter;
-    private boolean mapVisible;
+    private boolean showMapIcon;
+    private boolean inGridMode;
 
     //region Android Lifecycle
     @Override
@@ -66,19 +76,26 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_map).setVisible(mapVisible);
-        menu.findItem(R.id.action_list).setVisible(!mapVisible);
+        menu.findItem(R.id.action_map).setVisible(showMapIcon);
+        menu.findItem(R.id.action_list).setVisible(inGridMode);
+        menu.findItem(R.id.action_grid).setVisible(!inGridMode);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                presenter.onButtonSearchTouched();
+                break;
             case R.id.action_map:
                 presenter.onButtonMapTouched();
                 break;
             case R.id.action_list:
                 presenter.onButtonListTouched();
+                break;
+            case R.id.action_grid:
+                presenter.onButtonGridTouched();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -96,7 +113,6 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         vpAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(vpAdapter);
         viewPager.setCurrentItem(0);
-
     }
 
     @Override
@@ -166,24 +182,51 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
+    public void navigateToSearchActivity() {
+
+    }
+
+    @Override
     public int getSomeId() {
         return someId;
     }
 
     @Override
-    public void switchToMap() {
+    public void switchToMap(boolean inGridMode) {
+        this.inGridMode = inGridMode;
         viewPager.setCurrentItem(MAP_FRAG_POS);
+        invalidateOptionsMenu();
     }
 
     @Override
-    public void switchToList() {
+    public void switchToList(boolean inGridMode) {
+        this.inGridMode = inGridMode;
         viewPager.setCurrentItem(LIST_FRAG_POS);
+        invalidateOptionsMenu();
     }
 
     @Override
     public void setMapButtonVisible(boolean visibile) {
-        this.mapVisible = visibile;
-        invalidateOptionsMenu();
+        this.showMapIcon = visibile;
+    }
+
+    @Override
+    public void setLiveRecyclerVisible(boolean visible) {
+        Transition transition = null;
+        if (visible) {
+            transition = new Slide(Gravity.START);
+            transition.setDuration(500);
+            transition.setInterpolator(new AccelerateDecelerateInterpolator());
+            transition.addTarget(rvLive);
+        } else {
+            transition = new ChangeBounds();
+            transition.setDuration(500);
+            transition.setInterpolator(new AccelerateDecelerateInterpolator());
+            transition.addTarget(appBarLayout);
+        }
+        TransitionManager.beginDelayedTransition(appBarLayout, transition);
+        rvLive.setVisibility(visible ? View.VISIBLE : View.GONE);
+
     }
 
     //endregion
