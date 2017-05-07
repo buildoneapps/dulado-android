@@ -1,4 +1,4 @@
-package com.buildone.dulado.components;
+package com.buildone.dulado.components.activity;
 
 
 import android.content.Context;

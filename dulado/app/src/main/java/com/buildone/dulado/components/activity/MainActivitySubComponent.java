@@ -1,4 +1,4 @@
-package com.buildone.dulado.components;
+package com.buildone.dulado.components.activity;
 
 
 import android.content.Context;
@@ -8,8 +8,6 @@ import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.main.MainActivity;
 import com.buildone.logic.presenter.MainPresenter;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
 import javax.inject.Named;
 
@@ -36,15 +34,6 @@ public interface MainActivitySubComponent extends AndroidInjector<MainActivity> 
 
         @Binds
         abstract MainContract.View providesMainView(MainActivity mainActivity);
-
-        @Provides
-        static GoogleApiClient providesGoogleApi(MainActivity mainActivity) {
-            return new GoogleApiClient.Builder(mainActivity)
-                    .addConnectionCallbacks(mainActivity)
-                    .addOnConnectionFailedListener(mainActivity)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
 
         @Provides
         static MainContract.Presenter providesPresenter(MainActivity mainActivity, @Named("someId") int someId){
