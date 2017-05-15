@@ -2,15 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="@string/menu_map_text"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_green_24dp"
+        android:orderInCategory="1"
+        android:title="@string/menu_search_text"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_map"
         android:icon="@drawable/ic_map_green_24dp"
-        android:orderInCategory="100"
+        android:orderInCategory="99"
+        android:title="@string/menu_map_text"
         app:showAsAction="always" />
     <item
-        android:title="@string/menu_list_text"
         android:id="@+id/action_list"
         android:icon="@drawable/ic_view_list_green_24dp"
         android:orderInCategory="100"
+        android:title="@string/menu_list_text"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_grid"
+        android:icon="@drawable/ic_grid_green_24dp"
+        android:orderInCategory="100"
+        android:title="@string/menu_grid_text"
         app:showAsAction="always" />
 </menu>

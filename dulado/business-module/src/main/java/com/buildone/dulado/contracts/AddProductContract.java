@@ -13,7 +13,7 @@ public interface AddProductContract {
     interface View extends BaseView {
         void initToolbar();
         void checkPermissions();
-        void initPhotosRecyclerView(ArrayList<String> photos);
+        void initPhotosRecyclerView();
         void showPhotoChooserDialog();
         void openCamera();
         void openGallery();

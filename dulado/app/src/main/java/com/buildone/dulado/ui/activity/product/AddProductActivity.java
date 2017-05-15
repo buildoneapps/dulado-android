@@ -9,8 +9,6 @@ import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
@@ -46,7 +44,7 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     }
 
     @Override
-    public void initPhotosRecyclerView(ArrayList<String> photos) {
+    public void initPhotosRecyclerView() {
 
     }
 

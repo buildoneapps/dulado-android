@@ -1,14 +1,17 @@
 package com.buildone.dulado.application;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 
-import com.buildone.dulado.components.AddProductActivitySubComponent;
-import com.buildone.dulado.components.DiscoverActivitySubComponent;
-import com.buildone.dulado.components.EditProfileActivitySubComponent;
-import com.buildone.dulado.components.MainActivitySubComponent;
-import com.buildone.dulado.components.ProductActivitySubComponent;
-import com.buildone.dulado.components.StoreActivitySubComponent;
-import com.buildone.dulado.components.UserProfileActivitySubComponent;
+import com.buildone.dulado.components.activity.AddProductActivitySubComponent;
+import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
+import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
+import com.buildone.dulado.components.activity.MainActivitySubComponent;
+import com.buildone.dulado.components.activity.ProductActivitySubComponent;
+import com.buildone.dulado.components.activity.StoreActivitySubComponent;
+import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
+import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
+import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
 import com.buildone.dulado.ui.activity.DiscoverActivity;
 import com.buildone.dulado.ui.activity.EditProfileActivity;
 import com.buildone.dulado.ui.activity.UserProfileActivity;
@@ -16,11 +19,14 @@ import com.buildone.dulado.ui.activity.main.MainActivity;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
 import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
+import com.buildone.dulado.ui.fragments.MainListFragment;
+import com.buildone.dulado.ui.fragments.MainMapFragment;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ActivityKey;
 import dagger.android.AndroidInjector;
+import dagger.android.support.FragmentKey;
 import dagger.multibindings.IntoMap;
 
 /**
@@ -65,4 +71,14 @@ public abstract class BindingModule {
     @IntoMap
     @ActivityKey(EditProfileActivity.class)
     abstract AndroidInjector.Factory<? extends Activity> bindEditProfileActivityInjectorFactory(EditProfileActivitySubComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @FragmentKey(MainMapFragment.class)
+    abstract AndroidInjector.Factory<? extends Fragment> bindMainMapFragmentInjectorFactory(MainMapFragmentSubComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @FragmentKey(MainListFragment.class)
+    abstract AndroidInjector.Factory<? extends Fragment> bindMainListFragmentInjectorFactory(MainListFragmentSubComponent.Builder builder);
 }

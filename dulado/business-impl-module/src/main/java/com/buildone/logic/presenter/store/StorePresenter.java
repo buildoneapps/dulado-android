@@ -31,6 +31,8 @@ public class StorePresenter implements StoreContract.Presenter {
     public void start() {
         view.initToolbar();
         products.add(new ProductObject(1,1,"teste",1.99f));
+
+        store = new StoreObject(storeId,"ABC",1);
     }
 
     @Override

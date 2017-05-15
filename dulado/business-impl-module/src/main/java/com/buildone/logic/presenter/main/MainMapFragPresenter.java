@@ -1,6 +1,6 @@
-package com.buildone.logic.presenter;
+package com.buildone.logic.presenter.main;
 
-import com.buildone.dulado.contracts.MainContract;
+import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnStoreTouchedEvent;
 import com.buildone.dulado.model.LiveObject;
@@ -12,21 +12,19 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by Alessandro Pryds on 11/04/2017.
+ * Created by Alessandro Pryds on 07/05/2017.
  */
 
-public class MainPresenter implements MainContract.Presenter {
+public class MainMapFragPresenter implements MainMapContract.Presenter {
 
     private static final int INITIAL_RADIUS = 1000;
-    private final int someId;
-    private MainContract.View view;
+    private MainMapContract.View view;
     private boolean permissionGranted;
     private boolean mapReady;
     private CompositeDisposable compositeDisposable;
@@ -34,32 +32,18 @@ public class MainPresenter implements MainContract.Presenter {
     private ArrayList<LiveObject> liveItems;
 
     @Inject
-    public MainPresenter(MainContract.View view, @Named("someId") int someId) {
+    public MainMapFragPresenter(MainMapContract.View view) {
         this.view = view;
-        this.someId = someId;
         this.storeItems = new ArrayList<>();
         this.liveItems = new ArrayList<>();
     }
-
     @Override
     public void start() {
         initSubscriptions();
 
-        view.initToolbar();
         view.initPermissions();
         view.initMap();
-        view.showToastMessage(String.valueOf(someId));
-        view.initLiveRecycler();
         view.initStoresScrollView();
-
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        liveItems.add(new LiveObject(0, 1, ""));
-        view.populateLiveRecycler(liveItems);
 
         storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
         storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
@@ -164,11 +148,6 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void onCameraMove() {
         view.hideStoresScrollView();
-    }
-
-    @Override
-    public void onLiveItemTouched(int position) {
-        view.navigateToStoreActivity(liveItems.get(position).getStoreId());
     }
 
 }

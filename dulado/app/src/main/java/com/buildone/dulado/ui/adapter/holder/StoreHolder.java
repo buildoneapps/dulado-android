@@ -18,8 +18,8 @@ import butterknife.Unbinder;
 
 public class StoreHolder implements FlexibleHolder {
 
-    @BindView(R.id.ivStoreImage)
-    ImageView ivStoreImage;
+    @BindView(R.id.ivProductPhoto)
+    ImageView ivProductPhoto;
     private Context context;
     private StoreObject storeObject;
     private Unbinder unbinder;
@@ -47,13 +47,13 @@ public class StoreHolder implements FlexibleHolder {
 
     }
 
-    @OnClick({R.id.ivStoreImage, R.id.btnStore})
+    @OnClick({R.id.ivProductPhoto, R.id.ivSellerPhoto})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ivStoreImage:
+            case R.id.ivProductPhoto:
                 RxBus.getInstance().publish(new OnProductTouchedEvent(storeObject.getProduct()));
                 break;
-            case R.id.btnStore:
+            case R.id.ivSellerPhoto:
                 RxBus.getInstance().publish(new OnStoreTouchedEvent(storeObject));
                 break;
         }
