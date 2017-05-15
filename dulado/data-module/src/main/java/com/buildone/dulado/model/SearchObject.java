@@ -9,8 +9,9 @@ public class SearchObject {
     private SellerObject seller;
     private float price;
     private String tag;
+    private int id;
 
-    public SearchObject(String imageUrl, SellerObject seller, float price, String tag) {
+    public SearchObject(int id, String imageUrl, SellerObject seller, float price, String tag) {
         this.imageUrl = imageUrl;
         this.seller = seller;
         this.price = price;
@@ -31,5 +32,9 @@ public class SearchObject {
 
     public String getTag() {
         return tag;
+    }
+
+    public int getId() {
+        return id;
     }
 }

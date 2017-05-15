@@ -59,6 +59,7 @@ dependencies {
     compile glide.core
     compile discreteScrollView.core
     compile transitionsEverywhere.core
+    compile circleImageView.core
 
     compile project(':api-retrofit')
     compile project(':libs-module')

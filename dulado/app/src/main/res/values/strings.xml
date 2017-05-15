@@ -30,4 +30,23 @@
     <string name="menu_list_text">Visualizar em lista</string>
     <string name="menu_search_text">Pesquisar</string>
     <string name="menu_grid_text">Visualizar em grade</string>
+    <string name="sample_price">R$ 0.00</string>
+    <string name="sample_product_name">Produto abc</string>
+    <string name="sample_location">1.1 km</string>
+    <string name="sample_seller_name">Jack Sparrow</string>
+    <string name="sample_product_tags">#doce #big #cookies</string>
+    <string name="anunciar">Anunciar</string>
+    <string name="hint_product_name">O que você está vendendo?</string>
+    <string name="hint_product_description">Conte um pouco do seu produto</string>
+    <string name="hint_product_price">Preço</string>
+    <string name="hint_product_tags">Tags</string>
+    <string name="label_payment_methods">Formas de pagamento</string>
+    <string name="label_delivery_methods">Formas de entrega</string>
+    <string name="option_payment_online">Aceito o recebimento de pagamento on-line</string>
+    <string name="placeholder_online_payment_value" formatted="false">Você receberá %s em sua carteira se o produto for pago pelos meios de pagamento on-line</string>
+    <string name="button_payment_how_it_works">Como funciona o pagamento online?</string>
+    <string name="hint_shipping_method">Selecione os tipos de entrega disponiveis para esse produto</string>
+    <string name="option_shipping_pickup">Retirada em mãos</string>
+    <string name="option_shipping_delivery">Entrega em endereço</string>
+    <string name="option_share_facebook">Compartilhar meu anúncio no facebook</string>
 </resources>

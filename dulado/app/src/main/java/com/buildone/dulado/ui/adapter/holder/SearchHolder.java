@@ -2,33 +2,31 @@ package com.buildone.dulado.ui.adapter.holder;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.babic.filip.flexibleadapter.FlexibleHolder;
 import com.buildone.dulado.R;
-import com.buildone.dulado.model.LiveObject;
+import com.buildone.dulado.model.SearchObject;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class LiveHolder implements FlexibleHolder {
+public class SearchHolder implements FlexibleHolder {
 
-    @BindView(R.id.ivLivePhoto)
-    ImageView ivLivePhoto;
-
+    /*@BindView(R.id.ivPhoto)
+    ImageView ivPhoto;
+    */
     private Context context;
-    private LiveObject liveObject;
+    private SearchObject searchObject;
     private Unbinder unbinder;
 
-    public LiveHolder(Context context, LiveObject liveObject) {
+    public SearchHolder(Context context, SearchObject searchObject) {
         this.context = context;
-        this.liveObject = liveObject;
+        this.searchObject = searchObject;
     }
 
     @Override
     public int getLayout() {
-        return R.layout.recycler_live_item;
+        return R.layout.recycler_product_list_item;
     }
 
     @Override
@@ -42,6 +40,6 @@ public class LiveHolder implements FlexibleHolder {
     public void displayView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
 
-        //Glide.with(context).load(liveObject.getPhotoUrl()).placeholder(R.drawable.shape_circle).into(ivLivePhoto);
+        //Glide.with(context).load(searchObject.getPhotoUrl()).placeholder(R.drawable.shape_circle).into(ivLivePhoto);
     }
 }

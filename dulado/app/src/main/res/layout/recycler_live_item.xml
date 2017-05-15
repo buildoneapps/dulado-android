@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="72dp"
     android:layout_height="72dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="6dp"
     android:orientation="vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivLivePhoto"
         android:layout_width="60dp"
-        android:scaleType="fitCenter"
         android:layout_height="60dp"
-        android:src="@drawable/shape_circle" />
+        android:src="@color/ligher_gray"/>
 </LinearLayout>

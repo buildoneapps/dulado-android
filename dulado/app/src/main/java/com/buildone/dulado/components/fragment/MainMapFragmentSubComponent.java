@@ -6,7 +6,7 @@ import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.fragments.MainMapFragment;
-import com.buildone.logic.presenter.MainMapFragPresenter;
+import com.buildone.logic.presenter.main.MainMapFragPresenter;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 

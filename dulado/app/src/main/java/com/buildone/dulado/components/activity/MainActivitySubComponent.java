@@ -7,7 +7,7 @@ import com.buildone.dulado.contracts.MainContract;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.main.MainActivity;
-import com.buildone.logic.presenter.MainPresenter;
+import com.buildone.logic.presenter.main.MainPresenter;
 
 import javax.inject.Named;
 

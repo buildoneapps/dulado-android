@@ -1,4 +1,4 @@
-package com.buildone.logic.presenter;
+package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.event.OnProductTouchedEvent;

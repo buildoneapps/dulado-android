@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.buildone.dulado.ui.activity.product.ProductActivity"
+    tools:context="com.buildone.dulado.ui.activity.searchProduct.ProductActivity"
     tools:showIn="@layout/activity_product">
 
 

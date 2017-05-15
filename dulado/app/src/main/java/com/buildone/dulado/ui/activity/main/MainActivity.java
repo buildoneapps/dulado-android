@@ -1,5 +1,6 @@
 package com.buildone.dulado.ui.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,16 +12,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.LinearLayout;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
+import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainContract;
+import com.buildone.dulado.event.OnListFormatModeChangedEvent;
 import com.buildone.dulado.model.LiveObject;
 import com.buildone.dulado.ui.activity.NavDrawerBaseActivity;
+import com.buildone.dulado.ui.activity.product.AddProductActivity;
+import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.LiveHolder;
 import com.buildone.dulado.ui.adapter.viewpager.MainPagerAdapter;
 import com.buildone.dulado.utils.NonSwipeableViewPager;
 import com.buildone.dulado.utils.RecyclerItemClickListener;
+import com.buildone.rxbus.RxBus;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.Slide;
@@ -33,6 +41,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 
 public class MainActivity extends NavDrawerBaseActivity implements MainContract.View {
@@ -51,6 +60,8 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     NonSwipeableViewPager viewPager;
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
+    @BindView(R.id.container_create_ad)
+    LinearLayout containerCreateAd;
 
     FlexibleAdapter<LiveHolder> liveAdapter;
     private int someId;
@@ -93,9 +104,11 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
                 break;
             case R.id.action_list:
                 presenter.onButtonListTouched();
+                RxBus.getInstance().publish(new OnListFormatModeChangedEvent(AppConstants.LIST_MODE_VERTICAL_LIST));
                 break;
             case R.id.action_grid:
                 presenter.onButtonGridTouched();
+                RxBus.getInstance().publish(new OnListFormatModeChangedEvent(AppConstants.LIST_MODE_GRID));
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -134,7 +147,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         }));
     }
 
-    /*  @Override
+    /*
 
       <Spinner
           android:id="@+id/spinnerDistance"
@@ -144,7 +157,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
           android:layout_centerHorizontal="true"
           android:layout_margin="16dp"
           android:background="@android:color/white" />
-
+        @Override
       public void initSpinnerDistance(ArrayList<String> distances) {
           ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[]) distances.toArray());
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -177,13 +190,22 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
-    public void navigateToStoreActivity(int store) {
-
+    public void navigateToStoreActivity(int storeId) {
+        Intent intent = new Intent(this, StoreActivity.class);
+        intent.putExtra(AppConstants.INTENT_TAG_STORE_ID,storeId);
+        startActivity(intent);
     }
 
     @Override
     public void navigateToSearchActivity() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public void navigateToAddProductActivity() {
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -229,5 +251,29 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
 
     }
 
+    @Override
+    public void showCreateAdButton() {
+        Transition transition = new Slide(Gravity.BOTTOM)
+                .setDuration(500)
+                .setInterpolator(new AccelerateInterpolator())
+                .addTarget(containerCreateAd);
+        TransitionManager.beginDelayedTransition(containerCreateAd, transition);
+        containerCreateAd.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideCreateAdButton() {
+        Transition transition = new Slide(Gravity.BOTTOM)
+                .setDuration(500)
+                .setInterpolator(new AccelerateInterpolator())
+                .addTarget(containerCreateAd);
+        TransitionManager.beginDelayedTransition(containerCreateAd, transition);
+        containerCreateAd.setVisibility(View.GONE);
+    }
     //endregion
+
+    @OnClick(R.id.container_create_ad)
+    protected void onCreateAdTouched(){
+        presenter.onButtonCreateAdTouched();
+    }
 }

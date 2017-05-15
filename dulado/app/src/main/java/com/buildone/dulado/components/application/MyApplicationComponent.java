@@ -2,7 +2,6 @@ package com.buildone.dulado.components.application;
 
 import com.buildone.dulado.application.BindingModule;
 import com.buildone.dulado.application.DuladuApplication;
-import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
 import com.buildone.dulado.components.activity.AddProductActivitySubComponent;
 import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
 import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
@@ -10,6 +9,8 @@ import com.buildone.dulado.components.activity.MainActivitySubComponent;
 import com.buildone.dulado.components.activity.ProductActivitySubComponent;
 import com.buildone.dulado.components.activity.StoreActivitySubComponent;
 import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
+import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
+import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
 
 import javax.inject.Singleton;
 
@@ -39,7 +40,8 @@ public interface MyApplicationComponent {
             UserProfileActivitySubComponent.class,
             AddProductActivitySubComponent.class,
             EditProfileActivitySubComponent.class,
-            MainMapFragmentSubComponent.class
+            MainMapFragmentSubComponent.class,
+            MainListFragmentSubComponent.class
     })
     abstract class AppModule {
     }

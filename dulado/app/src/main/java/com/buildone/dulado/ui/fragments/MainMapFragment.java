@@ -122,13 +122,27 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
         View view = inflater.inflate(R.layout.fragment_main_map, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        presenter.start();
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override
@@ -151,14 +165,6 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
                 break;
         }
         presenter.onPermissionGranted(permissions, locationPermissions);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
     }
 
     @Override
@@ -191,6 +197,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
         }
         presenter.onPermissionGranted((String[]) locationPermissions.toArray(), locationPermissions);
     }
+
     @Override
     public void navigateToSearchActivity() {
         /*Intent intent = new Intent(this, SearchActivity.class);
@@ -317,7 +324,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onConnected(@Nullable Bundle bundle) {
         location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            Toast.makeText(getActivity(),"Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
         }
@@ -361,11 +368,5 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
                 presenter.onCameraMove();
             }
         });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }
