@@ -48,5 +48,7 @@
     <string name="hint_shipping_method">Selecione os tipos de entrega disponiveis para esse produto</string>
     <string name="option_shipping_pickup">Retirada em mãos</string>
     <string name="option_shipping_delivery">Entrega em endereço</string>
-    <string name="option_share_facebook">Compartilhar meu anúncio no facebook</string>
+    <string name="option_share_facebook">Compartilhar meu anúncio no Facebook</string>
+    <string name="option_share_instagram">Compartilhar meu anúncio no Intagram</string>
+    <string name="option_share_twitter">Compartilhar meu anúncio no Twitter</string>
 </resources>
