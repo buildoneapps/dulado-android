@@ -7,6 +7,7 @@ import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
 import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
 import com.buildone.dulado.components.activity.MainActivitySubComponent;
 import com.buildone.dulado.components.activity.ProductActivitySubComponent;
+import com.buildone.dulado.components.activity.SearchActivitySubComponent;
 import com.buildone.dulado.components.activity.StoreActivitySubComponent;
 import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
 import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
@@ -41,7 +42,8 @@ public interface MyApplicationComponent {
             AddProductActivitySubComponent.class,
             EditProfileActivitySubComponent.class,
             MainMapFragmentSubComponent.class,
-            MainListFragmentSubComponent.class
+            MainListFragmentSubComponent.class,
+            SearchActivitySubComponent.class
     })
     abstract class AppModule {
     }

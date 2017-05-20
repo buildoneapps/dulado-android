@@ -38,14 +38,12 @@ public class NavDrawerBaseActivity extends BaseActivity {
         }
     }
 
-    // Abre o menu lateral
     protected void openDrawer() {
         if (drawerLayout != null) {
             drawerLayout.openDrawer(GravityCompat.START);
         }
     }
 
-    // Fecha o menu lateral
     protected void closeDrawer() {
         if (drawerLayout != null) {
             drawerLayout.closeDrawer(GravityCompat.START);

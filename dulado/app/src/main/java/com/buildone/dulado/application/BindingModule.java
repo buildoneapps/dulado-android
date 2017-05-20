@@ -8,6 +8,7 @@ import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
 import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
 import com.buildone.dulado.components.activity.MainActivitySubComponent;
 import com.buildone.dulado.components.activity.ProductActivitySubComponent;
+import com.buildone.dulado.components.activity.SearchActivitySubComponent;
 import com.buildone.dulado.components.activity.StoreActivitySubComponent;
 import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
 import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
@@ -16,6 +17,7 @@ import com.buildone.dulado.ui.activity.DiscoverActivity;
 import com.buildone.dulado.ui.activity.EditProfileActivity;
 import com.buildone.dulado.ui.activity.UserProfileActivity;
 import com.buildone.dulado.ui.activity.main.MainActivity;
+import com.buildone.dulado.ui.activity.main.SearchActivity;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
 import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
@@ -71,6 +73,11 @@ public abstract class BindingModule {
     @IntoMap
     @ActivityKey(EditProfileActivity.class)
     abstract AndroidInjector.Factory<? extends Activity> bindEditProfileActivityInjectorFactory(EditProfileActivitySubComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @ActivityKey(SearchActivity.class)
+    abstract AndroidInjector.Factory<? extends Activity> bindSearchActivityInjectorFactory(SearchActivitySubComponent.Builder builder);
 
     @Binds
     @IntoMap

@@ -1,1 +1,1 @@
-include ':app', ':api', ':api-retrofit', ':api-retrofit', ':libs-module', ':data-module', ':business-module', ':business-impl-module'
+include ':app', ':api', ':api-retrofit', ':api-retrofit', ':libs-module', ':data-module', ':business-module', ':business-impl'

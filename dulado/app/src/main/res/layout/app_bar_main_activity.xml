@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:titleTextColor="@color/colorPrimary" />
+                app:titleTextColor="@color/colorAccent" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvLive"

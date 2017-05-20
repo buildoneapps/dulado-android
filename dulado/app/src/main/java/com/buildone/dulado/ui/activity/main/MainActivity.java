@@ -147,39 +147,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         }));
     }
 
-    /*
 
-      <Spinner
-          android:id="@+id/spinnerDistance"
-          android:layout_width="200dp"
-          android:layout_height="36dp"
-          android:layout_below="@id/rvLive"
-          android:layout_centerHorizontal="true"
-          android:layout_margin="16dp"
-          android:background="@android:color/white" />
-        @Override
-      public void initSpinnerDistance(ArrayList<String> distances) {
-          ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, (String[]) distances.toArray());
-          adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          spinnerDistance.setAdapter(adapter);
-          spinnerDistance.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                  presenter.onDistanceSelected(position);
-              }
-
-              @Override
-              public void onNothingSelected(AdapterView<?> adapterView) {
-
-              }
-          });
-      }
-
-      @Override
-      public void setCurrentDistance(int position) {
-          spinnerDistance.setSelection(position);
-      }
-  */
     @Override
     public void populateLiveRecycler(ArrayList<LiveObject> items) {
         ArrayList<LiveHolder> holders = new ArrayList<>();

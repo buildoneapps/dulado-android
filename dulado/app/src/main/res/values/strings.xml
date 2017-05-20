@@ -51,4 +51,8 @@
     <string name="option_share_facebook">Compartilhar meu anúncio no Facebook</string>
     <string name="option_share_instagram">Compartilhar meu anúncio no Intagram</string>
     <string name="option_share_twitter">Compartilhar meu anúncio no Twitter</string>
+    <string name="sample_description">Temos todos os doces de todos os tamanhos para todos os gostos em todos os formatos.</string>
+    <string name="sample_address">Sorocaba, SP</string>
+    <string name="label_payment_card_product">Pague com cartão de crédito</string>
+    <string name="label_secure_shopping">Ambiente de compra segura</string>
 </resources>

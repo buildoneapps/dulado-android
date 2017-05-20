@@ -63,7 +63,7 @@ dependencies {
 
     compile project(':api-retrofit')
     compile project(':libs-module')
-    compile project(path: ':business-impl-module')
+    compile project(path: ':business-impl')
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
     compile 'com.android.support:support-v4:25.2.0'
     testCompile 'junit:junit:4.12'
