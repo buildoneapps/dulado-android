@@ -12,7 +12,7 @@
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/api-retrofit" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/business-impl-module" />
+            <option value="$PROJECT_DIR$/business-impl" />
             <option value="$PROJECT_DIR$/business-module" />
             <option value="$PROJECT_DIR$/data-module" />
             <option value="$PROJECT_DIR$/libs-module" />

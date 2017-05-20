@@ -4,9 +4,11 @@ package com.buildone.dulado.components.activity;
 import android.content.Context;
 
 import com.buildone.dulado.contracts.MainContract;
+import com.buildone.dulado.interactor.IMainInteractor;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.main.MainActivity;
+import com.buildone.logic.interactor.MainInteractor;
 import com.buildone.logic.presenter.main.MainPresenter;
 
 import javax.inject.Named;
@@ -36,10 +38,14 @@ public interface MainActivitySubComponent extends AndroidInjector<MainActivity> 
         abstract MainContract.View providesMainView(MainActivity mainActivity);
 
         @Provides
-        static MainContract.Presenter providesPresenter(MainActivity mainActivity, @Named("someId") int someId){
-            return new MainPresenter(mainActivity,someId);
+        static IMainInteractor providesInteractor(MainActivity mainActivity) {
+            return new MainInteractor();
         }
 
+        @Provides
+        static MainContract.Presenter providesPresenter(MainActivity mainActivity, @Named("someId") int someId, IMainInteractor interactor) {
+            return new MainPresenter(mainActivity, interactor, someId);
+        }
 
         @Provides
         @Named("someId")

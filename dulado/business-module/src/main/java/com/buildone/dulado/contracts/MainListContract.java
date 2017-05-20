@@ -18,10 +18,12 @@ public interface MainListContract {
         void populateGridRecyclerView(ArrayList<SearchObject> items);
         void navigateToProductActivity(ProductObject product);
         void navigateToChatActivity(int productId);
+        void showEmptyMessage();
     }
 
     interface Presenter{
         void start();
+        void loadProducts();
         void initSubscriptions();
         void unsubscribeAll();
         void onProductSelected(ProductObject product);

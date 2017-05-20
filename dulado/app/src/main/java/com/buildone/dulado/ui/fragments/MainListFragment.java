@@ -45,7 +45,6 @@ public class MainListFragment extends BaseFragment implements MainListContract.V
     private Unbinder unbinder;
     private FlexibleAdapter<SearchHolder> listAdapter;
     private FlexibleAdapter<SearchGridHolder> gridAdapter;
-    private ArrayList<SearchObject> searchItems;
     private RecyclerView.OnScrollListener scrollingListener;
 
     //region Android Lifecycle
@@ -172,8 +171,10 @@ public class MainListFragment extends BaseFragment implements MainListContract.V
 
     }
 
-    public ArrayList<SearchObject> getSearchItems() {
-        return searchItems;
+    @Override
+    public void showEmptyMessage() {
+
     }
+
     //endregion
 }

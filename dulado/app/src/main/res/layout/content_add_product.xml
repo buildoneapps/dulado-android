@@ -15,6 +15,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="128dp">
+
+        </android.support.v7.widget.RecyclerView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,11 +80,31 @@
         </LinearLayout>
 
         <CheckBox
+            android:id="@+id/cbFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:padding="16dp"
             android:text="@string/option_share_facebook"
+            app:buttonTint="@color/colorAccent" />
+
+
+        <CheckBox
+            android:id="@+id/cbInstagram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:padding="16dp"
+            android:text="@string/option_share_instagram"
+            app:buttonTint="@color/colorAccent" />
+
+        <CheckBox
+            android:id="@+id/cbTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:padding="16dp"
+            android:text="@string/option_share_twitter"
             app:buttonTint="@color/colorAccent" />
 
         <LinearLayout
@@ -96,7 +123,6 @@
                 android:paddingTop="16dp"
                 android:textSize="14sp"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:layout_width="match_parent"

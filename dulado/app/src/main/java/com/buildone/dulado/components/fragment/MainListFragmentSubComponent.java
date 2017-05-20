@@ -3,16 +3,12 @@ package com.buildone.dulado.components.fragment;
 import android.content.Context;
 
 import com.buildone.dulado.contracts.MainListContract;
-import com.buildone.dulado.model.SearchObject;
-import com.buildone.dulado.model.SellerObject;
+import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.fragments.MainListFragment;
+import com.buildone.logic.interactor.ProductInteractor;
 import com.buildone.logic.presenter.main.MainListFragPresenter;
-
-import java.util.ArrayList;
-
-import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -38,20 +34,13 @@ public interface MainListFragmentSubComponent extends AndroidInjector<MainListFr
         }
 
         @Provides
-        static MainListContract.Presenter providesPresenter(MainListFragment fragment, @Named("searchItems") ArrayList<SearchObject> items) {
-            return new MainListFragPresenter(fragment, items);
+        static MainListContract.Presenter providesPresenter(MainListFragment fragment, IProductInteractor interactor) {
+            return new MainListFragPresenter(fragment,interactor);
         }
 
-        @Named("searchItems")
         @Provides
-        static ArrayList<SearchObject> providesItems(MainListFragment fragment) {
-            ArrayList<SearchObject> items = new ArrayList<>();
-            items.add(new SearchObject(0, "", new SellerObject(), 0, ""));
-            items.add(new SearchObject(0, "", new SellerObject(), 0, ""));
-            items.add(new SearchObject(0, "", new SellerObject(), 0, ""));
-            items.add(new SearchObject(0, "", new SellerObject(), 0, ""));
-            items.add(new SearchObject(0, "", new SellerObject(), 0, ""));
-            return items;
+        static IProductInteractor providesProductIteractor() {
+            return new ProductInteractor();
         }
 
     }

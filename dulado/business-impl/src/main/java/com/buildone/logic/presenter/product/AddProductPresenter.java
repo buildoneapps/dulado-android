@@ -3,6 +3,10 @@ package com.buildone.logic.presenter.product;
 import com.buildone.dulado.contracts.AddProductContract;
 import com.buildone.dulado.interactor.IProductInteractor;
 
+import java.util.ArrayList;
+
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * Created by Alessandro Pryds on 06/05/2017.
  */
@@ -10,20 +14,43 @@ import com.buildone.dulado.interactor.IProductInteractor;
 public class AddProductPresenter implements AddProductContract.Presenter {
     private AddProductContract.View view;
     private IProductInteractor interactor;
+    private CompositeDisposable disposable;
+    private ArrayList<String> items;
 
     public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
+        this.items = new ArrayList<String>(){{
+            add("");
+            add("");
+            add("");
+            add("");
+            add("");
+        }};
     }
 
     @Override
     public void start() {
         view.initToolbar();
+        view.initPhotosRecyclerView(items);
+        initSubscriptions();
     }
 
     @Override
-    public void onButtonAddPhotoTouched() {
+    public void initSubscriptions() {
+        disposable = new CompositeDisposable();
+    }
 
+    @Override
+    public void disposeAll() {
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
+    }
+
+    @Override
+    public void onButtonAddPhotoTouched(int position) {
+        view.showPhotoChooserDialog();
     }
 
     @Override
@@ -33,17 +60,12 @@ public class AddProductPresenter implements AddProductContract.Presenter {
 
     @Override
     public void onButtonCameraTouched() {
-
-    }
-
-    @Override
-    public void onButtonPhotoTouched() {
-
+        view.openCamera();
     }
 
     @Override
     public void onButtonGalleryTouched() {
-
+        view.openGallery();
     }
 
     @Override
@@ -53,6 +75,5 @@ public class AddProductPresenter implements AddProductContract.Presenter {
 
     @Override
     public void onPermissionError() {
-
     }
 }

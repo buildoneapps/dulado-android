@@ -6,7 +6,7 @@ package com.buildone.dulado.view;
 
 public interface BaseView {
     void showToastMessage(String text);
-    void showProgress(String message);
-    void showProgress();
-    void hideProgress();
+    void showLoading(String message);
+    void showLoading();
+    void hideLoading();
 }

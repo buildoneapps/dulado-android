@@ -4,7 +4,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':business-module')
     compile 'javax.inject:javax.inject:1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.9'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
 }
 
 sourceCompatibility = "1.7"

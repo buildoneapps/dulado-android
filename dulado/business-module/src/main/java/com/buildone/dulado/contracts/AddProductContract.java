@@ -13,21 +13,23 @@ public interface AddProductContract {
     interface View extends BaseView {
         void initToolbar();
         void checkPermissions();
-        void initPhotosRecyclerView();
+        void initPhotosRecyclerView(ArrayList<String> items);
         void showPhotoChooserDialog();
         void openCamera();
         void openGallery();
         void navigateToProductPreview(ProductObject product);
         void navigateToProductPage(ProductObject product);
         void navigateToShareActivity(ProductObject product);
+
     }
 
     interface Presenter{
         void start();
-        void onButtonAddPhotoTouched();
+        void initSubscriptions();
+        void disposeAll();
+        void onButtonAddPhotoTouched(int position);
         void onButtonPreviewTouched();
         void onButtonCameraTouched();
-        void onButtonPhotoTouched();
         void onButtonGalleryTouched();
         void onPermissionGranted();
         void onPermissionError();

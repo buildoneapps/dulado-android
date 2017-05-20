@@ -17,17 +17,17 @@ public class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
-    public void showProgress(String message) {
+    public void showLoading(String message) {
 
     }
 
     @Override
-    public void showProgress() {
+    public void showLoading() {
 
     }
 
     @Override
-    public void hideProgress() {
+    public void hideLoading() {
 
     }
 }
