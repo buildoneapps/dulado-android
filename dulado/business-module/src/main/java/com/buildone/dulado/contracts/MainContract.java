@@ -24,11 +24,13 @@ public interface MainContract {
         void switchToList(boolean inGridMode);
         void setMapButtonVisible(boolean visibile);
         void setLiveRecyclerVisible(boolean visible);
+        void setLiveProgressVisible(boolean visible);
 
         void showCreateAdButton();
         void hideCreateAdButton();
 
         int getSomeId();
+
 
     }
 

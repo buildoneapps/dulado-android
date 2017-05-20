@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
@@ -62,10 +63,12 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     AppBarLayout appBarLayout;
     @BindView(R.id.container_create_ad)
     LinearLayout containerCreateAd;
+    @BindView(R.id.liveProgress)
+    ProgressBar liveProgress;
 
-    FlexibleAdapter<LiveHolder> liveAdapter;
     private int someId;
 
+    FlexibleAdapter<LiveHolder> liveAdapter;
     private MainPagerAdapter vpAdapter;
     private boolean showMapIcon;
     private boolean inGridMode;
@@ -160,7 +163,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     @Override
     public void navigateToStoreActivity(int storeId) {
         Intent intent = new Intent(this, StoreActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_STORE_ID,storeId);
+        intent.putExtra(AppConstants.INTENT_TAG_STORE_ID, storeId);
         startActivity(intent);
     }
 
@@ -220,6 +223,11 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
+    public void setLiveProgressVisible(boolean visible) {
+        liveProgress.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void showCreateAdButton() {
         Transition transition = new Slide(Gravity.BOTTOM)
                 .setDuration(500)
@@ -241,7 +249,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     //endregion
 
     @OnClick(R.id.container_create_ad)
-    protected void onCreateAdTouched(){
+    protected void onCreateAdTouched() {
         presenter.onButtonCreateAdTouched();
     }
 }
