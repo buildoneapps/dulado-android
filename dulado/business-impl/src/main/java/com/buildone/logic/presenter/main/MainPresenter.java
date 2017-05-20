@@ -123,6 +123,7 @@ public class MainPresenter implements MainContract.Presenter {
         view.setMapButtonVisible(false);
         view.setLiveRecyclerVisible(true);
         view.switchToMap(inGridMode);
+        view.hideCreateAdButton();
     }
 
 
