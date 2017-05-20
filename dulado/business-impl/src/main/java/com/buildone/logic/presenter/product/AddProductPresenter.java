@@ -1,13 +1,11 @@
 package com.buildone.logic.presenter.product;
 
 import com.buildone.dulado.contracts.AddProductContract;
-import com.buildone.dulado.event.OnAddProductPhotoRequestEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
-import com.buildone.rxbus.RxBus;
 
-import io.reactivex.annotations.NonNull;
+import java.util.ArrayList;
+
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by Alessandro Pryds on 06/05/2017.
@@ -17,30 +15,30 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     private AddProductContract.View view;
     private IProductInteractor interactor;
     private CompositeDisposable disposable;
+    private ArrayList<String> items;
 
     public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
+        this.items = new ArrayList<String>(){{
+            add("");
+            add("");
+            add("");
+            add("");
+            add("");
+        }};
     }
 
     @Override
     public void start() {
         view.initToolbar();
+        view.initPhotosRecyclerView(items);
         initSubscriptions();
     }
 
     @Override
     public void initSubscriptions() {
         disposable = new CompositeDisposable();
-        disposable.add(RxBus.getInstance().getEvents().subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(@NonNull Object o) throws Exception {
-                if (o instanceof OnAddProductPhotoRequestEvent) {
-                    OnAddProductPhotoRequestEvent event = (OnAddProductPhotoRequestEvent) o;
-                    onButtonAddPhotoTouched(event.getPosition());
-                }
-            }
-        }));
     }
 
     @Override
