@@ -79,6 +79,8 @@ public class MainPresenter implements MainContract.Presenter {
                                     public void onNext(@NonNull ArrayList<LiveObject> liveObjects) {
                                         liveItems = liveObjects;
                                         view.populateLiveRecycler(liveItems);
+                                        view.setLiveProgressVisible(false);
+                                        view.setLiveRecyclerVisible(true);
                                     }
 
                                     @Override
