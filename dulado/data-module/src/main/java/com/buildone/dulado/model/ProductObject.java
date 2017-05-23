@@ -13,17 +13,19 @@ public class ProductObject {
     private float price;
     private String description;
     private ArrayList<String> productImages;
+    private SellerObject seller;
 
     public ProductObject() {
     }
 
-    public ProductObject(int id, int storeId, float price, String name, String description, ArrayList<String> productImages) {
+    public ProductObject(int id, int storeId, float price, String name, String description, ArrayList<String> productImages, SellerObject seller) {
         this.id = id;
         this.storeId = storeId;
         this.name = name;
         this.price = price;
         this.productImages = productImages;
         this.description = description;
+        this.seller = seller;
     }
 
     public String getDescription() {
@@ -40,6 +42,10 @@ public class ProductObject {
 
     public String getName() {
         return name;
+    }
+
+    public SellerObject getSeller() {
+        return seller;
     }
 
     public float getPrice() {

@@ -16,6 +16,7 @@ import com.buildone.dulado.parcel.ProductParcel;
 import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
+import com.bumptech.glide.Glide;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -119,6 +120,16 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     @Override
     public void setProductWish(boolean enabled) {
 
+    }
+
+    @Override
+    public void setSellerName(String name) {
+        tvSellerName.setText(name);
+    }
+
+    @Override
+    public void setSellerPhoto(String photoUrl) {
+        Glide.with(this).load(photoUrl).centerCrop().placeholder(R.drawable.shape_circle).into(ivSellerPhoto);
     }
 
     @Override

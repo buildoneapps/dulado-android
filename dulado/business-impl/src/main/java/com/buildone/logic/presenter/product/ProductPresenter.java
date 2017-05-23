@@ -35,7 +35,6 @@ public class ProductPresenter implements ProductContract.Presenter {
 
     @Override
     public void start() {
-        view.initToolbar("", "");
         initSubscriptions();
         if(product.getId() > 0){
             setupProduct(product);
@@ -71,12 +70,15 @@ public class ProductPresenter implements ProductContract.Presenter {
 
     @Override
     public void setupProduct(ProductObject product) {
+        view.initToolbar(product.getName(), "");
         view.setProductDescription(product.getDescription());
         view.setProductName(product.getName());
         view.setProductPrice("R$ " + product.getPrice());
         view.setProductQuantity(0);
         view.setProductTags(new ArrayList<String>());
         view.setProductWish(false);
+        //view.setSellerName(product.getSeller().getName());
+        view.setSellerPhoto(product.getSeller().getPhotoUrl());
     }
 
     @Override

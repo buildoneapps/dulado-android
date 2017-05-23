@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SellerObject;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class ProductParcel implements Parcelable {
 
 
     public ProductObject getProduct(){
-        return new ProductObject(id,storeId,price,name,description,productImages);
+        return new ProductObject(id,storeId,price,name,description,productImages, new SellerObject(1, "https://img.elo7.com.br/users/picture/186E8.jpg?59791763"));
     }
 
 
