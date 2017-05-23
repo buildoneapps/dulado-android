@@ -6,7 +6,9 @@ import android.widget.ImageView;
 
 import com.babic.filip.flexibleadapter.FlexibleHolder;
 import com.buildone.dulado.R;
+import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.model.SearchObject;
+import com.buildone.rxbus.RxBus;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -47,13 +49,13 @@ public class MainStoreHolder implements FlexibleHolder {
 
     @OnClick({R.id.ivProductPhoto, R.id.ivSellerPhoto})
     public void onViewClicked(View view) {
-        /*switch (view.getId()) {
+        switch (view.getId()) {
             case R.id.ivProductPhoto:
-                RxBus.getInstance().publish(new OnProductTouchedEvent(storeObject.getProductSearch()));
+                RxBus.getInstance().publish(new OnProductTouchedEvent(searchObject));
                 break;
             case R.id.ivSellerPhoto:
-                RxBus.getInstance().publish(new OnStoreTouchedEvent(storeObject));
+                //RxBus.getInstance().publish(new OnStoreTouchedEvent(searchObject.getSeller()));
                 break;
-        }*/
+        }
     }
 }
