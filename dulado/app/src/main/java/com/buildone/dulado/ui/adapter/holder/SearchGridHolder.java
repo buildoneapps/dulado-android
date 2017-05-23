@@ -59,8 +59,7 @@ public class SearchGridHolder implements FlexibleHolder {
     @Override
     public void displayView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
-        Glide.with(context).load(searchObject.getImageUrl()).placeholder(R.drawable.ic_digital_photo_camera_grey_300).into(ivProductPhoto);
-        ivProductPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        Glide.with(context).load(searchObject.getImageUrl()).centerCrop().placeholder(R.drawable.ic_digital_photo_camera_grey_300).into(ivProductPhoto);
 
     }
 

@@ -61,7 +61,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
 
-        product = (ProductParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
+        product = (ProductParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_OBJECT);
 
         AndroidInjection.inject(this);
         presenter.start();

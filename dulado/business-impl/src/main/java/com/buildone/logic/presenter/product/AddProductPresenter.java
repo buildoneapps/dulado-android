@@ -16,6 +16,7 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     private IProductInteractor interactor;
     private CompositeDisposable disposable;
     private ArrayList<String> items;
+    private int selectedPosition;
 
     public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor) {
         this.view = view;
@@ -50,7 +51,10 @@ public class AddProductPresenter implements AddProductContract.Presenter {
 
     @Override
     public void onButtonAddPhotoTouched(int position) {
-        view.showPhotoChooserDialog();
+        selectedPosition = position;
+        if(items.get(position).isEmpty()){
+            view.openCamera();
+        }
     }
 
     @Override
@@ -75,5 +79,12 @@ public class AddProductPresenter implements AddProductContract.Presenter {
 
     @Override
     public void onPermissionError() {
+    }
+
+    @Override
+    public void addPhoto(String photoUri) {
+        items.set(selectedPosition,photoUri);
+        view.notifyPhotoAdded(items);
+        selectedPosition = -1;
     }
 }

@@ -1,5 +1,6 @@
 package com.buildone.dulado.ui.activity.product;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,13 @@ import android.widget.CheckBox;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
+import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.AddProductContract;
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.parcel.ProductParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.adapter.holder.AddProductPhotoHolder;
+import com.buildone.dulado.utils.CameraIntentHelper;
 import com.buildone.dulado.utils.CameraIntentHelperCallback;
 import com.buildone.dulado.utils.RecyclerItemClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -36,6 +40,9 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     @Inject
     AddProductContract.Presenter presenter;
 
+    @Inject
+    CameraIntentHelper cameraHelper;
+
     @BindView(R.id.rvPhotos)
     RecyclerView rvPhotos;
     @BindView(R.id.cbFacebook)
@@ -55,6 +62,12 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
 
         AndroidInjection.inject(this);
         presenter.start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        cameraHelper.onActivityResult(requestCode,resultCode,data);
     }
 
     @Override
@@ -94,13 +107,27 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     }
 
     @Override
+    public void notifyPhotoAdded(ArrayList<String> items) {
+        List<AddProductPhotoHolder> holders = new ArrayList<>();
+        for(int i = 0; i < items.size(); i++){
+            if(i == 0) {
+                holders.add(new AddProductPhotoHolder(this, items.get(i), true));
+            }else{
+                holders.add(new AddProductPhotoHolder(this, items.get(i), !items.get(i-1).isEmpty()));
+            }
+        }
+        adapter.setItems(holders);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void showPhotoChooserDialog() {
 
     }
 
     @Override
     public void openCamera() {
-
+        cameraHelper.startCameraIntent();
     }
 
     @Override
@@ -115,7 +142,9 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
 
     @Override
     public void navigateToProductPage(ProductObject product) {
-
+        Intent intent = new Intent(this, ProductActivity.class);
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
+        startActivity(intent);
     }
 
     @Override
@@ -123,38 +152,45 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
 
     }
 
+
+    //region Camera Intent Helper
     @Override
     public void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees) {
+        showToastMessage("Camera: addPhoto() - " + photoUri);
+        presenter.addPhoto(photoUri.toString());
 
     }
 
     @Override
     public void deletePhotoWithUri(Uri photoUri) {
+        showToastMessage("Camera: deletePhotoWithUri()");
 
     }
 
     @Override
     public void onSdCardNotMounted() {
+        showToastMessage("Camera: onSdCardNotMounted()");
 
     }
 
     @Override
     public void onCanceled() {
-
+        showToastMessage("Camera: onCanceled()");
     }
 
     @Override
     public void onCouldNotTakePhoto() {
-
+        showToastMessage("Camera: onCouldNotTakePhoto()");
     }
 
     @Override
     public void onPhotoUriNotFound() {
-
+        showToastMessage("Camera: onPhotoUriNotFound()");
     }
 
     @Override
     public void logException(Exception e) {
 
     }
+    //endregion
 }
