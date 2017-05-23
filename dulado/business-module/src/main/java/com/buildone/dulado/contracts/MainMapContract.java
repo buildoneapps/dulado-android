@@ -1,6 +1,7 @@
 package com.buildone.dulado.contracts;
 
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.model.StoreObject;
 import com.buildone.dulado.view.BaseView;
 
@@ -23,7 +24,7 @@ public interface MainMapContract {
         void centerUser();
         void showRadius(int radius);
         void initStoresScrollView();
-        void populateStoreScrollView(ArrayList<StoreObject> items);
+        void populateStoreScrollView(ArrayList<SearchObject> items);
         void hideStoresScrollView();
         void showStoresScrollView();
 

@@ -25,11 +25,11 @@ import com.buildone.dulado.R;
 import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.model.ProductObject;
-import com.buildone.dulado.model.StoreObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.parcel.ProductParcel;
 import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
-import com.buildone.dulado.ui.adapter.holder.StoreHolder;
+import com.buildone.dulado.ui.adapter.holder.MainStoreHolder;
 import com.buildone.dulado.utils.PermissionStatusHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -93,7 +93,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     @BindView(R.id.btnHideStores)
     ImageView btnHideStores;
 
-    FlexibleAdapter<StoreHolder> storeAdapter;
+    FlexibleAdapter<MainStoreHolder> storeAdapter;
 
     Unbinder unbinder;
 
@@ -269,10 +269,10 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     }
 
     @Override
-    public void populateStoreScrollView(ArrayList<StoreObject> items) {
-        List<StoreHolder> holders = new ArrayList<>();
-        for (StoreObject item : items) {
-            holders.add(new StoreHolder(getActivity(), item));
+    public void populateStoreScrollView(ArrayList<SearchObject> items) {
+        List<MainStoreHolder> holders = new ArrayList<>();
+        for (SearchObject item : items) {
+            holders.add(new MainStoreHolder(getActivity(), item));
         }
         storeAdapter.addItems(holders);
         scrollStores.scrollToPosition(1);

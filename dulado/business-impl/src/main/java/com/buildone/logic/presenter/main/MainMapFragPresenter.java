@@ -3,19 +3,24 @@ package com.buildone.logic.presenter.main;
 import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnStoreTouchedEvent;
+import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.model.LiveObject;
-import com.buildone.dulado.model.StoreObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alessandro Pryds on 07/05/2017.
@@ -28,14 +33,16 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
     private boolean permissionGranted;
     private boolean mapReady;
     private CompositeDisposable compositeDisposable;
-    private ArrayList<StoreObject> storeItems;
+    private ArrayList<SearchObject> storeItems;
     private ArrayList<LiveObject> liveItems;
+    private IProductInteractor productInteractor;
 
     @Inject
-    public MainMapFragPresenter(MainMapContract.View view) {
+    public MainMapFragPresenter(MainMapContract.View view, IProductInteractor productInteractor) {
         this.view = view;
         this.storeItems = new ArrayList<>();
         this.liveItems = new ArrayList<>();
+        this.productInteractor = productInteractor;
     }
     @Override
     public void start() {
@@ -45,12 +52,6 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
         view.initMap();
         view.initStoresScrollView();
 
-        storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
-        storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
-        storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
-        storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
-        storeItems.add(new StoreObject(0, "https://github.com/bumptech/glide/raw/master/static/glide_logo.png", 0));
-        view.populateStoreScrollView(storeItems);
     }
 
     @Override
@@ -70,6 +71,27 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
                 }
             }
         }));
+
+        compositeDisposable.add(productInteractor.getProducts()
+                .delay(5, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<ArrayList<SearchObject>>() {
+                    @Override
+                    public void onNext(@NonNull ArrayList<SearchObject> searchObjects) {
+                        storeItems = searchObjects;
+                        view.populateStoreScrollView(storeItems);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                }));
     }
 
     @Override

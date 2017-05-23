@@ -3,9 +3,11 @@ package com.buildone.dulado.components.fragment;
 import android.content.Context;
 
 import com.buildone.dulado.contracts.MainMapContract;
+import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.fragments.MainMapFragment;
+import com.buildone.logic.interactor.ProductInteractor;
 import com.buildone.logic.presenter.main.MainMapFragPresenter;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -47,8 +49,13 @@ public interface MainMapFragmentSubComponent extends AndroidInjector<MainMapFrag
         abstract MainMapContract.View providesView(MainMapFragment fragment);
 
         @Provides
-        static MainMapContract.Presenter providesPresenter(MainMapFragment fragment) {
-            return new MainMapFragPresenter(fragment);
+        static IProductInteractor providesInteractor() {
+            return new ProductInteractor();
+        }
+
+        @Provides
+        static MainMapContract.Presenter providesPresenter(MainMapContract.View view, IProductInteractor productInteractor) {
+            return new MainMapFragPresenter(view ,productInteractor);
         }
 
     }

@@ -10,5 +10,5 @@
         android:id="@+id/ivLivePhoto"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@color/ligher_gray"/>
+        app:srcCompat="@drawable/ic_user_live_placeholder"/>
 </LinearLayout>

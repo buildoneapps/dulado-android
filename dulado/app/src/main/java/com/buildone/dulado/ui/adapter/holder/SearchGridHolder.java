@@ -2,22 +2,39 @@ package com.buildone.dulado.ui.adapter.holder;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.babic.filip.flexibleadapter.FlexibleHolder;
 import com.buildone.dulado.R;
 import com.buildone.dulado.event.OnChatButtonTouchedEvent;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
+import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchGridHolder implements FlexibleHolder {
 
-    /*@BindView(R.id.ivPhoto)
-    ImageView ivPhoto;
-    */
+    @BindView(R.id.ivProductPhoto)
+    ImageView ivProductPhoto;
+    @BindView(R.id.tvProductName)
+    TextView tvProductName;
+    @BindView(R.id.tvProducTags)
+    TextView tvProducTags;
+    @BindView(R.id.tvPrice)
+    TextView tvPrice;
+    @BindView(R.id.ivSellerPhoto)
+    CircleImageView ivSellerPhoto;
+    @BindView(R.id.tvSellerName)
+    TextView tvSellerName;
+    @BindView(R.id.tvLocation)
+    TextView tvLocation;
+
     private Context context;
     private SearchObject searchObject;
     private Unbinder unbinder;
@@ -42,8 +59,9 @@ public class SearchGridHolder implements FlexibleHolder {
     @Override
     public void displayView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
+        Glide.with(context).load(searchObject.getImageUrl()).placeholder(R.drawable.ic_digital_photo_camera_grey_300).into(ivProductPhoto);
+        ivProductPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-        //Glide.with(context).load(searchObject.getPhotoUrl()).placeholder(R.drawable.shape_circle).into(ivLivePhoto);
     }
 
     @OnClick(R.id.fabChat)
