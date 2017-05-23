@@ -64,6 +64,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     private static final int MAP_FRAG_POS = 0;
     private static final int LIST_FRAG_POS = 1;
     private static final int REQUEST_CODE_PERMISSIONS = 0x32;
+    private static final int REQUEST_CODE_ADD_PRODUCT = 0x42;
 
     @Inject
     FirebaseAnalytics firebaseAnalytics;
@@ -163,7 +164,16 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        cameraHelper.onActivityResult(requestCode,resultCode,data);
+
+        switch(requestCode){
+            case REQUEST_CODE_ADD_PRODUCT:
+                ProductSearchParcel parcel = (ProductSearchParcel) data.getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
+                presenter.addProduct(parcel.getSearchObject());
+                break;
+            default:
+                cameraHelper.onActivityResult(requestCode,resultCode,data);
+                break;
+        }
     }
 
 
@@ -239,7 +249,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     public void navigateToAddProductActivity(String photoUri) {
         Intent intent = new Intent(this, AddProductActivity.class);
         intent.putExtra(AppConstants.INTENT_TAG_PHOTO_URI, photoUri);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
     }
 
     @Override

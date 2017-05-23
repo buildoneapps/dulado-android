@@ -2,6 +2,7 @@ package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainListContract;
 import com.buildone.dulado.event.OnListFormatModeChangedEvent;
+import com.buildone.dulado.event.OnProductAddedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.model.SearchObject;
@@ -79,6 +80,12 @@ public class MainListFragPresenter implements MainListContract.Presenter {
                 if (o instanceof OnListFormatModeChangedEvent) {
                     OnListFormatModeChangedEvent event = (OnListFormatModeChangedEvent) o;
                     switchListMode(event.getListFormat());
+                }else if(o instanceof OnProductAddedEvent){
+                    OnProductAddedEvent event = (OnProductAddedEvent) o;
+                    loadedProducts.add(0,event.getProductAdded());
+
+                    view.populateGridRecyclerView(loadedProducts);
+                    view.populateListRecyclerView(loadedProducts);
                 }
             }
         }));

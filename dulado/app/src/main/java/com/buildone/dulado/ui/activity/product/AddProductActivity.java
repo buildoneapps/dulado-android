@@ -8,13 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
 import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.AddProductContract;
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
+import com.buildone.dulado.model.SellerObject;
 import com.buildone.dulado.parcel.ProductParcel;
+import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.adapter.holder.AddProductPhotoHolder;
 import com.buildone.dulado.utils.CameraIntentHelper;
@@ -30,6 +37,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 
 public class AddProductActivity extends BaseActivity implements AddProductContract.View, CameraIntentHelperCallback {
@@ -51,6 +60,24 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     CheckBox cbInstagram;
     @BindView(R.id.cbTwitter)
     CheckBox cbTwitter;
+    @BindView(R.id.etProductName)
+    EditText etProductName;
+    @BindView(R.id.etProductDesc)
+    EditText etProductDesc;
+    @BindView(R.id.etPrice)
+    EditText etPrice;
+    @BindView(R.id.etTags)
+    EditText etTags;
+    @BindView(R.id.cbPickup)
+    CheckBox cbPickup;
+    @BindView(R.id.cbDelivery)
+    CheckBox cbDelivery;
+    @BindView(R.id.cbOnlinePayment)
+    CheckBox cbOnlinePayment;
+    @BindView(R.id.loadingPaymentCalc)
+    ProgressBar loadingPaymentCalc;
+    @BindView(R.id.tvOnlinePaymentIncome)
+    TextView tvOnlinePaymentIncome;
 
     private FlexibleAdapter<AddProductPhotoHolder> adapter;
     private String photoUri;
@@ -61,7 +88,7 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
 
-        if(getIntent().getExtras() != null){
+        if (getIntent().getExtras() != null) {
             photoUri = getIntent().getExtras().getString(AppConstants.INTENT_TAG_PHOTO_URI);
         }
         AndroidInjection.inject(this);
@@ -71,7 +98,7 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        cameraHelper.onActivityResult(requestCode,resultCode,data);
+        cameraHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -85,8 +112,8 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     public void initPhotosRecyclerView(ArrayList<String> items) {
         List<AddProductPhotoHolder> holders = new ArrayList<>();
         adapter = new FlexibleAdapter<AddProductPhotoHolder>();
-        for(int i = 0; i < items.size(); i++){
-            holders.add(new AddProductPhotoHolder(this,items.get(i), i == 1));
+        for (int i = 0; i < items.size(); i++) {
+            holders.add(new AddProductPhotoHolder(this, items.get(i), i == 1));
         }
         adapter.addItems(holders);
         rvPhotos.setAdapter(adapter);
@@ -108,11 +135,11 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     @Override
     public void notifyPhotoAdded(ArrayList<String> items) {
         List<AddProductPhotoHolder> holders = new ArrayList<>();
-        for(int i = 0; i < items.size(); i++){
-            if(i == 0) {
+        for (int i = 0; i < items.size(); i++) {
+            if (i == 0) {
                 holders.add(new AddProductPhotoHolder(this, items.get(i), true));
-            }else{
-                holders.add(new AddProductPhotoHolder(this, items.get(i), !items.get(i-1).isEmpty()));
+            } else {
+                holders.add(new AddProductPhotoHolder(this, items.get(i), !items.get(i - 1).isEmpty()));
             }
         }
         adapter.setItems(holders);
@@ -156,6 +183,19 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
         return photoUri;
     }
 
+    @Override
+    public void saveProductInApplication() {
+        float price = 0;
+        if(!etPrice.getText().toString().isEmpty()){
+            price = Float.parseFloat(etPrice.getText().toString());
+        }
+        Intent extras = new Intent();
+        extras.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(new SearchObject(0, etProductName.getText().toString(), photoUri, new SellerObject(0, "https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"),price,etTags.getText().toString())));
+        setResult(RESULT_OK, extras);
+        finish();
+    }
+
+
     //region Camera Intent Helper
     @Override
     public void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees) {
@@ -194,6 +234,42 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     @Override
     public void logException(Exception e) {
 
+    }
+
+    @OnClick({R.id.btnOnlinePaymentHelp, R.id.btnPostProduct})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnOnlinePaymentHelp:
+                break;
+            case R.id.btnPostProduct:
+                presenter.publishProduct();
+                break;
+        }
+    }
+
+
+    @OnCheckedChanged({R.id.cbDelivery, R.id.cbFacebook, R.id.cbInstagram, R.id.cbTwitter, R.id.cbOnlinePayment, R.id.cbPickup})
+    public void onCheckedChange(CompoundButton view, boolean checked) {
+        switch (view.getId()) {
+            case R.id.cbDelivery:
+                presenter.canDelivery(checked);
+                break;
+            case R.id.cbPickup:
+                presenter.canPickup(checked);
+                break;
+            case R.id.cbFacebook:
+                presenter.shouldPostFacebook(checked);
+                break;
+            case R.id.cbInstagram:
+                presenter.shouldPostInstagram(checked);
+                break;
+            case R.id.cbTwitter:
+                presenter.shouldPostTwitter(checked);
+                break;
+            case R.id.cbOnlinePayment:
+                presenter.enableOnlinePayment(checked);
+                break;
+        }
     }
     //endregion
 }

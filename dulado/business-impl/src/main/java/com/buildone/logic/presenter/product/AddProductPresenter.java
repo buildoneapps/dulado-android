@@ -81,4 +81,40 @@ public class AddProductPresenter implements AddProductContract.Presenter {
         view.notifyPhotoAdded(items);
         selectedPosition = -1;
     }
+
+    @Override
+    public void publishProduct() {
+        //TODO: Remove: Test only
+        view.saveProductInApplication();
+    }
+
+    @Override
+    public void canDelivery(boolean checked) {
+
+    }
+
+    @Override
+    public void canPickup(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostFacebook(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostInstagram(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostTwitter(boolean checked) {
+
+    }
+
+    @Override
+    public void enableOnlinePayment(boolean checked) {
+
+    }
 }

@@ -2,6 +2,7 @@ package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainContract;
 import com.buildone.dulado.event.OnChatButtonTouchedEvent;
+import com.buildone.dulado.event.OnProductAddedEvent;
 import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.event.OnSellerTouchedEvent;
@@ -206,6 +207,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void cameraError() {
         view.showCouldNotTakePhotoMessage();
+    }
+
+    @Override
+    public void addProduct(SearchObject productAdded) {
+        RxBus.getInstance().publish(new OnProductAddedEvent(productAdded));
     }
 
 }

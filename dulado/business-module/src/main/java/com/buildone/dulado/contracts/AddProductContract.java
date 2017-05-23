@@ -21,6 +21,8 @@ public interface AddProductContract {
         void navigateToProductPage(ProductObject product);
         void navigateToShareActivity(ProductObject product);
         String getPhotoUri();
+
+        void saveProductInApplication();
     }
 
     interface Presenter{
@@ -32,5 +34,13 @@ public interface AddProductContract {
         void onButtonCameraTouched();
         void onButtonGalleryTouched();
         void addPhoto(String photoUri);
+        void publishProduct();
+
+        void canDelivery(boolean checked);
+        void canPickup(boolean checked);
+        void shouldPostFacebook(boolean checked);
+        void shouldPostInstagram(boolean checked);
+        void shouldPostTwitter(boolean checked);
+        void enableOnlinePayment(boolean checked);
     }
 }

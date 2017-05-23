@@ -5,7 +5,7 @@ import android.app.Application;
 import android.support.v4.app.Fragment;
 
 import com.buildone.dulado.R;
-import com.buildone.dulado.components.application.DaggerMyApplicationComponent;
+import com.buildone.dulado.components.application.DaggerDuladuApplicationComponent;
 
 import javax.inject.Inject;
 
@@ -27,7 +27,7 @@ public class DuladuApplication extends Application implements HasDispatchingActi
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerMyApplicationComponent.create().inject(this);
+        DaggerDuladuApplicationComponent.create().inject(this);
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath(AppConstants.FONT_DEFAULT)
                 .setFontAttrId(R.attr.fontPath)

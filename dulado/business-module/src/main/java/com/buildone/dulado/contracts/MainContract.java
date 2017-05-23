@@ -64,5 +64,7 @@ public interface MainContract {
         void navigateToAddProduct(String photoUri);
 
         void cameraError();
+
+        void addProduct(SearchObject productAdded);
     }
 }
