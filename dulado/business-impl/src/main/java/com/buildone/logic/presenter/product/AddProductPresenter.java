@@ -5,6 +5,8 @@ import com.buildone.dulado.interactor.IProductInteractor;
 
 import java.util.ArrayList;
 
+import javax.inject.Named;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -18,11 +20,11 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     private ArrayList<String> items;
     private int selectedPosition;
 
-    public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor) {
+    public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor, @Named("photoUri") final String photoUri) {
         this.view = view;
         this.interactor = interactor;
         this.items = new ArrayList<String>(){{
-            add("");
+            add(photoUri);
             add("");
             add("");
             add("");
@@ -72,14 +74,6 @@ public class AddProductPresenter implements AddProductContract.Presenter {
         view.openGallery();
     }
 
-    @Override
-    public void onPermissionGranted() {
-
-    }
-
-    @Override
-    public void onPermissionError() {
-    }
 
     @Override
     public void addPhoto(String photoUri) {

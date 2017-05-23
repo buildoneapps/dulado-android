@@ -8,6 +8,7 @@ import com.buildone.dulado.interactor.IMainInteractor;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.main.MainActivity;
+import com.buildone.dulado.utils.CameraIntentHelper;
 import com.buildone.logic.interactor.MainInteractor;
 import com.buildone.logic.presenter.main.MainPresenter;
 
@@ -45,6 +46,11 @@ public interface MainActivitySubComponent extends AndroidInjector<MainActivity> 
         @Provides
         static MainContract.Presenter providesPresenter(MainActivity mainActivity, @Named("someId") int someId, IMainInteractor interactor) {
             return new MainPresenter(mainActivity, interactor, someId);
+        }
+
+        @Provides
+        static CameraIntentHelper providesCameraHelper(MainActivity activity) {
+            return new CameraIntentHelper(activity,activity);
         }
 
         @Provides

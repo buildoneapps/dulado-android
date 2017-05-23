@@ -12,4 +12,5 @@ public class AppConstants {
     public static final String FONT_DEFAULT = "fonts/Roboto-Regular.ttf";
     public static final int LIST_MODE_VERTICAL_LIST = 0;
     public static final int LIST_MODE_GRID = 1;
+    public static final String INTENT_TAG_PHOTO_URI = "intentTag";
 }

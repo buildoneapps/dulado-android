@@ -301,7 +301,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onConnected(@Nullable Bundle bundle) {
         location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            Toast.makeText(getActivity(), "Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
         }

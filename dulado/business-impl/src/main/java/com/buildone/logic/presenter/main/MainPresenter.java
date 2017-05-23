@@ -12,6 +12,7 @@ import com.buildone.dulado.model.SellerObject;
 import com.buildone.rxbus.RxBus;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -184,7 +185,27 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onButtonCreateAdTouched() {
-        view.navigateToAddProductActivity();
+        view.checkCameraPermission();
+    }
+
+    @Override
+    public void onPermissionGranted(String[] receivedPermissions, List<String> required) {
+        view.openCamera();
+    }
+
+    @Override
+    public void onPermissionFailed() {
+        view.showCameraPermissionRequiredMessage();
+    }
+
+    @Override
+    public void navigateToAddProduct(String photoUri) {
+        view.navigateToAddProductActivity(photoUri);
+    }
+
+    @Override
+    public void cameraError() {
+        view.showCouldNotTakePhotoMessage();
     }
 
 }

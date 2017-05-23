@@ -53,6 +53,7 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     CheckBox cbTwitter;
 
     private FlexibleAdapter<AddProductPhotoHolder> adapter;
+    private String photoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
 
+        if(getIntent().getExtras() != null){
+            photoUri = getIntent().getExtras().getString(AppConstants.INTENT_TAG_PHOTO_URI);
+        }
         AndroidInjection.inject(this);
         presenter.start();
     }
@@ -78,16 +82,11 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
     }
 
     @Override
-    public void checkPermissions() {
-
-    }
-
-    @Override
     public void initPhotosRecyclerView(ArrayList<String> items) {
         List<AddProductPhotoHolder> holders = new ArrayList<>();
         adapter = new FlexibleAdapter<AddProductPhotoHolder>();
         for(int i = 0; i < items.size(); i++){
-            holders.add(new AddProductPhotoHolder(this,items.get(i), i == 0));
+            holders.add(new AddProductPhotoHolder(this,items.get(i), i == 1));
         }
         adapter.addItems(holders);
         rvPhotos.setAdapter(adapter);
@@ -152,6 +151,10 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
 
     }
 
+    @Override
+    public String getPhotoUri() {
+        return photoUri;
+    }
 
     //region Camera Intent Helper
     @Override

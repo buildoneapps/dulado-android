@@ -47,7 +47,6 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
         view.initPermissions();
         view.initMap();
         view.initStoresScrollView();
-
     }
 
     @Override
