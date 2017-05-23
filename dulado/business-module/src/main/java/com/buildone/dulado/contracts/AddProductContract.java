@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public interface AddProductContract {
     interface View extends BaseView {
         void initToolbar();
-        void checkPermissions();
         void initPhotosRecyclerView(ArrayList<String> items);
         void notifyPhotoAdded(ArrayList<String> items);
         void showPhotoChooserDialog();
@@ -21,6 +20,9 @@ public interface AddProductContract {
         void navigateToProductPreview(ProductObject product);
         void navigateToProductPage(ProductObject product);
         void navigateToShareActivity(ProductObject product);
+        String getPhotoUri();
+
+        void saveProductInApplication();
     }
 
     interface Presenter{
@@ -31,8 +33,14 @@ public interface AddProductContract {
         void onButtonPreviewTouched();
         void onButtonCameraTouched();
         void onButtonGalleryTouched();
-        void onPermissionGranted();
-        void onPermissionError();
         void addPhoto(String photoUri);
+        void publishProduct();
+
+        void canDelivery(boolean checked);
+        void canPickup(boolean checked);
+        void shouldPostFacebook(boolean checked);
+        void shouldPostInstagram(boolean checked);
+        void shouldPostTwitter(boolean checked);
+        void enableOnlinePayment(boolean checked);
     }
 }

@@ -27,9 +27,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         modules = {
                 AndroidSupportInjectionModule.class,
                 BindingModule.class,
-                MyApplicationComponent.AppModule.class
+                DuladuApplicationComponent.AppModule.class
         })
-public interface MyApplicationComponent {
+public interface DuladuApplicationComponent {
 
     void inject(DuladuApplication application);
 

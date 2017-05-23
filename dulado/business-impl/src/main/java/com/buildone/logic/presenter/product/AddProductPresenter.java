@@ -5,6 +5,8 @@ import com.buildone.dulado.interactor.IProductInteractor;
 
 import java.util.ArrayList;
 
+import javax.inject.Named;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -18,11 +20,11 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     private ArrayList<String> items;
     private int selectedPosition;
 
-    public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor) {
+    public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor, @Named("photoUri") final String photoUri) {
         this.view = view;
         this.interactor = interactor;
         this.items = new ArrayList<String>(){{
-            add("");
+            add(photoUri);
             add("");
             add("");
             add("");
@@ -72,19 +74,47 @@ public class AddProductPresenter implements AddProductContract.Presenter {
         view.openGallery();
     }
 
-    @Override
-    public void onPermissionGranted() {
-
-    }
-
-    @Override
-    public void onPermissionError() {
-    }
 
     @Override
     public void addPhoto(String photoUri) {
         items.set(selectedPosition,photoUri);
         view.notifyPhotoAdded(items);
         selectedPosition = -1;
+    }
+
+    @Override
+    public void publishProduct() {
+        //TODO: Remove: Test only
+        view.saveProductInApplication();
+    }
+
+    @Override
+    public void canDelivery(boolean checked) {
+
+    }
+
+    @Override
+    public void canPickup(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostFacebook(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostInstagram(boolean checked) {
+
+    }
+
+    @Override
+    public void shouldPostTwitter(boolean checked) {
+
+    }
+
+    @Override
+    public void enableOnlinePayment(boolean checked) {
+
     }
 }

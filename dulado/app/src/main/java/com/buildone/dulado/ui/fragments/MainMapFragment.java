@@ -301,7 +301,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onConnected(@Nullable Bundle bundle) {
         location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            Toast.makeText(getActivity(), "Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Latitude():" + location.getLatitude() + "\nLongitude(): " + location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
         }
@@ -334,9 +334,9 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_store_png))
                     .anchor(0.5f, 1)
             );
-            Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
         }
     }
 

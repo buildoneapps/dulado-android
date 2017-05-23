@@ -1,8 +1,13 @@
 package com.buildone.dulado.ui.activity.main;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +35,10 @@ import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.LiveHolder;
 import com.buildone.dulado.ui.adapter.viewpager.MainPagerAdapter;
+import com.buildone.dulado.utils.CameraIntentHelper;
+import com.buildone.dulado.utils.CameraIntentHelperCallback;
 import com.buildone.dulado.utils.NonSwipeableViewPager;
+import com.buildone.dulado.utils.PermissionStatusHelper;
 import com.buildone.dulado.utils.RecyclerItemClickListener;
 import com.buildone.rxbus.RxBus;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -40,6 +48,9 @@ import com.transitionseverywhere.Transition;
 import com.transitionseverywhere.TransitionManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -48,15 +59,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends NavDrawerBaseActivity implements MainContract.View {
+public class MainActivity extends NavDrawerBaseActivity implements MainContract.View, CameraIntentHelperCallback {
 
     private static final int MAP_FRAG_POS = 0;
     private static final int LIST_FRAG_POS = 1;
+    private static final int REQUEST_CODE_PERMISSIONS = 0x32;
+    private static final int REQUEST_CODE_ADD_PRODUCT = 0x42;
+
     @Inject
     FirebaseAnalytics firebaseAnalytics;
 
     @Inject
     MainContract.Presenter presenter;
+
+    @Inject
+    CameraIntentHelper cameraHelper;
 
     @BindView(R.id.rvLive)
     RecyclerView rvLive;
@@ -75,6 +92,8 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     private MainPagerAdapter vpAdapter;
     private boolean showMapIcon;
     private boolean inGridMode;
+    private List<String> cameraPermissions = Arrays.asList(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+
 
     //region Android Lifecycle
     @Override
@@ -125,6 +144,38 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSIONS:
+                for (int i = 0; i < permissions.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        presenter.onPermissionFailed();
+                        return;
+                    }
+                }
+                break;
+        }
+        presenter.onPermissionGranted(permissions, cameraPermissions);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch(requestCode){
+            case REQUEST_CODE_ADD_PRODUCT:
+                ProductSearchParcel parcel = (ProductSearchParcel) data.getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
+                presenter.addProduct(parcel.getSearchObject());
+                break;
+            default:
+                cameraHelper.onActivityResult(requestCode,resultCode,data);
+                break;
+        }
+    }
+
 
     //region MainContract.View
     @Override
@@ -195,14 +246,50 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
-    public void navigateToAddProductActivity() {
+    public void navigateToAddProductActivity(String photoUri) {
         Intent intent = new Intent(this, AddProductActivity.class);
-        startActivity(intent);
+        intent.putExtra(AppConstants.INTENT_TAG_PHOTO_URI, photoUri);
+        startActivityForResult(intent, REQUEST_CODE_ADD_PRODUCT);
     }
 
     @Override
     public int getSomeId() {
         return someId;
+    }
+
+    @Override
+    public void checkCameraPermission() {
+        boolean needPermission = false;
+        for (String permission : cameraPermissions) {
+            switch (PermissionStatusHelper.getPermissionStatus(this, permission)) {
+                case PermissionStatusHelper.BLOCKED_OR_NEVER_ASKED:
+                    needPermission = true;
+                    break;
+                case PermissionStatusHelper.DENIED:
+                    needPermission = true;
+                    break;
+            }
+        }
+        if (needPermission) {
+            ActivityCompat.requestPermissions(this, (String[]) cameraPermissions.toArray(), REQUEST_CODE_PERMISSIONS);
+            return;
+        }
+        presenter.onPermissionGranted((String[]) cameraPermissions.toArray(), cameraPermissions);
+    }
+
+    @Override
+    public void showCameraPermissionRequiredMessage() {
+
+    }
+
+    @Override
+    public void openCamera() {
+        cameraHelper.startCameraIntent();
+    }
+
+    @Override
+    public void showCouldNotTakePhotoMessage() {
+
     }
 
     @Override
@@ -269,8 +356,47 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
     //endregion
 
+    //region Button Actions
     @OnClick(R.id.container_create_ad)
     protected void onCreateAdTouched() {
         presenter.onButtonCreateAdTouched();
     }
+    //endregion
+
+    //region CameraIntentHelperCallback
+    @Override
+    public void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees) {
+        presenter.navigateToAddProduct(photoUri.toString());
+    }
+
+    @Override
+    public void deletePhotoWithUri(Uri photoUri) {
+
+    }
+
+    @Override
+    public void onSdCardNotMounted() {
+        presenter.cameraError();
+    }
+
+    @Override
+    public void onCanceled() {
+    }
+
+    @Override
+    public void onCouldNotTakePhoto() {
+        presenter.cameraError();
+    }
+
+    @Override
+    public void onPhotoUriNotFound() {
+        presenter.cameraError();
+
+    }
+
+    @Override
+    public void logException(Exception e) {
+
+    }
+    //endregion
 }

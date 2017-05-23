@@ -2,6 +2,7 @@ package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainContract;
 import com.buildone.dulado.event.OnChatButtonTouchedEvent;
+import com.buildone.dulado.event.OnProductAddedEvent;
 import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.event.OnSellerTouchedEvent;
@@ -12,6 +13,7 @@ import com.buildone.dulado.model.SellerObject;
 import com.buildone.rxbus.RxBus;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -184,7 +186,32 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onButtonCreateAdTouched() {
-        view.navigateToAddProductActivity();
+        view.checkCameraPermission();
+    }
+
+    @Override
+    public void onPermissionGranted(String[] receivedPermissions, List<String> required) {
+        view.openCamera();
+    }
+
+    @Override
+    public void onPermissionFailed() {
+        view.showCameraPermissionRequiredMessage();
+    }
+
+    @Override
+    public void navigateToAddProduct(String photoUri) {
+        view.navigateToAddProductActivity(photoUri);
+    }
+
+    @Override
+    public void cameraError() {
+        view.showCouldNotTakePhotoMessage();
+    }
+
+    @Override
+    public void addProduct(SearchObject productAdded) {
+        RxBus.getInstance().publish(new OnProductAddedEvent(productAdded));
     }
 
 }

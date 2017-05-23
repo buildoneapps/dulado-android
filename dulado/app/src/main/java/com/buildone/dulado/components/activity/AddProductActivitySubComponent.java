@@ -1,6 +1,7 @@
 package com.buildone.dulado.components.activity;
 
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.buildone.dulado.contracts.AddProductContract;
@@ -11,6 +12,8 @@ import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
 import com.buildone.dulado.utils.CameraIntentHelper;
 import com.buildone.logic.presenter.product.AddProductPresenter;
+
+import javax.inject.Named;
 
 import dagger.Binds;
 import dagger.Module;
@@ -35,17 +38,29 @@ public interface AddProductActivitySubComponent extends AndroidInjector<AddProdu
         abstract Context providesContext(AddProductActivity activity);
 
         @Binds
+        @ForApplication
+        abstract Activity providesActivity(AddProductActivity activity);
+
+
+        @Binds
         abstract AddProductContract.View providesView(AddProductActivity activity);
 
         @Provides
-        static AddProductContract.Presenter providesPresenter(AddProductContract.View view, IProductInteractor interactor) {
-            return new AddProductPresenter(view, interactor);
+        static AddProductContract.Presenter providesPresenter(AddProductContract.View view, IProductInteractor interactor, @Named("photoUri") String photoUri) {
+            return new AddProductPresenter(view, interactor, photoUri);
         }
 
         @Provides
         static CameraIntentHelper providesCameraHelper(AddProductActivity activity){
             return new CameraIntentHelper(activity,activity);
         }
+
+        @Provides
+        @Named("photoUri")
+        static String providePhotoUri(AddProductActivity activity) {
+            return activity.getPhotoUri();
+        }
+
     }
 
     @Subcomponent.Builder

@@ -6,6 +6,7 @@ import com.buildone.dulado.model.SellerObject;
 import com.buildone.dulado.view.BaseView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Alessandro Pryds on 11/04/2017.
@@ -22,7 +23,7 @@ public interface MainContract {
         void navigateToProductActivity(SearchObject searchObject);
         void navigateToChatActivity(int productId);
         void navigateToSearchActivity();
-        void navigateToAddProductActivity();
+        void navigateToAddProductActivity(String photoUri);
 
         void switchToMap(boolean inGridMode);
         void switchToList(boolean inGridMode);
@@ -35,7 +36,11 @@ public interface MainContract {
 
         int getSomeId();
 
+        void checkCameraPermission();
+        void showCameraPermissionRequiredMessage();
 
+        void openCamera();
+        void showCouldNotTakePhotoMessage();
     }
 
     interface Presenter{
@@ -52,5 +57,14 @@ public interface MainContract {
         void onButtonGridTouched();
         void onButtonSearchTouched();
         void onButtonCreateAdTouched();
+
+        void onPermissionGranted(String[] receivedPermissions, List<String> required);
+        void onPermissionFailed();
+
+        void navigateToAddProduct(String photoUri);
+
+        void cameraError();
+
+        void addProduct(SearchObject productAdded);
     }
 }
