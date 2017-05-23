@@ -13,6 +13,7 @@
         tools:context=".ui.fragments.MainMapFragment" />
 
     <LinearLayout
+        android:layout_marginBottom="8dp"
         android:id="@+id/container_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="270dp"
-    android:layout_height="140dp"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/ivProductPhoto"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@color/ligher_gray" />
 
     <LinearLayout
@@ -46,7 +46,8 @@
     <TextView
         android:id="@+id/tvPrice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_product"
         android:layout_toEndOf="@id/ivProductPhoto"
         android:gravity="start|center_vertical"
         android:paddingStart="8dp"
@@ -62,7 +63,8 @@
         android:layout_marginBottom="8dp"
         android:layout_toEndOf="@id/ivProductPhoto"
         android:paddingEnd="8dp"
-        android:paddingStart="8dp">
+        android:paddingStart="8dp"
+        android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivSellerPhoto"

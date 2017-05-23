@@ -11,38 +11,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:orientation="vertical"
         android:paddingBottom="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="32dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/sym_def_app_icon" />
+            android:src="@android:drawable/sym_def_app_icon"
+            app:civ_border_color="@color/drawer_icon"
+            app:civ_border_width="2dp" />
 
-        <TextView
-
-            android:id="@+id/tNome"
+        <LinearLayout
+            android:padding="8dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Android Studio"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Android Studio"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-        <TextView
-
-            android:id="@+id/tEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="android.studio@android.com" />
+            <TextView
+                android:id="@+id/tEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="android.studio@android.com" />
+        </LinearLayout>
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorAccent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -104,7 +112,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_shopping_cart_green_24dp" />
+                app:srcCompat="@drawable/ic_shopping_cart_white_24dp" />
 
             <TextView
 
@@ -128,7 +136,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_wallet_green_24dp" />
+                app:srcCompat="@drawable/ic_wallet_24dp" />
 
 
             <TextView
@@ -153,7 +161,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_shopping_cart_green_24dp" />
+                app:srcCompat="@drawable/ic_shopping_cart_white_24dp" />
 
             <TextView
 
@@ -177,7 +185,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_chat_bubble_outline_green_24dp" />
+                app:srcCompat="@drawable/ic_chat_bubble_outline_24dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -224,7 +232,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_help_outline_green_24dp" />
+                app:srcCompat="@drawable/ic_help_outline_24dp" />
 
             <TextView
 

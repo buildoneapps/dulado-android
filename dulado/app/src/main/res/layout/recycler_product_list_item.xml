@@ -115,6 +115,6 @@
             app:backgroundTint="@android:color/white"
             app:elevation="1dp"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_chat_bubble_outline_green_24dp" />
+            app:srcCompat="@drawable/ic_chat_edited" />
     </RelativeLayout>
 </LinearLayout>

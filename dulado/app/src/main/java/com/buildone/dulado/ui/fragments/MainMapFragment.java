@@ -352,6 +352,11 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onLocationChanged(Location location) {
         this.location = location;
         if (this.location != null) {
+            /*googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(location.getLatitude(),location.getLongitude()))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_store_png))
+                    .anchor(0.5f, 1)
+            );*/
             Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
@@ -362,6 +367,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         presenter.onMapReady();
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.setOnGroundOverlayClickListener(new GoogleMap.OnGroundOverlayClickListener() {
             @Override
             public void onGroundOverlayClick(GroundOverlay groundOverlay) {
