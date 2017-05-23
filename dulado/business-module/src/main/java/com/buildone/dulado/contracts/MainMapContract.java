@@ -1,8 +1,6 @@
 package com.buildone.dulado.contracts;
 
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
-import com.buildone.dulado.model.StoreObject;
 import com.buildone.dulado.view.BaseView;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public interface MainMapContract {
         void showStoresScrollView();
 
         void navigateToSearchActivity();
-        void navigateToProductActivity(ProductObject product);
+        void navigateToProductActivity(SearchObject product);
         void navigateToStoreActivity(int store);
     }
 

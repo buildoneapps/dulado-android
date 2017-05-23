@@ -9,6 +9,7 @@ import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.modules.ProductRepositoryModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
+import com.buildone.dulado.utils.CameraIntentHelper;
 import com.buildone.logic.presenter.product.AddProductPresenter;
 
 import dagger.Binds;
@@ -37,10 +38,14 @@ public interface AddProductActivitySubComponent extends AndroidInjector<AddProdu
         abstract AddProductContract.View providesView(AddProductActivity activity);
 
         @Provides
-        static AddProductContract.Presenter providesPresenter(AddProductActivity activity, IProductInteractor interactor) {
-            return new AddProductPresenter(activity, interactor);
+        static AddProductContract.Presenter providesPresenter(AddProductContract.View view, IProductInteractor interactor) {
+            return new AddProductPresenter(view, interactor);
         }
 
+        @Provides
+        static CameraIntentHelper providesCameraHelper(AddProductActivity activity){
+            return new CameraIntentHelper(activity,activity);
+        }
     }
 
     @Subcomponent.Builder

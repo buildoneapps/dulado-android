@@ -2,8 +2,10 @@ package com.buildone.dulado.ui.activity.product;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.buildone.dulado.R;
 import com.buildone.dulado.application.AppConstants;
@@ -18,11 +20,32 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.AndroidInjection;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductActivity extends BaseActivity implements ProductContract.View {
+
+    @BindView(R.id.productAddess)
+    TextView productAddess;
+    @BindView(R.id.ivSellerPhoto)
+    CircleImageView ivSellerPhoto;
+    @BindView(R.id.tvSellerName)
+    TextView tvSellerName;
+    @BindView(R.id.vpPhotos)
+    ViewPager vpPhotos;
+    @BindView(R.id.productName)
+    TextView productName;
+    @BindView(R.id.productTags)
+    TextView productTags;
+    @BindView(R.id.tvPrice)
+    TextView tvPrice;
+    @BindView(R.id.productDescription)
+    TextView productDescription;
+    @BindView(R.id.paymentCard)
+    TextView paymentCard;
 
     @Inject
     FirebaseAnalytics firebaseAnalytics;
@@ -38,7 +61,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
 
-        product = (ProductParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_OBJECT);
+        product = (ProductParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
 
         AndroidInjection.inject(this);
         presenter.start();
@@ -55,7 +78,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public void setProductName(String name) {
-
+        productName.setText(name);
     }
 
     @Override
@@ -65,12 +88,12 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public void setProductDescription(String description) {
-
+        productDescription.setText(description);
     }
 
     @Override
     public void setProductPrice(String price) {
-
+        tvPrice.setText(price);
     }
 
     @Override
@@ -89,14 +112,14 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     }
 
     @Override
-    public void showProductUnavailableCOntainer() {
+    public void showProductUnavailableContainer() {
 
     }
 
     @Override
     public void navigateToCheckoutActivity(ProductObject product) {
         /*Intent intent = new Intent(this, CheckoutActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(product));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);*/
     }
@@ -104,7 +127,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     @Override
     public void navigateToChatActivity(ProductObject product) {
         /*Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(product));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);*/
     }

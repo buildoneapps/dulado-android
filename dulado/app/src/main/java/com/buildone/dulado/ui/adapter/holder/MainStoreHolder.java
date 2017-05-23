@@ -49,7 +49,7 @@ public class MainStoreHolder implements FlexibleHolder {
     public void onViewClicked(View view) {
         /*switch (view.getId()) {
             case R.id.ivProductPhoto:
-                RxBus.getInstance().publish(new OnProductTouchedEvent(storeObject.getProduct()));
+                RxBus.getInstance().publish(new OnProductTouchedEvent(storeObject.getProductSearch()));
                 break;
             case R.id.ivSellerPhoto:
                 RxBus.getInstance().publish(new OnStoreTouchedEvent(storeObject));

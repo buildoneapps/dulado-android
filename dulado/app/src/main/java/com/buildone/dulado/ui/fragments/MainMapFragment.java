@@ -24,9 +24,8 @@ import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
 import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainMapContract;
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
-import com.buildone.dulado.parcel.ProductParcel;
+import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.MainStoreHolder;
@@ -41,9 +40,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.transitionseverywhere.Slide;
 import com.transitionseverywhere.Transition;
@@ -205,9 +206,9 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     }
 
     @Override
-    public void navigateToProductActivity(ProductObject product) {
+    public void navigateToProductActivity(SearchObject product) {
         Intent intent = new Intent(getActivity(), ProductActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(product));
         startActivity(intent);
     }
 
@@ -352,11 +353,11 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onLocationChanged(Location location) {
         this.location = location;
         if (this.location != null) {
-            /*googleMap.addMarker(new MarkerOptions()
+            googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(location.getLatitude(),location.getLongitude()))
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_store_png))
                     .anchor(0.5f, 1)
-            );*/
+            );
             Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();

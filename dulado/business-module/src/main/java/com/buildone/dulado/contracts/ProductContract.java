@@ -18,7 +18,7 @@ public interface ProductContract {
         void loadProductImages(ArrayList<String> imageUrls);
         void setProductQuantity();
         void setProductWish(boolean enabled);
-        void showProductUnavailableCOntainer();
+        void showProductUnavailableContainer();
         void navigateToCheckoutActivity(ProductObject product);
         void navigateToChatActivity(ProductObject product);
         void navigateToStoreActivity(int storeId);

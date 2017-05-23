@@ -6,7 +6,6 @@ import com.buildone.dulado.event.OnListFormatModeChangedEvent;
 import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
 
@@ -81,7 +80,7 @@ public class MainListFragPresenter implements MainListContract.Presenter {
             public void accept(@NonNull Object o) throws Exception {
                 if (o instanceof OnProductTouchedEvent) {
                     OnProductTouchedEvent event = (OnProductTouchedEvent) o;
-                    onProductSelected(event.getProduct());
+                    onProductSelected(event.getProductSearch());
                 } else if (o instanceof OnChatButtonTouchedEvent) {
                     OnChatButtonTouchedEvent event = (OnChatButtonTouchedEvent) o;
                     onChatProductTouched(event.getSearchProduct());
@@ -129,7 +128,7 @@ public class MainListFragPresenter implements MainListContract.Presenter {
     }
 
     @Override
-    public void onProductSelected(ProductObject product) {
+    public void onProductSelected(SearchObject product) {
         view.navigateToProductActivity(product);
     }
 

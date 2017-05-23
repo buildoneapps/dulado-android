@@ -16,7 +16,7 @@ public interface MainListContract {
         void populateListRecyclerView(ArrayList<SearchObject> items);
         void initGridRecyclerView();
         void populateGridRecyclerView(ArrayList<SearchObject> items);
-        void navigateToProductActivity(ProductObject product);
+        void navigateToProductActivity(SearchObject product);
         void navigateToChatActivity(int productId);
         void showEmptyMessage();
     }
@@ -26,7 +26,7 @@ public interface MainListContract {
         void loadProducts();
         void initSubscriptions();
         void unsubscribeAll();
-        void onProductSelected(ProductObject product);
+        void onProductSelected(SearchObject product);
         void onChatProductTouched(SearchObject product);
         void switchListMode(int listFormat);
 

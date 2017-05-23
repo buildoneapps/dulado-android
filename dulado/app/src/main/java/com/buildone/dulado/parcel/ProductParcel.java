@@ -6,31 +6,22 @@ import android.os.Parcelable;
 import com.buildone.dulado.model.ProductObject;
 
 /**
- * Created by Alessandro Pryds on 05/05/2017.
+ * Created by Alessandro Pryds on 22/05/2017.
  */
 
 public class ProductParcel implements Parcelable {
     private int id;
+    private int storeId;
     private String name;
     private float price;
 
-    public ProductParcel(ProductObject product) {
-        this.id = product.getId();
-        this.name = product.getName();
-        this.price = product.getPrice();
+    public ProductParcel(ProductObject productObject) {
+        this.id = productObject.getId();
+        this.storeId = productObject.getStoreId();
+        this.name = productObject.getName();
+        this.price = productObject.getPrice();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public float getPrice() {
-        return price;
-    }
 
     public ProductObject getProduct(){
         return new ProductObject(id,0,name,price);
@@ -45,17 +36,19 @@ public class ProductParcel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.storeId);
         dest.writeString(this.name);
         dest.writeFloat(this.price);
     }
 
     protected ProductParcel(Parcel in) {
         this.id = in.readInt();
+        this.storeId = in.readInt();
         this.name = in.readString();
         this.price = in.readFloat();
     }
 
-    public static final Parcelable.Creator<ProductParcel> CREATOR = new Parcelable.Creator<ProductParcel>() {
+    public static final Creator<ProductParcel> CREATOR = new Creator<ProductParcel>() {
         @Override
         public ProductParcel createFromParcel(Parcel source) {
             return new ProductParcel(source);

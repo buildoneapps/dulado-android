@@ -1,5 +1,6 @@
 package com.buildone.dulado.ui.activity.product;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +14,12 @@ import com.buildone.dulado.contracts.AddProductContract;
 import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.adapter.holder.AddProductPhotoHolder;
+import com.buildone.dulado.utils.CameraIntentHelperCallback;
 import com.buildone.dulado.utils.RecyclerItemClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public class AddProductActivity extends BaseActivity implements AddProductContract.View {
+public class AddProductActivity extends BaseActivity implements AddProductContract.View, CameraIntentHelperCallback {
 
     @Inject
     FirebaseAnalytics firebaseAnalytics;
@@ -117,6 +120,41 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
 
     @Override
     public void navigateToShareActivity(ProductObject product) {
+
+    }
+
+    @Override
+    public void onPhotoUriFound(Date dateCameraIntentStarted, Uri photoUri, int rotateXDegrees) {
+
+    }
+
+    @Override
+    public void deletePhotoWithUri(Uri photoUri) {
+
+    }
+
+    @Override
+    public void onSdCardNotMounted() {
+
+    }
+
+    @Override
+    public void onCanceled() {
+
+    }
+
+    @Override
+    public void onCouldNotTakePhoto() {
+
+    }
+
+    @Override
+    public void onPhotoUriNotFound() {
+
+    }
+
+    @Override
+    public void logException(Exception e) {
 
     }
 }

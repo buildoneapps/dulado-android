@@ -67,7 +67,7 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
                     view.navigateToStoreActivity(event.getStore().getId());
                 }else if(o instanceof OnProductTouchedEvent){
                     OnProductTouchedEvent event = (OnProductTouchedEvent) o;
-                    view.navigateToProductActivity(event.getProduct());
+                    view.navigateToProductActivity(event.getProductSearch());
                 }
             }
         }));
