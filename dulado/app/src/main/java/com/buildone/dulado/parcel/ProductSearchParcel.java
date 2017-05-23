@@ -27,7 +27,7 @@ public class ProductSearchParcel implements Parcelable {
     }
 
     public SearchObject getSearchObject(){
-        return new SearchObject(id, name, imageUrl, new SellerObject(id),price,tag);
+        return new SearchObject(id, name, imageUrl, new SellerObject(id, "https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"),price,tag);
     }
 
 

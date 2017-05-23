@@ -2,6 +2,7 @@ package com.buildone.dulado.contracts;
 
 import com.buildone.dulado.model.LiveObject;
 import com.buildone.dulado.model.SearchObject;
+import com.buildone.dulado.model.SellerObject;
 import com.buildone.dulado.view.BaseView;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public interface MainContract {
         void onButtonMapTouched();
         void onProductSelected(SearchObject product);
         void onChatProductTouched(SearchObject product);
+        void onSellerTouched(SellerObject seller);
         void onButtonListTouched();
         void onButtonGridTouched();
         void onButtonSearchTouched();

@@ -90,6 +90,12 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
+    protected void onDestroy() {
+        presenter.disposeAll();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
