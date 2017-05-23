@@ -1,19 +1,19 @@
 package com.buildone.dulado.event;
 
-import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
 
 /**
  * Created by Alessandro Pryds on 06/05/2017.
  */
 
 public class OnProductTouchedEvent {
-    private ProductObject productObject;
+    private SearchObject productSearch;
 
-    public OnProductTouchedEvent(ProductObject productObject) {
-        this.productObject = productObject;
+    public OnProductTouchedEvent(SearchObject productSearch) {
+        this.productSearch = productSearch;
     }
 
-    public ProductObject getProduct() {
-        return productObject;
+    public SearchObject getProductSearch() {
+        return productSearch;
     }
 }

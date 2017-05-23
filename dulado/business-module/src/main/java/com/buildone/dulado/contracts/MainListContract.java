@@ -1,6 +1,5 @@
 package com.buildone.dulado.contracts;
 
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.view.BaseView;
 
@@ -16,8 +15,6 @@ public interface MainListContract {
         void populateListRecyclerView(ArrayList<SearchObject> items);
         void initGridRecyclerView();
         void populateGridRecyclerView(ArrayList<SearchObject> items);
-        void navigateToProductActivity(ProductObject product);
-        void navigateToChatActivity(int productId);
         void showEmptyMessage();
     }
 
@@ -25,9 +22,7 @@ public interface MainListContract {
         void start();
         void loadProducts();
         void initSubscriptions();
-        void unsubscribeAll();
-        void onProductSelected(ProductObject product);
-        void onChatProductTouched(SearchObject product);
+        void disposeAll();
         void switchListMode(int listFormat);
 
         void onShow();

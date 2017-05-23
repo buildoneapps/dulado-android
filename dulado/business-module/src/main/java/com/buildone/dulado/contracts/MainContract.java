@@ -1,6 +1,8 @@
 package com.buildone.dulado.contracts;
 
 import com.buildone.dulado.model.LiveObject;
+import com.buildone.dulado.model.SearchObject;
+import com.buildone.dulado.model.SellerObject;
 import com.buildone.dulado.view.BaseView;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public interface MainContract {
         void initLiveRecycler();
         void populateLiveRecycler(ArrayList<LiveObject> items);
         void navigateToStoreActivity(int store);
+        void navigateToProductActivity(SearchObject searchObject);
+        void navigateToChatActivity(int productId);
         void navigateToSearchActivity();
         void navigateToAddProductActivity();
 
@@ -41,6 +45,9 @@ public interface MainContract {
         void onScrollChanged(boolean isScrolling);
         void onLiveItemTouched(int position);
         void onButtonMapTouched();
+        void onProductSelected(SearchObject product);
+        void onChatProductTouched(SearchObject product);
+        void onSellerTouched(SellerObject seller);
         void onButtonListTouched();
         void onButtonGridTouched();
         void onButtonSearchTouched();

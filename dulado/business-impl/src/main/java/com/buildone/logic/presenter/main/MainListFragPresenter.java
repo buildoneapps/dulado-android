@@ -1,12 +1,9 @@
 package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainListContract;
-import com.buildone.dulado.event.OnChatButtonTouchedEvent;
 import com.buildone.dulado.event.OnListFormatModeChangedEvent;
-import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
 
@@ -79,13 +76,7 @@ public class MainListFragPresenter implements MainListContract.Presenter {
         disposable.add(RxBus.getInstance().getEvents().subscribe(new Consumer<Object>() {
             @Override
             public void accept(@NonNull Object o) throws Exception {
-                if (o instanceof OnProductTouchedEvent) {
-                    OnProductTouchedEvent event = (OnProductTouchedEvent) o;
-                    onProductSelected(event.getProduct());
-                } else if (o instanceof OnChatButtonTouchedEvent) {
-                    OnChatButtonTouchedEvent event = (OnChatButtonTouchedEvent) o;
-                    onChatProductTouched(event.getSearchProduct());
-                } else if (o instanceof OnListFormatModeChangedEvent) {
+                if (o instanceof OnListFormatModeChangedEvent) {
                     OnListFormatModeChangedEvent event = (OnListFormatModeChangedEvent) o;
                     switchListMode(event.getListFormat());
                 }
@@ -95,7 +86,7 @@ public class MainListFragPresenter implements MainListContract.Presenter {
 
     @Override
     public void switchListMode(int listFormat) {
-        if(loadedProducts.size() == 0){
+        if (loadedProducts.size() == 0) {
             view.showEmptyMessage();
             return;
         }
@@ -122,19 +113,9 @@ public class MainListFragPresenter implements MainListContract.Presenter {
     }
 
     @Override
-    public void unsubscribeAll() {
+    public void disposeAll() {
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
-    }
-
-    @Override
-    public void onProductSelected(ProductObject product) {
-        view.navigateToProductActivity(product);
-    }
-
-    @Override
-    public void onChatProductTouched(SearchObject searchProduct) {
-        view.navigateToChatActivity(searchProduct.getId());
     }
 }

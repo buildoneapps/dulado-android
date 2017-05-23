@@ -2,6 +2,7 @@ package com.buildone.dulado.ui.adapter.holder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,10 +45,15 @@ public class AddProductPhotoHolder implements FlexibleHolder {
     @Override
     public void displayView(@NonNull View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
+        if(enabled){
+            ivProductPhoto.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.shape_stroke_color_accent));
+        }else{
+            ivProductPhoto.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.shape_stroke_gray_300));
+        }
         if (photoPath == null || photoPath.isEmpty()) {
             //ivProductPhoto.setImageDrawable(R.drawable.ic_photo_enabled);
         } else {
-            Glide.with(context).load(photoPath).into(ivProductPhoto);
+            Glide.with(context).load(photoPath).centerCrop().into(ivProductPhoto);
         }
     }
 

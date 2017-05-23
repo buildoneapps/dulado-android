@@ -1,7 +1,6 @@
 package com.buildone.dulado.contracts;
 
-import com.buildone.dulado.model.ProductObject;
-import com.buildone.dulado.model.StoreObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.view.BaseView;
 
 import java.util.ArrayList;
@@ -23,21 +22,15 @@ public interface MainMapContract {
         void centerUser();
         void showRadius(int radius);
         void initStoresScrollView();
-        void populateStoreScrollView(ArrayList<StoreObject> items);
+        void populateStoreScrollView(ArrayList<SearchObject> items);
         void hideStoresScrollView();
         void showStoresScrollView();
-
-        void navigateToSearchActivity();
-        void navigateToProductActivity(ProductObject product);
-        void navigateToStoreActivity(int store);
     }
 
     interface Presenter{
         void start();
         void initSubscriptions();
-        void unsubscribeAll();
-        void onSearchTouched();
-        void onStoreSelected(int position);
+        void disposeAll();
         void onPermissionFailed();
         void onPermissionGranted(String[] receivedPermissions, List<String> required);
         void onMapReady();

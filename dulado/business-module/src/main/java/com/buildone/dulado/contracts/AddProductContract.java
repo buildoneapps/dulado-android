@@ -14,13 +14,13 @@ public interface AddProductContract {
         void initToolbar();
         void checkPermissions();
         void initPhotosRecyclerView(ArrayList<String> items);
+        void notifyPhotoAdded(ArrayList<String> items);
         void showPhotoChooserDialog();
         void openCamera();
         void openGallery();
         void navigateToProductPreview(ProductObject product);
         void navigateToProductPage(ProductObject product);
         void navigateToShareActivity(ProductObject product);
-
     }
 
     interface Presenter{
@@ -33,5 +33,6 @@ public interface AddProductContract {
         void onButtonGalleryTouched();
         void onPermissionGranted();
         void onPermissionError();
+        void addPhoto(String photoUri);
     }
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.buildone.dulado.contracts.ProductContract;
 import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.scope.ForApplication;
 import com.buildone.dulado.ui.activity.product.ProductActivity;
@@ -40,8 +41,8 @@ public interface ProductActivitySubComponent extends AndroidInjector<ProductActi
 
 
         @Provides
-        static ProductContract.Presenter providesPresenter(ProductActivity activity, IProductInteractor interactor, @Named("productObject") ProductObject product) {
-            return new ProductPresenter(activity, interactor, product);
+        static ProductContract.Presenter providesPresenter(ProductActivity activity, IProductInteractor interactor, @Named("productObject") ProductObject product, @Named("productSearchObject") SearchObject productSearch) {
+            return new ProductPresenter(activity, interactor, product, productSearch);
         }
 
         @Provides
@@ -53,6 +54,12 @@ public interface ProductActivitySubComponent extends AndroidInjector<ProductActi
         @Named("productObject")
         static ProductObject provideProductObject(ProductActivity activity) {
             return activity.getProduct();
+        }
+
+        @Provides
+        @Named("productSearchObject")
+        static SearchObject provideProductSearchObject(ProductActivity activity) {
+            return activity.getProductSearch();
         }
 
     }

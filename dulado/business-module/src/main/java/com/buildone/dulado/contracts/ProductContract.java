@@ -1,6 +1,7 @@
 package com.buildone.dulado.contracts;
 
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
 
 import java.util.ArrayList;
 
@@ -16,17 +17,23 @@ public interface ProductContract {
         void setProductDescription(String description);
         void setProductPrice(String price);
         void loadProductImages(ArrayList<String> imageUrls);
-        void setProductQuantity();
+        void setProductQuantity(int i);
         void setProductWish(boolean enabled);
-        void showProductUnavailableCOntainer();
+        void setSellerName(String name);
+        void setSellerPhoto(String photoUrl);
+        void showProductUnavailableContainer();
         void navigateToCheckoutActivity(ProductObject product);
         void navigateToChatActivity(ProductObject product);
         void navigateToStoreActivity(int storeId);
         ProductObject getProduct();
+        SearchObject getProductSearch();
     }
 
     interface Presenter{
         void start();
+        void initSubscriptions();
+        void disposeAll();
+        void setupProduct(ProductObject product);
         void onButtonCheckoutTouched();
         void onButtonChatTouched();
         void onButtonAddWishListTouched();

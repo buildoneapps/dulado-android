@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
 import com.buildone.dulado.contracts.MainListContract;
-import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.ui.adapter.holder.SearchGridHolder;
 import com.buildone.dulado.ui.adapter.holder.SearchHolder;
@@ -65,8 +64,6 @@ public class MainListFragment extends BaseFragment implements MainListContract.V
         if (getArguments() != null) {
         }
         AndroidSupportInjection.inject(this);
-
-
     }
 
     @Override
@@ -87,7 +84,7 @@ public class MainListFragment extends BaseFragment implements MainListContract.V
 
     @Override
     public void onDestroy() {
-        presenter.unsubscribeAll();
+        presenter.disposeAll();
         super.onDestroy();
     }
 
@@ -161,15 +158,6 @@ public class MainListFragment extends BaseFragment implements MainListContract.V
         gridAdapter.setItems(holders);
     }
 
-    @Override
-    public void navigateToProductActivity(ProductObject product) {
-
-    }
-
-    @Override
-    public void navigateToChatActivity(int productId) {
-
-    }
 
     @Override
     public void showEmptyMessage() {

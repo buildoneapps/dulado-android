@@ -11,10 +11,11 @@
         android:id="@+id/ivProductPhoto"
         android:layout_width="match_parent"
         android:layout_height="190dp"
+        android:scaleType="centerCrop"
         android:src="@color/light_gray" />
 
     <LinearLayout
-        android:id="@+id/container_product"
+        android:id="@+id/container_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivProductPhoto"
@@ -59,9 +60,10 @@
 
 
     <RelativeLayout
+        android:id="@+id/container_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/container_product"
+        android:layout_below="@id/container_info"
         android:layout_marginBottom="8dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp">
@@ -125,5 +127,5 @@
         app:elevation="2dp"
         app:fabSize="mini"
         app:rippleColor="@color/ligher_gray"
-        app:srcCompat="@drawable/ic_chat_bubble_outline_green_24dp" />
+        app:srcCompat="@drawable/ic_chat_edited" />
 </RelativeLayout>

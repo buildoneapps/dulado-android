@@ -7,26 +7,26 @@ import android.widget.ImageView;
 import com.babic.filip.flexibleadapter.FlexibleHolder;
 import com.buildone.dulado.R;
 import com.buildone.dulado.event.OnProductTouchedEvent;
-import com.buildone.dulado.event.OnStoreTouchedEvent;
-import com.buildone.dulado.model.StoreObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class StoreHolder implements FlexibleHolder {
+public class MainStoreHolder implements FlexibleHolder {
 
     @BindView(R.id.ivProductPhoto)
     ImageView ivProductPhoto;
     private Context context;
-    private StoreObject storeObject;
+    private SearchObject searchObject;
     private Unbinder unbinder;
 
-    public StoreHolder(Context context, StoreObject storeObject) {
+    public MainStoreHolder(Context context, SearchObject searchObject) {
         this.context = context;
-        this.storeObject = storeObject;
+        this.searchObject = searchObject;
     }
 
     @Override
@@ -44,17 +44,17 @@ public class StoreHolder implements FlexibleHolder {
     @Override
     public void displayView(View rootView) {
         unbinder = ButterKnife.bind(this, rootView);
-
+        Glide.with(context).load(searchObject.getImageUrl()).centerCrop().into(ivProductPhoto);
     }
 
     @OnClick({R.id.ivProductPhoto, R.id.ivSellerPhoto})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivProductPhoto:
-                RxBus.getInstance().publish(new OnProductTouchedEvent(storeObject.getProduct()));
+                RxBus.getInstance().publish(new OnProductTouchedEvent(searchObject));
                 break;
             case R.id.ivSellerPhoto:
-                RxBus.getInstance().publish(new OnStoreTouchedEvent(storeObject));
+                //RxBus.getInstance().publish(new OnStoreTouchedEvent(searchObject.getSeller()));
                 break;
         }
     }

@@ -2,7 +2,6 @@ package com.buildone.dulado.ui.fragments;
 
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -22,14 +21,9 @@ import android.widget.Toast;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
-import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainMapContract;
-import com.buildone.dulado.model.ProductObject;
-import com.buildone.dulado.model.StoreObject;
-import com.buildone.dulado.parcel.ProductParcel;
-import com.buildone.dulado.ui.activity.product.ProductActivity;
-import com.buildone.dulado.ui.activity.store.StoreActivity;
-import com.buildone.dulado.ui.adapter.holder.StoreHolder;
+import com.buildone.dulado.model.SearchObject;
+import com.buildone.dulado.ui.adapter.holder.MainStoreHolder;
 import com.buildone.dulado.utils.PermissionStatusHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,9 +35,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.transitionseverywhere.Slide;
 import com.transitionseverywhere.Transition;
@@ -93,7 +89,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     @BindView(R.id.btnHideStores)
     ImageView btnHideStores;
 
-    FlexibleAdapter<StoreHolder> storeAdapter;
+    FlexibleAdapter<MainStoreHolder> storeAdapter;
 
     Unbinder unbinder;
 
@@ -147,7 +143,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
 
     @Override
     public void onDestroy() {
-        presenter.unsubscribeAll();
+        presenter.disposeAll();
         super.onDestroy();
     }
 
@@ -198,25 +194,6 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
         presenter.onPermissionGranted((String[]) locationPermissions.toArray(), locationPermissions);
     }
 
-    @Override
-    public void navigateToSearchActivity() {
-        /*Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);*/
-    }
-
-    @Override
-    public void navigateToProductActivity(ProductObject product) {
-        Intent intent = new Intent(getActivity(), ProductActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
-        startActivity(intent);
-    }
-
-    @Override
-    public void navigateToStoreActivity(int storeId) {
-        Intent intent = new Intent(getActivity(), StoreActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_STORE_ID, storeId);
-        startActivity(intent);
-    }
 
     @Override
     public void loadMapStyle() {
@@ -269,10 +246,10 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     }
 
     @Override
-    public void populateStoreScrollView(ArrayList<StoreObject> items) {
-        List<StoreHolder> holders = new ArrayList<>();
-        for (StoreObject item : items) {
-            holders.add(new StoreHolder(getActivity(), item));
+    public void populateStoreScrollView(ArrayList<SearchObject> items) {
+        List<MainStoreHolder> holders = new ArrayList<>();
+        for (SearchObject item : items) {
+            holders.add(new MainStoreHolder(getActivity(), item));
         }
         storeAdapter.addItems(holders);
         scrollStores.scrollToPosition(1);
@@ -352,6 +329,11 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onLocationChanged(Location location) {
         this.location = location;
         if (this.location != null) {
+            googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(location.getLatitude(),location.getLongitude()))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_store_png))
+                    .anchor(0.5f, 1)
+            );
             Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();
@@ -362,6 +344,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         presenter.onMapReady();
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.setOnGroundOverlayClickListener(new GoogleMap.OnGroundOverlayClickListener() {
             @Override
             public void onGroundOverlayClick(GroundOverlay groundOverlay) {
