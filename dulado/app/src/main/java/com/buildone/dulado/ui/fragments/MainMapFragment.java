@@ -2,7 +2,6 @@ package com.buildone.dulado.ui.fragments;
 
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -22,12 +21,8 @@ import android.widget.Toast;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
-import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainMapContract;
 import com.buildone.dulado.model.SearchObject;
-import com.buildone.dulado.parcel.ProductSearchParcel;
-import com.buildone.dulado.ui.activity.product.ProductActivity;
-import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.MainStoreHolder;
 import com.buildone.dulado.utils.PermissionStatusHelper;
 import com.google.android.gms.common.ConnectionResult;
@@ -148,7 +143,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
 
     @Override
     public void onDestroy() {
-        presenter.unsubscribeAll();
+        presenter.disposeAll();
         super.onDestroy();
     }
 
@@ -199,25 +194,6 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
         presenter.onPermissionGranted((String[]) locationPermissions.toArray(), locationPermissions);
     }
 
-    @Override
-    public void navigateToSearchActivity() {
-        /*Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);*/
-    }
-
-    @Override
-    public void navigateToProductActivity(SearchObject product) {
-        Intent intent = new Intent(getActivity(), ProductActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(product));
-        startActivity(intent);
-    }
-
-    @Override
-    public void navigateToStoreActivity(int storeId) {
-        Intent intent = new Intent(getActivity(), StoreActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_STORE_ID, storeId);
-        startActivity(intent);
-    }
 
     @Override
     public void loadMapStyle() {

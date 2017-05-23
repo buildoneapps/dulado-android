@@ -1,6 +1,7 @@
 package com.buildone.logic.interactor;
 
 import com.buildone.dulado.interactor.IProductInteractor;
+import com.buildone.dulado.model.ProductObject;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.model.SellerObject;
 
@@ -39,5 +40,16 @@ public class ProductInteractor implements IProductInteractor {
         objects.add(new SearchObject(0, "Teste Product", "https://img.cybercook.uol.com.br/imagens/receitas/593/pao-caseiro.jpg?2017", new SellerObject(), 0.25f, "#nerd #livro"));
         objects.add(new SearchObject(0, "Teste Product", "https://www.rs21.com.br/wp-content/uploads/2013/01/coxinha.jpg", new SellerObject(), 0.25f, "#nerd #livro"));
         return Observable.fromArray(objects);
+    }
+
+    @Override
+    public Observable<ProductObject> getProductById(int productId) {
+        ArrayList<String> productImages = new ArrayList<String>();
+        productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
+        productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
+        productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
+        productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
+        productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
+        return Observable.just(new ProductObject(productId,0,2.5f,"Test Product","Este produto possui uma descrição simples, mas objetiva!", productImages));
     }
 }

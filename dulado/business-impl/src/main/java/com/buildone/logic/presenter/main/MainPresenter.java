@@ -1,9 +1,12 @@
 package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainContract;
+import com.buildone.dulado.event.OnChatButtonTouchedEvent;
+import com.buildone.dulado.event.OnProductTouchedEvent;
 import com.buildone.dulado.event.OnScrollChangedEvent;
 import com.buildone.dulado.interactor.IMainInteractor;
 import com.buildone.dulado.model.LiveObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
 
 import java.util.ArrayList;
@@ -65,6 +68,12 @@ public class MainPresenter implements MainContract.Presenter {
                 if (o instanceof OnScrollChangedEvent) {
                     OnScrollChangedEvent event = (OnScrollChangedEvent) o;
                     onScrollChanged(event.isScrolling());
+                }else if (o instanceof OnProductTouchedEvent) {
+                    OnProductTouchedEvent event = (OnProductTouchedEvent) o;
+                    onProductSelected(event.getProductSearch());
+                } else if (o instanceof OnChatButtonTouchedEvent) {
+                    OnChatButtonTouchedEvent event = (OnChatButtonTouchedEvent) o;
+                    onChatProductTouched(event.getSearchProduct());
                 }
             }
         }));
@@ -99,7 +108,9 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void disposeAll() {
-        compositeDisposable.clear();
+        if(compositeDisposable != null && !compositeDisposable.isDisposed()){
+            compositeDisposable.dispose();
+        }
     }
 
     @Override
@@ -128,6 +139,15 @@ public class MainPresenter implements MainContract.Presenter {
         view.hideCreateAdButton();
     }
 
+    @Override
+    public void onProductSelected(SearchObject product) {
+        view.navigateToProductActivity(product);
+    }
+
+    @Override
+    public void onChatProductTouched(SearchObject product) {
+        view.navigateToChatActivity(product.getId());
+    }
 
     @Override
     public void onButtonListTouched() {

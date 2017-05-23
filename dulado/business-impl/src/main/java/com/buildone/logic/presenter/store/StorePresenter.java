@@ -30,9 +30,11 @@ public class StorePresenter implements StoreContract.Presenter {
     @Override
     public void start() {
         view.initToolbar();
-        products.add(new ProductObject(1,1,"teste",1.99f));
+        products.add(new ProductObject(1, storeId, 12.2f, "teste", "Teste descricao", new ArrayList<String>() {{
+            add("https://s-media-cache-ak0.pinimg.com/736x/b1/2a/74/b12a74b433c345e8c77131c1681e7b83.jpg");
+        }}));
 
-        store = new StoreObject(storeId,"ABC",1);
+        store = new StoreObject(storeId, "ABC", 1);
     }
 
     @Override

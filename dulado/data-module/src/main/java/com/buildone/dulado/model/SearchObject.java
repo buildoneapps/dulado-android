@@ -12,8 +12,12 @@ public class SearchObject {
     private String tag;
     private int id;
 
+    public SearchObject() {
+    }
+
     public SearchObject(int id, String productName, String imageUrl, SellerObject seller, float price, String tag) {
         this.imageUrl = imageUrl;
+        this.id = id;
         this.seller = seller;
         this.price = price;
         this.tag = tag;

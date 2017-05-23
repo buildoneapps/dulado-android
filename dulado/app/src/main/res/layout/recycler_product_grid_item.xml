@@ -15,7 +15,7 @@
         android:src="@color/light_gray" />
 
     <LinearLayout
-        android:id="@+id/container_product"
+        android:id="@+id/container_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivProductPhoto"
@@ -60,9 +60,10 @@
 
 
     <RelativeLayout
+        android:id="@+id/container_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/container_product"
+        android:layout_below="@id/container_info"
         android:layout_marginBottom="8dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp">

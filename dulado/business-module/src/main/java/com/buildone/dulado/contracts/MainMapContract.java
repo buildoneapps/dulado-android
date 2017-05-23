@@ -25,18 +25,12 @@ public interface MainMapContract {
         void populateStoreScrollView(ArrayList<SearchObject> items);
         void hideStoresScrollView();
         void showStoresScrollView();
-
-        void navigateToSearchActivity();
-        void navigateToProductActivity(SearchObject product);
-        void navigateToStoreActivity(int store);
     }
 
     interface Presenter{
         void start();
         void initSubscriptions();
-        void unsubscribeAll();
-        void onSearchTouched();
-        void onStoreSelected(int position);
+        void disposeAll();
         void onPermissionFailed();
         void onPermissionGranted(String[] receivedPermissions, List<String> required);
         void onMapReady();

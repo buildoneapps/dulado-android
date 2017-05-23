@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.buildone.dulado.model.ProductObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by Alessandro Pryds on 22/05/2017.
  */
@@ -14,17 +16,21 @@ public class ProductParcel implements Parcelable {
     private int storeId;
     private String name;
     private float price;
+    private String description;
+    private ArrayList<String> productImages;
 
     public ProductParcel(ProductObject productObject) {
         this.id = productObject.getId();
         this.storeId = productObject.getStoreId();
         this.name = productObject.getName();
         this.price = productObject.getPrice();
+        this.description = productObject.getDescription();
+        this.productImages = productObject.getProductImages();
     }
 
 
     public ProductObject getProduct(){
-        return new ProductObject(id,0,name,price);
+        return new ProductObject(id,storeId,price,name,description,productImages);
     }
 
 
@@ -39,6 +45,8 @@ public class ProductParcel implements Parcelable {
         dest.writeInt(this.storeId);
         dest.writeString(this.name);
         dest.writeFloat(this.price);
+        dest.writeString(this.description);
+        dest.writeStringList(this.productImages);
     }
 
     protected ProductParcel(Parcel in) {
@@ -46,6 +54,8 @@ public class ProductParcel implements Parcelable {
         this.storeId = in.readInt();
         this.name = in.readString();
         this.price = in.readFloat();
+        this.description = in.readString();
+        this.productImages = in.createStringArrayList();
     }
 
     public static final Creator<ProductParcel> CREATOR = new Creator<ProductParcel>() {

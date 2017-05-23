@@ -1,12 +1,9 @@
 package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.MainMapContract;
-import com.buildone.dulado.event.OnProductTouchedEvent;
-import com.buildone.dulado.event.OnStoreTouchedEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.model.LiveObject;
 import com.buildone.dulado.model.SearchObject;
-import com.buildone.rxbus.RxBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +15,6 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -59,18 +55,6 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
         if(compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
-        compositeDisposable.add(RxBus.getInstance().getEvents().subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(@NonNull Object o) throws Exception {
-                if(o instanceof OnStoreTouchedEvent){
-                    OnStoreTouchedEvent event = (OnStoreTouchedEvent) o;
-                    view.navigateToStoreActivity(event.getStore().getId());
-                }else if(o instanceof OnProductTouchedEvent){
-                    OnProductTouchedEvent event = (OnProductTouchedEvent) o;
-                    view.navigateToProductActivity(event.getProductSearch());
-                }
-            }
-        }));
 
         compositeDisposable.add(productInteractor.getProducts()
                 .delay(5, TimeUnit.SECONDS)
@@ -95,19 +79,12 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
     }
 
     @Override
-    public void unsubscribeAll() {
-        compositeDisposable.clear();
+    public void disposeAll() {
+        if(compositeDisposable != null && !compositeDisposable.isDisposed()){
+            compositeDisposable.dispose();
+        }
     }
 
-    @Override
-    public void onSearchTouched() {
-        view.navigateToSearchActivity();
-    }
-
-    @Override
-    public void onStoreSelected(int position) {
-        view.navigateToStoreActivity(storeItems.get(position).getId());
-    }
 
     @Override
     public void onPermissionFailed() {

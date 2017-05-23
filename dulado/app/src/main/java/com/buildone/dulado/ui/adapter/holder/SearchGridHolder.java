@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.babic.filip.flexibleadapter.FlexibleHolder;
 import com.buildone.dulado.R;
 import com.buildone.dulado.event.OnChatButtonTouchedEvent;
+import com.buildone.dulado.event.OnProductTouchedEvent;
+import com.buildone.dulado.event.OnSellerTouchedEvent;
 import com.buildone.dulado.model.SearchObject;
 import com.buildone.rxbus.RxBus;
 import com.bumptech.glide.Glide;
@@ -66,5 +68,20 @@ public class SearchGridHolder implements FlexibleHolder {
     @OnClick(R.id.fabChat)
     public void onChatButtonTouched() {
         RxBus.getInstance().publish(new OnChatButtonTouchedEvent(searchObject));
+    }
+
+    @OnClick({R.id.ivProductPhoto, R.id.container_info, R.id.container_store})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ivProductPhoto:
+                RxBus.getInstance().publish(new OnProductTouchedEvent(searchObject));
+                break;
+            case R.id.container_info:
+                RxBus.getInstance().publish(new OnProductTouchedEvent(searchObject));
+                break;
+            case R.id.container_store:
+                RxBus.getInstance().publish(new OnSellerTouchedEvent(searchObject.getSeller()));
+                break;
+        }
     }
 }

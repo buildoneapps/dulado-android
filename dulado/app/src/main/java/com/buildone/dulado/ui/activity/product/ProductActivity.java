@@ -11,7 +11,9 @@ import com.buildone.dulado.R;
 import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.ProductContract;
 import com.buildone.dulado.model.ProductObject;
+import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.parcel.ProductParcel;
+import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -54,6 +56,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     ProductContract.Presenter presenter;
 
     private ProductParcel product;
+    private ProductSearchParcel productSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +65,16 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
         ButterKnife.bind(this);
 
         product = (ProductParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_OBJECT);
+        productSearch = (ProductSearchParcel) getIntent().getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
 
         AndroidInjection.inject(this);
         presenter.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.disposeAll();
+        super.onDestroy();
     }
 
     @Override
@@ -102,7 +112,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     }
 
     @Override
-    public void setProductQuantity() {
+    public void setProductQuantity(int i) {
 
     }
 
@@ -142,7 +152,18 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public ProductObject getProduct() {
-        return product.getProduct();
+        if(product != null) {
+            return product.getProduct();
+        }
+        return new ProductObject();
+    }
+
+    @Override
+    public SearchObject getProductSearch() {
+        if(productSearch != null) {
+            return productSearch.getSearchObject();
+        }
+        return new SearchObject();
     }
 
     @OnClick({R.id.btnChat, R.id.btnStore})

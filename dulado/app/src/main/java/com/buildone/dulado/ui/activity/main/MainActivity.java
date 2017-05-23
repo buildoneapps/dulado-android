@@ -22,8 +22,11 @@ import com.buildone.dulado.application.AppConstants;
 import com.buildone.dulado.contracts.MainContract;
 import com.buildone.dulado.event.OnListFormatModeChangedEvent;
 import com.buildone.dulado.model.LiveObject;
+import com.buildone.dulado.model.SearchObject;
+import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.NavDrawerBaseActivity;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
+import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.LiveHolder;
 import com.buildone.dulado.ui.adapter.viewpager.MainPagerAdapter;
@@ -165,6 +168,18 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         Intent intent = new Intent(this, StoreActivity.class);
         intent.putExtra(AppConstants.INTENT_TAG_STORE_ID, storeId);
         startActivity(intent);
+    }
+
+    @Override
+    public void navigateToProductActivity(SearchObject searchObject) {
+        Intent intent = new Intent(this, ProductActivity.class);
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(searchObject));
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToChatActivity(int productId) {
+
     }
 
     @Override
