@@ -75,7 +75,6 @@ public class LiveHolder implements FlexibleHolder {
     }
 
     private void animateView() {
-
         Observable.timer(800, TimeUnit.MILLISECONDS)
                 .repeat(3)
                 .observeOn(Schedulers.newThread())

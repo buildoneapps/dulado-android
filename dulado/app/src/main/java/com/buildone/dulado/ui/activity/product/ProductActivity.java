@@ -16,6 +16,7 @@ import com.buildone.dulado.parcel.ProductParcel;
 import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
+import com.buildone.dulado.ui.adapter.viewpager.PhotoPagerAdapter;
 import com.bumptech.glide.Glide;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -58,6 +59,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     private ProductParcel product;
     private ProductSearchParcel productSearch;
+    private PhotoPagerAdapter vpAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +111,9 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public void loadProductImages(ArrayList<String> imageUrls) {
-
+        vpAdapter = new PhotoPagerAdapter(getSupportFragmentManager(),imageUrls);
+        vpPhotos.setAdapter(vpAdapter);
+        vpPhotos.setCurrentItem(0);
     }
 
     @Override

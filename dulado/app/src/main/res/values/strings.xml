@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">dulado</string>
-    <string name="title_activity_main">Tela principal</string>
+    <string name="app_name">Duladu</string>
+    <string name="title_activity_main">Duladu</string>
     <string name="title_activity_discover">Descobrir</string>
     <string name="title_activity_store">Loja</string>
     <string name="title_activity_user_profile">Perfil do usuário</string>
@@ -20,7 +20,6 @@
     <string name="nav_title_help">Preciso de ajuda</string>
     <string name="nav_title_about">Sobre o Duladu</string>
     <string name="nav_title_exit">Sair</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
     <string name="navigation_drawer_open">Abrir menu lateral</string>
     <string name="navigation_drawer_close">Fechar menu lateral</string>
@@ -57,4 +56,8 @@
     <string name="label_secure_shopping">Ambiente de compra segura</string>
     <string name="button_post_product_text">Publicar produto</string>
     <string name="label_live">Ao vivo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name_space">"  Duladu"</string>
 </resources>
