@@ -38,6 +38,14 @@ public class ProductPresenter implements ProductContract.Presenter {
         initSubscriptions();
         if(product.getId() > 0){
             setupProduct(product);
+        }else if(productSearch.getId() > 0){
+            setupProduct(new ProductObject(productSearch.getId(),
+                    productSearch.getSeller().getId(),
+                    productSearch.getPrice(),
+                    productSearch.getProductName(),
+                    "",
+                    new ArrayList<String>(){{add(productSearch.getImageUrl());}},
+                    productSearch.getSeller()));
         }
     }
 
@@ -79,6 +87,7 @@ public class ProductPresenter implements ProductContract.Presenter {
         view.setProductWish(false);
         //view.setSellerName(product.getSeller().getName());
         view.setSellerPhoto(product.getSeller().getPhotoUrl());
+        view.loadProductImages(product.getProductImages());
     }
 
     @Override

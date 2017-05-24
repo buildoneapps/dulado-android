@@ -182,7 +182,10 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     public void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(getString(R.string.app_name_space));
+        getSupportActionBar().setIcon(R.drawable.ic_shop_market);
     }
+
 
     @Override
     public void initViewPager() {

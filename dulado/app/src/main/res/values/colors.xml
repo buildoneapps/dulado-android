@@ -19,4 +19,6 @@
     <color name="drawer_icon">#FFFFFF</color>
     <color name="colorAccentDark">#e06060</color>
     <color name="button_post_product_text_color">#FFFFFF</color>
+    <color name="grey_400_alpha">#CCBDBDBD</color>
+    <color name="green_600">#43A047</color>
 </resources>
