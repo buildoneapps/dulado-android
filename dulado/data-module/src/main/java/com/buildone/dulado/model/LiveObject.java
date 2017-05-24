@@ -24,6 +24,6 @@ public class LiveObject {
     }
 
     public int getStoreId() {
-        return 0;
+        return storeId;
     }
 }

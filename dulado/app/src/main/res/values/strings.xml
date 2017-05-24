@@ -56,4 +56,5 @@
     <string name="label_payment_card_product">Pague com cartão de crédito</string>
     <string name="label_secure_shopping">Ambiente de compra segura</string>
     <string name="button_post_product_text">Publicar produto</string>
+    <string name="label_live">Ao vivo</string>
 </resources>
