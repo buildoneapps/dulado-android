@@ -9,7 +9,7 @@
     <color name="ligher_gray">#dddddd</color>
     <color name="dark_gray">#D1D1D1</color>
     <color name="product_name_text_color">#000000</color>
-    <color name="product_price_text_color">#2FCB71</color>
+    <color name="product_price_text_color">#16CE9E</color>
     <color name="product_seller_name">#cacaca</color>
     <color name="product_location">#cacaca</color>
     <color name="product_subtitle_text_color">#999999</color>
@@ -21,4 +21,5 @@
     <color name="button_post_product_text_color">#FFFFFF</color>
     <color name="grey_400_alpha">#CCBDBDBD</color>
     <color name="green_600">#43A047</color>
+    <color name="green_soft_dark">#5FB487</color>
 </resources>

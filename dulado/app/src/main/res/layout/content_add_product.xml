@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingEnd="8dp"
+    android:scrollbars="none"
     android:paddingStart="8dp"
     android:paddingTop="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
