@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,15 +9,214 @@
     tools:context="com.buildone.dulado.ui.activity.store.StoreActivity"
     tools:showIn="@layout/activity_store">
 
-    <Button
-        android:id="@+id/btnUserProfile"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UserProfile" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnViewProduct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Product" />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/ivStoreHeader"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:background="@color/grey_300" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:paddingTop="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/storeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/sample_store_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_location_pin_24dp" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:text="@string/sample_location"
+                    android:textColor="@color/product_location"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="end"
+                    android:paddingEnd="8dp"
+                    android:text="@string/sample_product_count"
+                    android:textColor="@color/product_location"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingStart="8dp">
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/shape_circle"
+                    android:tint="@color/product_price_text_color" />
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/shape_circle"
+                    android:tint="@color/product_price_text_color" />
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/shape_circle"
+                    android:tint="@color/product_price_text_color" />
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/shape_circle"
+                    android:tint="@color/product_price_text_color" />
+
+                <ImageView
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/shape_circle" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:background="@color/grey_300" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp">
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:background="@color/grey_300" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/grey_300" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/grey_300" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/grey_300" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/grey_300" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/ivPin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/colorAccent"
+                    app:srcCompat="@drawable/ic_pin_store" />
+
+                <TextView
+                    android:id="@+id/productAddess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ivPin"
+                    android:padding="6dp"
+                    android:text="@string/sample_address"
+                    android:textColor="@color/grey_400" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivSellerPhoto"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@color/light_gray" />
+
+
+                <TextView
+                    android:id="@+id/tvSellerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/ivSellerPhoto"
+                    android:padding="6dp"
+                    android:text="@string/sample_seller_name"
+                    android:textColor="@color/grey_400" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:background="@color/grey_300" />
+
+        <Button
+            android:id="@+id/btnUserProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UserProfile" />
+
+        <Button
+            android:id="@+id/btnViewProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product" />
+
+    </LinearLayout>
+
+</ScrollView>
