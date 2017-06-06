@@ -62,9 +62,9 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/productStoreCount"
                     android:layout_width="match_parent"
                     android:layout_height="16dp"
-                    android:layout_centerVertical="true"
                     android:gravity="end"
                     android:paddingEnd="8dp"
                     android:text="@string/sample_product_count"
@@ -118,10 +118,11 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="200dp"
                 android:background="@color/grey_300" />
 
             <LinearLayout
+                android:id="@+id/btnViewProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp">
@@ -157,6 +158,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/btnUserProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -204,18 +206,6 @@
             android:layout_width="match_parent"
             android:layout_height="128dp"
             android:background="@color/grey_300" />
-
-        <Button
-            android:id="@+id/btnUserProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="UserProfile" />
-
-        <Button
-            android:id="@+id/btnViewProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Product" />
 
     </LinearLayout>
 

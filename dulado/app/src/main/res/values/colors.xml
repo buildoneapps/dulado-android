@@ -22,4 +22,7 @@
     <color name="grey_400_alpha">#CCBDBDBD</color>
     <color name="green_600">#43A047</color>
     <color name="green_soft_dark">#5FB487</color>
+
+    <color name="cart_button_background_color">#FAFBFB</color>
+    <color name="cart_button_stroke_color">#F8F9F9</color>
 </resources>

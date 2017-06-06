@@ -98,7 +98,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:padding="4dp"
-                android:src="@drawable/ic_price_tag" />
+                app:srcCompat="@drawable/ic_price_tag" />
 
             <TextView
                 android:id="@+id/tvPrice"
@@ -124,7 +124,27 @@
             android:textColor="@color/grey_400"
             android:textSize="16sp" />
 
+
+        <Button
+            android:id="@+id/btnPostProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/shape_background_round_color_accent"
+            android:text="Do lado? Eu quero!"
+            android:textAllCaps="false"
+            android:textColor="@color/button_post_product_text_color" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/grey_100" />
+
         <RelativeLayout
+            android:layout_marginTop="16dp"
             android:id="@+id/container_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -197,21 +217,21 @@
             android:src="@color/grey_100" />
 
         <LinearLayout
-            android:layout_gravity="center_vertical"
             android:id="@+id/btnChat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
                 android:layout_marginBottom="2dp"
+                android:layout_marginStart="8dp"
                 app:backgroundTint="@android:color/white"
                 app:elevation="2dp"
                 app:fabSize="mini"
@@ -276,22 +296,19 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@color/grey_100" />
+            android:src="@color/grey_300" />
 
-
-        <Button
-            android:id="@+id/btnPostProduct"
+        <LinearLayout
+            android:padding="6dp"
+            android:background="@color/grey_100"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/shape_background_round_color_accent"
-            android:text="Do lado? Eu quero!"
-            android:textAllCaps="false"
-            android:textColor="@color/button_post_product_text_color" />
+            android:layout_height="150dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:text="@string/label_related_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

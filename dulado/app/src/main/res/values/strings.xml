@@ -65,4 +65,26 @@
     <string name="label_chat_product">Tire suas dúvidas com o vendedor</string>
     <string name="sample_store_name">Cookie n\' fun</string>
     <string name="sample_product_count">mais de 10 produtos a venda!</string>
+    <string name="title_activity_checkout_overview">CheckoutOverview</string>
+    <string name="label_delivery_methods_checkout">Método de entrega</string>
+    <string name="delivery">Entrega em endereço</string>
+    <string name="pickup">Retirada na loja</string>
+    <string name="label_payment_method">Forma de pagamento</string>
+    <string name="label_go_to_store">Encontre o vendedor</string>
+    <string name="label_review_product">Avalie sua compra</string>
+    <string name="label_wait_delivery">Aguarde a entrega</string>
+    <string name="label_pay_using_card">Cartão de crédito</string>
+    <string name="label_pay_debit">Débito em conta</string>
+    <string name="label_pay_boleto">Boleto</string>
+    <string name="label_payment_status">Status do pagamento</string>
+    <string name="label_waiting_payment">Aguardando confirmação do pagamento</string>
+    <string name="label_wait_delivery_desc">A entrega do seu produto está prevista para 01/06/2016.</string>
+    <string name="label_pay_using_card_debit">Cartão de débito</string>
+    <string name="label_pay_using_money">Dinheiro</string>
+    <string name="label_in_app_payment">Pelo aplicativo:</string>
+    <string name="label_offline_payment">Por fora do aplicativo:</string>
+    <string name="label_go_to_store_desc">O vendedor se encontra no endereço: \nAvenida dois, nº 308 - Vila Santana, Sorocaba - SP</string>
+    <string name="label_reting_desc">A sua opnião é muito importante para garantir a qualidade dos produtos. Avalie a sua compra, é rapidinho!</string>
+    <string name="label_quantity">Qtd.</string>
+    <string name="label_related_products">Produtos relacionados</string>
 </resources>

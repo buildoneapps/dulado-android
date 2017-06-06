@@ -63,6 +63,7 @@ public class SearchGridHolder implements FlexibleHolder {
         unbinder = ButterKnife.bind(this, rootView);
         tvProductName.setText(searchObject.getProductName());
         tvPrice.setText("R$ " + String.format("%.2f",searchObject.getPrice()));
+        tvProducTags.setText(searchObject.getTag());
         Glide.with(context).load(searchObject.getImageUrl()).centerCrop().placeholder(R.drawable.ic_digital_photo_camera_grey_300).into(ivProductPhoto);
         Glide.with(context).load(searchObject.getSeller().getPhotoUrl()).centerCrop().placeholder(R.drawable.shape_circle).into(ivSellerPhoto);
     }

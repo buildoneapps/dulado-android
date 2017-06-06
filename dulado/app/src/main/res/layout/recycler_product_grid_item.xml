@@ -16,54 +16,52 @@
 
     <LinearLayout
         android:id="@+id/container_info"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivProductPhoto"
+        android:orientation="vertical"
         android:padding="8dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvProductName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:text="@string/sample_product_name"
+            android:textColor="@color/product_name_text_color"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tvProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:text="@string/sample_product_name"
-                android:textColor="@color/product_name_text_color"
-                android:textSize="12sp" />
-
-
-            <TextView
-                android:id="@+id/tvProducTags"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:text="@string/sample_product_tags"
-                android:textColor="@color/product_subtitle_text_color"
-                android:textSize="10sp"
-                android:textStyle="italic" />
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="match_parent"
+            android:id="@+id/tvProducTags"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="end|center_vertical"
-            android:text="@string/sample_price"
-            android:textColor="@color/product_price_text_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_gravity="center_vertical"
+            android:lines="1"
+            android:text="@string/sample_product_tags"
+            android:textColor="@color/product_subtitle_text_color"
+            android:textSize="10sp"
+            android:textStyle="italic" />
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/container_info"
+        android:gravity="end|center_vertical"
+        android:padding="8dp"
+        android:text="@string/sample_price"
+        android:textColor="@color/product_price_text_color"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/container_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/container_info"
+        android:layout_below="@id/tvPrice"
         android:layout_marginBottom="8dp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp">
