@@ -34,12 +34,10 @@ public interface ProductContract {
         void initSubscriptions();
         void disposeAll();
         void setupProduct(ProductObject product);
-        void onButtonCheckoutTouched();
-        void onButtonChatTouched();
-        void onButtonAddWishListTouched();
-        void onButtonRemindMeTouched();
-        void onButtonStoreTouched();
-        void onIncreaseQuantity();
-        void onDecreaseQuantity();
+        void goToCheckout();
+        void openChat();
+        void addToWishList();
+        void remindMe();
+        void goToStore();
     }
 }

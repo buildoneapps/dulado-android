@@ -111,7 +111,7 @@
                 android:value="com.buildone.dulado.ui.activity.main.MainActivity" />
         </activity>
         <activity
-            android:name=".ui.activity.checkout.CheckoutOverview"
+            android:name=".ui.activity.checkout.CheckoutOverviewActivity"
             android:label="@string/title_activity_checkout_overview"
             android:parentActivityName=".ui.activity.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

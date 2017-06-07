@@ -15,6 +15,7 @@ import com.buildone.dulado.model.SearchObject;
 import com.buildone.dulado.parcel.ProductParcel;
 import com.buildone.dulado.parcel.ProductSearchParcel;
 import com.buildone.dulado.ui.activity.BaseActivity;
+import com.buildone.dulado.ui.activity.checkout.CheckoutOverviewActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.viewpager.PhotoPagerAdapter;
 import com.bumptech.glide.Glide;
@@ -143,10 +144,10 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public void navigateToCheckoutActivity(ProductObject product) {
-        /*Intent intent = new Intent(this, CheckoutActivity.class);
-        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT, new ProductSearchParcel(product));
+        Intent intent = new Intent(this, CheckoutOverviewActivity.class);
+        intent.putExtra(AppConstants.INTENT_TAG_PRODUCT_OBJECT, new ProductParcel(product));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override
@@ -181,14 +182,17 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
         return new SearchObject();
     }
 
-    @OnClick({R.id.btnChat, R.id.btnStore})
+    @OnClick({R.id.btnChat, R.id.btnStore, R.id.btnPurchase})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btnChat:
-                presenter.onButtonChatTouched();
+                presenter.openChat();
                 break;
             case R.id.btnStore:
-                presenter.onButtonStoreTouched();
+                presenter.goToStore();
+                break;
+            case R.id.btnPurchase:
+                presenter.goToCheckout();
                 break;
         }
     }

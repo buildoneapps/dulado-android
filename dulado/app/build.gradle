@@ -36,6 +36,7 @@ dependencies {
 
     compile supportDependencies.appCompat
     compile supportDependencies.design
+    compile supportDependencies.percent
 
     compile google.location
     compile google.maps

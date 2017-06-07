@@ -126,7 +126,7 @@
 
 
         <Button
-            android:id="@+id/btnPostProduct"
+            android:id="@+id/btnPurchase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"

@@ -98,37 +98,28 @@ public class ProductPresenter implements ProductContract.Presenter {
     }
 
     @Override
-    public void onButtonCheckoutTouched() {
+    public void goToCheckout() {
         view.navigateToCheckoutActivity(product);
     }
 
     @Override
-    public void onButtonChatTouched() {
+    public void openChat() {
         view.navigateToChatActivity(product);
     }
 
     @Override
-    public void onButtonAddWishListTouched() {
+    public void addToWishList() {
 
     }
 
     @Override
-    public void onButtonRemindMeTouched() {
+    public void remindMe() {
 
     }
 
     @Override
-    public void onButtonStoreTouched() {
+    public void goToStore() {
         view.navigateToStoreActivity(product.getStoreId());
     }
 
-    @Override
-    public void onIncreaseQuantity() {
-
-    }
-
-    @Override
-    public void onDecreaseQuantity() {
-
-    }
 }
