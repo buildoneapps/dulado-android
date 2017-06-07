@@ -293,6 +293,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusDelivery"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -341,12 +342,14 @@
                 app:layout_widthPercent="50%">
 
                 <ImageView
+                    android:id="@+id/ivDelivery"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:tint="@android:color/black"
                     app:srcCompat="@drawable/ic_delivery_truck" />
 
                 <TextView
+                    android:id="@+id/deliveryText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
@@ -367,6 +370,7 @@
                 app:layout_widthPercent="50%">
 
                 <ImageView
+                    android:id="@+id/ivPickup"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:padding="2dp"
@@ -374,6 +378,7 @@
                     app:srcCompat="@drawable/ic_pickup" />
 
                 <TextView
+                    android:id="@+id/pickupText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
@@ -397,6 +402,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusPaymentMethod"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -411,182 +417,190 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="sans-serif-light"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:text="@string/label_in_app_payment"
-            android:textColor="@android:color/black"
-            android:textSize="12sp" />
-
         <LinearLayout
+            android:id="@+id/container_payment_method"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/shape_rectangle_round_cornes_grey_100"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_credit_card" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/label_pay_using_card"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
-                android:src="@color/grey_300" />
-
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:text="@string/label_in_app_payment"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp">
+                android:layout_margin="8dp"
+                android:background="@drawable/shape_rectangle_round_cornes_grey_100"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:tint="@android:color/black"
+                        app:srcCompat="@drawable/ic_credit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/label_pay_using_card"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
 
                 <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_credit_card" />
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@color/grey_300" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/label_pay_using_card_debit"
-                    android:textColor="@android:color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:tint="@android:color/black"
+                        app:srcCompat="@drawable/ic_credit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/label_pay_using_card_debit"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@color/grey_300" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:tint="@android:color/black"
+                        app:srcCompat="@drawable/ic_credit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/label_pay_debit"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@color/grey_300" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:tint="@android:color/black"
+                        app:srcCompat="@drawable/ic_credit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/label_pay_boleto"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
-                android:src="@color/grey_300" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingStart="8dp"
+                android:paddingTop="8dp"
+                android:text="@string/label_offline_payment"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp">
+                android:layout_margin="8dp"
+                android:background="@drawable/shape_rectangle_round_cornes_grey_100"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_credit_card" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/label_pay_debit"
-                    android:textColor="@android:color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:tint="@android:color/black"
+                        app:srcCompat="@drawable/ic_credit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@string/label_pay_using_money"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
             </LinearLayout>
 
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
-                android:src="@color/grey_300" />
-
-            <LinearLayout
+            <Button
+                android:id="@+id/btnConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_credit_card" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/label_pay_boleto"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_background_round_color_green"
+                android:drawableStart="@drawable/ic_like"
+                android:paddingEnd="36dp"
+                android:paddingStart="16dp"
+                android:text="@string/button_confirm_order"
+                android:textAllCaps="false"
+                android:textColor="@color/button_post_product_text_color" />
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="sans-serif-light"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:text="@string/label_offline_payment"
-            android:textColor="@android:color/black"
-            android:textSize="12sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/shape_rectangle_round_cornes_grey_100"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:tint="@android:color/black"
-                    app:srcCompat="@drawable/ic_credit_card" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="@string/label_pay_using_money"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/shape_background_round_color_green"
-            android:drawableStart="@drawable/ic_like"
-            android:paddingEnd="36dp"
-            android:paddingStart="16dp"
-            android:text="@string/button_confirm_order"
-            android:textAllCaps="false"
-            android:textColor="@color/button_post_product_text_color" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -603,6 +617,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusOrder"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -618,6 +633,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvOrderStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -638,6 +654,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusPayment"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -653,6 +670,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvPaymentStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -673,6 +691,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusDelivering"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -708,6 +727,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusMeetSeller"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
@@ -749,6 +769,7 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/statusReview"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/shape_circle_stroke" />
