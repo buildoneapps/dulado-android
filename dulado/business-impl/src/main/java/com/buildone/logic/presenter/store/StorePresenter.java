@@ -33,7 +33,7 @@ public class StorePresenter implements StoreContract.Presenter {
         view.initToolbar();
         products.add(new ProductObject(1, storeId, 12.2f, "teste", "Teste descricao", new ArrayList<String>() {{
             add("https://s-media-cache-ak0.pinimg.com/736x/b1/2a/74/b12a74b433c345e8c77131c1681e7b83.jpg");
-        }}, new SellerObject(1, "https://img.elo7.com.br/users/picture/186E8.jpg?59791763")));
+        }}, new SellerObject(1, "https://img.elo7.com.br/users/picture/186E8.jpg?59791763"), "#doce #chocolate", 10));
 
         store = new StoreObject(storeId, "ABC", 1);
     }

@@ -65,7 +65,7 @@
     <string name="label_chat_product">Tire suas dúvidas com o vendedor</string>
     <string name="sample_store_name">Cookie n\' fun</string>
     <string name="sample_product_count">mais de 10 produtos a venda!</string>
-    <string name="title_activity_checkout_overview">CheckoutOverview</string>
+    <string name="title_activity_checkout_overview">Realizar Pedido</string>
     <string name="label_delivery_methods_checkout">Método de entrega</string>
     <string name="delivery">Entrega em endereço</string>
     <string name="pickup">Retirada na loja</string>
@@ -95,6 +95,12 @@
     <string name="label_cupon">Cupom</string>
     <string name="text_order_total">Total</string>
     <string name="label_order_status">Status do pedido</string>
-    <string name="label_waiting_accept_order">Aguardando confirmaçao do pedido pelo vendedor.</string>
+    <string name="label_waiting_accept_order">O seu pedido foi realizado e o vendedor foi notificado.\nAguarde o vendedor confirmar o seu pedido.</string>
     <string name="label_insert_cupon">Possui um cupom de desconto?\nAperte aqui para usá-lo.</string>
+    <string name="button_purchase">Realizar pagamento</string>
+    <string name="label_waiting_send_order">Aguardando envio do pedido.</string>
+    <string name="finishing_payment_text">Finalizando o pagamento, por favor aguarde…</string>
+    <string name="dialog_title_finishing_payment">Pagamento</string>
+    <string name="label_payment_confirmed_status">Pagamento confirmado</string>
+    <string name="label_order_accepted">O seu pedido já foi separado pelo vendedor. Para confirmar, realize o pagamento.</string>
 </resources>

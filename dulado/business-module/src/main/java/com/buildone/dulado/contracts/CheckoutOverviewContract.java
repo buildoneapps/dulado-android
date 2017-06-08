@@ -11,8 +11,9 @@ public interface CheckoutOverviewContract {
         void setProductTag(String tags);
         void setQuantity(int quantity);
 
-        void setShippingSelectedStyle();
-        void setPaymentSelectedStyle();
+        void setDeliverySelected(boolean selected);
+        void setPickupSelected(boolean selected);
+        void setPaymentSelectedStyle(int paymentMethod);
         void openStatus(int status);
         void closeStatus(int status);
 
@@ -23,13 +24,32 @@ public interface CheckoutOverviewContract {
         void hidePaymentButton();
 
         void loadMap();
+
+        void setIncreaseButtonEnabled(boolean enable);
+        void setDecreaseButtonEnabled(boolean enable);
+
+        void showSecurePaymentDialog();
+        void hideSecurePaymentDialog();
+
+        void setConfirmOrderProgressVisible(boolean visible);
+
+        void uncheckAllPaymentMethods();
+
+        void showCouponEditText();
+        void hideCouponContainer();
     }
 
     interface Presenter{
         void start();
         void selectPickup();
         void selectDelivery();
-        void selectPaymentMethod();
+        void selectPaymentMethod(int methodId);
+        void nextStep();
         void confirmOrder();
+        void increaseQuantity();
+        void decreaseQuantity();
+        void insertCupon();
+        void reviewProduct();
+        void attemptToPurchase();
     }
 }

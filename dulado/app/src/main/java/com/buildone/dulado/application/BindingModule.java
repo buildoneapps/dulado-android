@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 
 import com.buildone.dulado.components.activity.AddProductActivitySubComponent;
+import com.buildone.dulado.components.activity.CheckoutOverviewActivitySubComponent;
 import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
 import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
 import com.buildone.dulado.components.activity.MainActivitySubComponent;
@@ -16,6 +17,7 @@ import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
 import com.buildone.dulado.ui.activity.DiscoverActivity;
 import com.buildone.dulado.ui.activity.EditProfileActivity;
 import com.buildone.dulado.ui.activity.UserProfileActivity;
+import com.buildone.dulado.ui.activity.checkout.CheckoutOverviewActivity;
 import com.buildone.dulado.ui.activity.main.MainActivity;
 import com.buildone.dulado.ui.activity.main.SearchActivity;
 import com.buildone.dulado.ui.activity.product.AddProductActivity;
@@ -78,6 +80,13 @@ public abstract class BindingModule {
     @IntoMap
     @ActivityKey(SearchActivity.class)
     abstract AndroidInjector.Factory<? extends Activity> bindSearchActivityInjectorFactory(SearchActivitySubComponent.Builder builder);
+
+
+    @Binds
+    @IntoMap
+    @ActivityKey(CheckoutOverviewActivity.class)
+    abstract AndroidInjector.Factory<? extends Activity> bindCheckoutOverviewActivityInjectorFactory(CheckoutOverviewActivitySubComponent.Builder builder);
+
 
     @Binds
     @IntoMap

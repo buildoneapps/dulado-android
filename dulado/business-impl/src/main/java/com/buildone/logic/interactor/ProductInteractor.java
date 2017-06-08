@@ -50,6 +50,6 @@ public class ProductInteractor implements IProductInteractor {
         productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
         productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
         productImages.add("https://s-media-cache-ak0.pinimg.com/originals/d3/c4/0b/d3c40bf7c14400c51ef02f02e7c49b93.jpg");
-        return Observable.just(new ProductObject(productId,0,2.5f,"Test Product","Este produto possui uma descrição simples, mas objetiva!", productImages, new SellerObject(1, "https://img.elo7.com.br/users/picture/186E8.jpg?59791763")));
+        return Observable.just(new ProductObject(productId,0,2.5f,"Test Product","Este produto possui uma descrição simples, mas objetiva!", productImages, new SellerObject(1, "https://img.elo7.com.br/users/picture/186E8.jpg?59791763"), "#doce #chocolate", 10));
     }
 }

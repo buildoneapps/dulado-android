@@ -45,7 +45,7 @@ public class ProductPresenter implements ProductContract.Presenter {
                     productSearch.getProductName(),
                     "",
                     new ArrayList<String>(){{add(productSearch.getImageUrl());}},
-                    productSearch.getSeller()));
+                    productSearch.getSeller(), "#doce #chocolate", 10));
         }
     }
 

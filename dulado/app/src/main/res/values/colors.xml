@@ -25,4 +25,8 @@
 
     <color name="cart_button_background_color">#FAFBFB</color>
     <color name="cart_button_stroke_color">#F8F9F9</color>
+    <color name="blue_800">#1565C0</color>
+    <color name="blue_900">#0D47A1</color>
+    <color name="grey_800">#424242</color>
+    <color name="black_title">#434248</color>
 </resources>
