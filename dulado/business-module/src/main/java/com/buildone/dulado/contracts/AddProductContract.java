@@ -23,6 +23,16 @@ public interface AddProductContract {
         String getPhotoUri();
 
         void saveProductInApplication();
+
+        void hideOnlinePaymentLoading();
+        void showOnlinePurchaseLoading();
+
+        void hideOnlinePaymentCalculatedValue();
+        void showOnlinePaymentCalcultedValue(Double searchObjects);
+
+        void showPriceNullError();
+
+        void uncheckOnlinePayment();
     }
 
     interface Presenter{
@@ -41,6 +51,6 @@ public interface AddProductContract {
         void shouldPostFacebook(boolean checked);
         void shouldPostInstagram(boolean checked);
         void shouldPostTwitter(boolean checked);
-        void enableOnlinePayment(boolean checked);
+        void enableOnlinePayment(boolean checked, float price);
     }
 }

@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
@@ -32,6 +33,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -195,6 +197,37 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
         finish();
     }
 
+    @Override
+    public void hideOnlinePaymentLoading() {
+        loadingPaymentCalc.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showOnlinePurchaseLoading() {
+        loadingPaymentCalc.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideOnlinePaymentCalculatedValue() {
+        tvOnlinePaymentIncome.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showOnlinePaymentCalcultedValue(Double finalPrice) {
+        tvOnlinePaymentIncome.setVisibility(View.VISIBLE);
+        tvOnlinePaymentIncome.setText(String.format(getString(R.string.placeholder_online_payment_value),String.format(Locale.getDefault(),"%.2f",finalPrice)));
+    }
+
+    @Override
+    public void showPriceNullError() {
+        Toast.makeText(this, getString(R.string.error_price_null), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void uncheckOnlinePayment() {
+        cbOnlinePayment.setChecked(false);
+    }
+
 
     //region Camera Intent Helper
     @Override
@@ -267,7 +300,11 @@ public class AddProductActivity extends BaseActivity implements AddProductContra
                 presenter.shouldPostTwitter(checked);
                 break;
             case R.id.cbOnlinePayment:
-                presenter.enableOnlinePayment(checked);
+                double value = 0;
+                if(etPrice.getText().length() > 0){
+                    value = Double.parseDouble(etPrice.getText().toString());
+                }
+                presenter.enableOnlinePayment(checked, (float) value);
                 break;
         }
     }

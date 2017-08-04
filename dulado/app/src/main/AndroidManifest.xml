@@ -110,6 +110,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.buildone.dulado.ui.activity.main.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.activity.checkout.CheckoutOverviewActivity"
+            android:label="@string/title_activity_checkout_overview"
+            android:parentActivityName=".ui.activity.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.buildone.dulado.ui.activity.main.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingEnd="8dp"
+    android:scrollbars="none"
     android:paddingStart="8dp"
     android:paddingTop="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hint_product_price"
-                android:inputType="number"
+                android:inputType="numberDecimal|numberSigned"
                 android:padding="16dp"
                 android:textSize="14sp" />
 

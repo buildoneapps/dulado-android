@@ -42,7 +42,7 @@
     <string name="label_payment_methods">Formas de pagamento</string>
     <string name="label_delivery_methods">Formas de entrega</string>
     <string name="option_payment_online">Aceito o recebimento de pagamento on-line</string>
-    <string name="placeholder_online_payment_value" formatted="false">Você receberá %s em sua carteira se o produto for pago pelos meios de pagamento on-line</string>
+    <string name="placeholder_online_payment_value" formatted="false">Você receberá R$ %s em sua carteira se o produto for pago pelos meios de pagamento on-line</string>
     <string name="button_payment_how_it_works">Como funciona o pagamento online?</string>
     <string name="hint_shipping_method">Selecione os tipos de entrega disponiveis para esse produto</string>
     <string name="option_shipping_pickup">Retirada em mãos</string>
@@ -60,4 +60,54 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_name_space">"  Duladu"</string>
+    <string name="sample_more_friends_reviwed">+ 80 amigos recomendaram</string>
+    <string name="label_like">Recomendar</string>
+    <string name="label_chat_product">Tire suas dúvidas com o vendedor</string>
+    <string name="sample_store_name">Cookie n\' fun</string>
+    <string name="sample_product_count">mais de 10 produtos a venda!</string>
+    <string name="title_activity_checkout_overview">Realizar Pedido</string>
+    <string name="label_delivery_methods_checkout">Método de entrega</string>
+    <string name="delivery">Entrega em endereço</string>
+    <string name="pickup">Retirada na loja</string>
+    <string name="label_payment_method">Forma de pagamento</string>
+    <string name="label_go_to_store">Encontre o vendedor</string>
+    <string name="label_review_product">Avalie sua compra</string>
+    <string name="label_wait_delivery">Aguarde a entrega</string>
+    <string name="label_pay_using_card">Cartão de crédito</string>
+    <string name="label_pay_debit">Débito em conta</string>
+    <string name="label_pay_boleto">Boleto</string>
+    <string name="label_payment_status">Status do pagamento</string>
+    <string name="label_waiting_payment">Aguardando confirmação do pagamento</string>
+    <string name="label_wait_delivery_desc">A entrega do seu produto está prevista para 01/06/2016.</string>
+    <string name="label_pay_using_card_debit">Cartão de débito</string>
+    <string name="label_pay_using_money">Dinheiro</string>
+    <string name="label_in_app_payment">Pelo aplicativo:</string>
+    <string name="label_offline_payment">Por fora do aplicativo:</string>
+    <string name="label_go_to_store_desc">O vendedor se encontra no endereço: \nAvenida dois, nº 308 - Vila Santana, Sorocaba - SP</string>
+    <string name="label_reting_desc">A sua opnião é muito importante para garantir a qualidade dos produtos. Avalie a sua compra, é rapidinho!</string>
+    <string name="label_quantity">Qtd.</string>
+    <string name="label_related_products">Produtos relacionados</string>
+    <string name="button_confirm_order">Confirmar pedido</string>
+    <string name="label_product_quantity">Quantas unidades do produto?</string>
+    <string name="label_subtotal">Subtotal</string>
+    <string name="text_price_empty">R$ 0,00</string>
+    <string name="text_price" formatted="false">R$ %s</string>
+    <string name="label_shipping">Frete</string>
+    <string name="label_cupon">Desconto</string>
+    <string name="text_order_total">Total</string>
+    <string name="label_order_status">Status do pedido</string>
+    <string name="label_waiting_accept_order">O seu pedido foi realizado e o vendedor foi notificado.\nAguarde o vendedor confirmar o seu pedido.</string>
+    <string name="label_insert_cupon">Possui um cupom de desconto?\nAperte aqui para usá-lo.</string>
+    <string name="button_purchase">Realizar pagamento</string>
+    <string name="label_waiting_send_order">Aguardando envio do pedido.</string>
+    <string name="finishing_payment_text">Finalizando o pagamento, por favor aguarde…</string>
+    <string name="dialog_title_finishing_payment">Pagamento</string>
+    <string name="label_payment_confirmed_status">Pagamento confirmado</string>
+    <string name="label_order_accepted">O seu pedido já foi separado pelo vendedor. Para confirmar, realize o pagamento.</string>
+    <string name="payment_info_secure">Sua informação está segura</string>
+    <string name="payment_info_secure_desc">Nós não venderemos ou alugaremos suas informações pessoais de contato para qualquer finalidade de marketing.</string>
+    <string name="payment_checkout_secure">Checkout seguro</string>
+    <string name="payment_checkout_secure_desc">Todas informações são criptografadas e transmitidas sem nenhum risco utilizando um protocolo SSL. Pode confirar na gente!</string>
+    <string name="sample_order_id">Pedido: AX0112</string>
+    <string name="error_price_null">Insira o preço do produto</string>
 </resources>

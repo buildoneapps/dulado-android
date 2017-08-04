@@ -92,6 +92,7 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     FlexibleAdapter<MainStoreHolder> storeAdapter;
 
     Unbinder unbinder;
+    private boolean addedMarks;
 
     public MainMapFragment() {
         // Required empty public constructor
@@ -137,13 +138,13 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
 
     @Override
     public void onDestroyView() {
+        presenter.disposeAll();
         super.onDestroyView();
         unbinder.unbind();
     }
 
     @Override
     public void onDestroy() {
-        presenter.disposeAll();
         super.onDestroy();
     }
 
@@ -328,12 +329,26 @@ public class MainMapFragment extends BaseFragment implements MainMapContract.Vie
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        if (this.location != null) {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(location.getLatitude(),location.getLongitude()))
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_store_png))
-                    .anchor(0.5f, 1)
-            );
+        if (this.location != null && !addedMarks) {
+            addedMarks = true;
+            googleMap.clear();
+            int minimum = -2;
+            int maximum = 10;
+            for(int i = 0 ; i < 8; i++){
+                int multiplierLat = minimum + (int)(Math.random() * maximum);
+                int multiplierLong = minimum + (int)(Math.random() * maximum);
+                if(i < 2){
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(location.getLatitude() + 0.0001 * multiplierLat,location.getLongitude() + 0.0003* multiplierLong))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_live_1))
+                            .anchor(0.5f, 1));
+                    continue;
+                }
+                googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(location.getLatitude() + 0.0001 * multiplierLat,location.getLongitude() + 0.0003* multiplierLong))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_icon_off))
+                        .anchor(0.5f, 1));
+            }
             //Toast.makeText(getActivity(), "Latitude():" + this.location.getLatitude() + "\nLongitude(): " + this.location.getLongitude(), Toast.LENGTH_SHORT).show();
         } else {
             //Toast.makeText(getActivity(), "Location not Detected", Toast.LENGTH_SHORT).show();

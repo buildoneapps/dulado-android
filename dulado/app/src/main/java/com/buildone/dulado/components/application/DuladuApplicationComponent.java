@@ -3,6 +3,7 @@ package com.buildone.dulado.components.application;
 import com.buildone.dulado.application.BindingModule;
 import com.buildone.dulado.application.DuladuApplication;
 import com.buildone.dulado.components.activity.AddProductActivitySubComponent;
+import com.buildone.dulado.components.activity.CheckoutOverviewActivitySubComponent;
 import com.buildone.dulado.components.activity.DiscoverActivitySubComponent;
 import com.buildone.dulado.components.activity.EditProfileActivitySubComponent;
 import com.buildone.dulado.components.activity.MainActivitySubComponent;
@@ -43,7 +44,8 @@ public interface DuladuApplicationComponent {
             EditProfileActivitySubComponent.class,
             MainMapFragmentSubComponent.class,
             MainListFragmentSubComponent.class,
-            SearchActivitySubComponent.class
+            SearchActivitySubComponent.class,
+            CheckoutOverviewActivitySubComponent.class
     })
     abstract class AppModule {
     }

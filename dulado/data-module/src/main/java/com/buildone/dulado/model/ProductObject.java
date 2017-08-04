@@ -12,13 +12,15 @@ public class ProductObject {
     private String name;
     private float price;
     private String description;
+    private String tags;
     private ArrayList<String> productImages;
     private SellerObject seller;
+    private int storeQuantity;
 
     public ProductObject() {
     }
 
-    public ProductObject(int id, int storeId, float price, String name, String description, ArrayList<String> productImages, SellerObject seller) {
+    public ProductObject(int id, int storeId, float price, String name, String description, ArrayList<String> productImages, SellerObject seller, String tags, int storeQuantity) {
         this.id = id;
         this.storeId = storeId;
         this.name = name;
@@ -26,10 +28,16 @@ public class ProductObject {
         this.productImages = productImages;
         this.description = description;
         this.seller = seller;
+        this.tags = tags;
+        this.storeQuantity = storeQuantity;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTags() {
+        return tags;
     }
 
     public ArrayList<String> getProductImages() {
@@ -54,5 +62,13 @@ public class ProductObject {
 
     public int getStoreId() {
         return storeId;
+    }
+
+    public int getStoreQuantity() {
+        return storeQuantity;
+    }
+
+    public void setStoreQuantity(int storeQuantity) {
+        this.storeQuantity = storeQuantity;
     }
 }

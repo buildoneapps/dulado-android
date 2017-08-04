@@ -11,6 +11,7 @@
 
 
     <LinearLayout
+        android:id="@+id/btnStore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -39,7 +40,6 @@
                 android:text="@string/sample_address"
                 android:textColor="@color/grey_400" />
 
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivSellerPhoto"
                 android:layout_width="28dp"
@@ -47,7 +47,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@color/light_gray" />
-
 
             <TextView
                 android:id="@+id/tvSellerName"
@@ -87,17 +86,29 @@
             android:textColor="@color/grey_300"
             android:textSize="14sp" />
 
-
-        <TextView
-            android:id="@+id/tvPrice"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
-            android:paddingBottom="2dp"
-            android:text="@string/sample_price"
-            android:textColor="@color/product_price_text_color"
-            android:textSize="16sp" />
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="4dp"
+                app:srcCompat="@drawable/ic_price_tag" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="2dp"
+                android:text="@string/sample_price"
+                android:textColor="@color/product_price_text_color"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/productDescription"
@@ -111,10 +122,133 @@
             android:textColor="@color/grey_400"
             android:textSize="16sp" />
 
+
+        <Button
+            android:id="@+id/btnPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/shape_background_round_color_accent"
+            android:text="Do lado? Eu quero!"
+            android:textAllCaps="false"
+            android:textColor="@color/button_post_product_text_color" />
+
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:src="@color/grey_100" />
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:id="@+id/container_friends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="8dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:id="@+id/like1"
+                android:src="@color/grey_300"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:id="@+id/like2"
+                android:layout_marginLeft="18dp"
+                android:src="@color/grey_300"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:id="@+id/like3"
+                android:layout_marginLeft="36dp"
+                android:src="@color/grey_300"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/lastFriend"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="54dp"
+                android:src="@color/grey_300"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@id/lastFriend"
+                android:gravity="center_vertical"
+                android:text="@string/sample_more_friends_reviwed"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnLike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_background_round_color_green"
+            android:drawableStart="@drawable/ic_like"
+            android:paddingEnd="36dp"
+            android:paddingStart="16dp"
+            android:text="@string/label_like"
+            android:textAllCaps="false"
+            android:textColor="@color/button_post_product_text_color" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/grey_100" />
+
+        <LinearLayout
+            android:id="@+id/btnChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="8dp"
+                app:backgroundTint="@android:color/white"
+                app:elevation="2dp"
+                app:fabSize="mini"
+                app:rippleColor="@color/ligher_gray"
+                app:srcCompat="@drawable/ic_chat_edited" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center_horizontal"
+                android:text="@string/label_chat_product"
+                android:textColor="@color/grey_400"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,26 +292,24 @@
                 android:text="@string/label_secure_shopping"
                 android:textColor="@color/green_600"
                 android:textSize="16sp" />
-
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:src="@color/grey_100" />
+            android:src="@color/grey_300" />
 
-        <Button
-            android:id="@+id/btnChat"
+        <LinearLayout
+            android:padding="6dp"
+            android:background="@color/grey_100"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Chat" />
+            android:layout_height="150dp"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnStore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Store" />
+            <TextView
+                android:text="@string/label_related_products"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

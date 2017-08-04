@@ -13,11 +13,10 @@ public interface ProductContract {
     interface View{
         void initToolbar(String title, String subtitle);
         void setProductName(String name);
-        void setProductTags(ArrayList<String> tags);
+        void setProductTags(String tags);
         void setProductDescription(String description);
         void setProductPrice(String price);
         void loadProductImages(ArrayList<String> imageUrls);
-        void setProductQuantity(int i);
         void setProductWish(boolean enabled);
         void setSellerName(String name);
         void setSellerPhoto(String photoUrl);
@@ -34,12 +33,10 @@ public interface ProductContract {
         void initSubscriptions();
         void disposeAll();
         void setupProduct(ProductObject product);
-        void onButtonCheckoutTouched();
-        void onButtonChatTouched();
-        void onButtonAddWishListTouched();
-        void onButtonRemindMeTouched();
-        void onButtonStoreTouched();
-        void onIncreaseQuantity();
-        void onDecreaseQuantity();
+        void goToCheckout();
+        void openChat();
+        void addToWishList();
+        void remindMe();
+        void goToStore();
     }
 }
