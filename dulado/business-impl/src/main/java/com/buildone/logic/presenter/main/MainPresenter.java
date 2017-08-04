@@ -55,7 +55,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void start() {
         view.initToolbar();
         view.initViewPager();
-        view.showToastMessage(String.valueOf(someId));
+        //view.showToastMessage(String.valueOf(someId));
         view.initLiveRecycler();
         view.hideCreateAdButton();
         initSubscriptions();
@@ -164,7 +164,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void onButtonListTouched() {
         inGridMode = false;
         view.setMapButtonVisible(true);
-        view.setLiveRecyclerVisible(false);
+        view.setLiveRecyclerVisible(true);
         view.switchToList(inGridMode);
         view.showCreateAdButton();
     }
@@ -173,7 +173,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void onButtonGridTouched() {
         inGridMode = true;
         view.setMapButtonVisible(true);
-        view.setLiveRecyclerVisible(false);
+        view.setLiveRecyclerVisible(true);
         view.switchToList(inGridMode);
 
         view.showCreateAdButton();

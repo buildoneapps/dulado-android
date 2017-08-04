@@ -17,8 +17,7 @@
         <ImageView
             android:id="@+id/ivStoreHeader"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:background="@color/grey_300" />
+            android:layout_height="128dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,6 +116,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/image0"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/grey_300" />
@@ -128,29 +128,34 @@
                 android:paddingTop="2dp">
 
                 <ImageView
+                    android:id="@+id/image1"
                     android:layout_width="74dp"
                     android:layout_height="74dp"
                     android:background="@color/grey_300" />
 
                 <ImageView
-                    android:layout_width="74dp"
-                    android:layout_height="74dp"
-                    android:layout_marginStart="2dp"
-                    android:background="@color/grey_300" />
-
-                <ImageView
+                    android:id="@+id/image2"
                     android:layout_width="74dp"
                     android:layout_height="74dp"
                     android:layout_marginStart="2dp"
                     android:background="@color/grey_300" />
 
                 <ImageView
+                    android:id="@+id/image3"
                     android:layout_width="74dp"
                     android:layout_height="74dp"
                     android:layout_marginStart="2dp"
                     android:background="@color/grey_300" />
 
                 <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/grey_300" />
+
+                <ImageView
+                    android:id="@+id/image5"
                     android:layout_width="74dp"
                     android:layout_height="74dp"
                     android:layout_marginStart="2dp"

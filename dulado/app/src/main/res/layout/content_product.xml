@@ -40,7 +40,6 @@
                 android:text="@string/sample_address"
                 android:textColor="@color/grey_400" />
 
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivSellerPhoto"
                 android:layout_width="28dp"
@@ -48,7 +47,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@color/light_gray" />
-
 
             <TextView
                 android:id="@+id/tvSellerName"
@@ -154,6 +152,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
+                android:id="@+id/like1"
                 android:src="@color/grey_300"
                 app:civ_border_color="@android:color/white"
                 app:civ_border_width="2dp" />
@@ -161,6 +160,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
+                android:id="@+id/like2"
                 android:layout_marginLeft="18dp"
                 android:src="@color/grey_300"
                 app:civ_border_color="@android:color/white"
@@ -169,6 +169,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="38dp"
                 android:layout_height="38dp"
+                android:id="@+id/like3"
                 android:layout_marginLeft="36dp"
                 android:src="@color/grey_300"
                 app:civ_border_color="@android:color/white"

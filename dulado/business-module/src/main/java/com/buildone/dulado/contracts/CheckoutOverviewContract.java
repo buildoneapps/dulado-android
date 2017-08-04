@@ -9,6 +9,7 @@ public interface CheckoutOverviewContract {
         void initToolbar();
         void setProductName(String productName);
         void setProductTag(String tags);
+        void setProductPhoto(String photoUrl);
         void setQuantity(int quantity);
 
         void setDeliverySelected(boolean selected);
@@ -37,6 +38,18 @@ public interface CheckoutOverviewContract {
 
         void showCouponEditText();
         void hideCouponContainer();
+
+        void setTotal(float value);
+        void setSubtotal(float value);
+        void setShippingPrice(float value);
+        void setDiscount(float value);
+
+        void showCouponProgress();
+        void hideCouponProgress();
+
+        void showCouponConfirmedIcon();
+
+        void blockShippingButtons();
     }
 
     interface Presenter{
@@ -51,5 +64,6 @@ public interface CheckoutOverviewContract {
         void insertCupon();
         void reviewProduct();
         void attemptToPurchase();
+        void attemptToApplyCoupon();
     }
 }

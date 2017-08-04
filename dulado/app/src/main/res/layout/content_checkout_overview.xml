@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -212,6 +213,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_cupon"
@@ -254,7 +256,8 @@
             android:id="@+id/container_coupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            android:background="@drawable/shape_rectangle_round_corners_grey_100">
 
             <Button
                 android:id="@+id/btnCupom"
@@ -264,12 +267,11 @@
                 android:background="?attr/selectableItemBackground" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginStart="2dp"
-                android:background="@drawable/shape_rectangle_round_corners_grey_100"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp">
 
@@ -292,7 +294,6 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:visibility="gone"
                     android:id="@+id/etCoupon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -300,21 +301,32 @@
                     android:layout_marginStart="10dp"
                     android:background="@drawable/background_white_stroke_grey"
                     android:padding="12dp"
-                    android:textColor="@color/grey_800"
                     android:text="h91ke2"
-                    android:textSize="16sp" />
+                    android:textColor="@color/grey_800"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/couponProgress"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:paddingBottom="2dp"
+                android:visibility="gone" />
+
             <ImageButton
-                android:visibility="gone"
                 android:id="@+id/btnConfirmCoupon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
-                android:tint="@color/grey_400"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/grey_400"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_success" />
         </RelativeLayout>
 
@@ -440,13 +452,13 @@
                 android:src="@drawable/status_icon" />
 
             <TextView
+                fontPath="fonts/Dosis-SemiBold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@string/label_payment_method"
                 android:textColor="@color/black_title"
-                android:textSize="16sp"
-                fontPath="fonts/Dosis-SemiBold.ttf"/>
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -499,32 +511,39 @@
                 android:background="@drawable/shape_rectangle_round_corners_grey_100"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/container_credit_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:tint="@color/grey_800"
-                        app:srcCompat="@drawable/ic_card_type_3_white" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="@string/label_pay_using_card"
-                        android:textColor="@android:color/black" />
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:tint="@color/grey_800"
+                            app:srcCompat="@drawable/ic_card_type_3_white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:text="@string/label_pay_using_card"
+                            android:textColor="@android:color/black" />
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivCheckCredit"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_approved_signal" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -534,33 +553,40 @@
                     android:src="@color/grey_300" />
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/container_debit_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:tint="@color/grey_800"
-                        app:srcCompat="@drawable/ic_card_type_3_white" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="@string/label_pay_using_card_debit"
-                        android:textColor="@android:color/black" />
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:tint="@color/grey_800"
+                            app:srcCompat="@drawable/ic_card_type_3_white" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:text="@string/label_pay_using_card_debit"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivCheckDebitCard"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_approved_signal" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -569,33 +595,40 @@
                     android:layout_marginTop="2dp"
                     android:src="@color/grey_300" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/container_account_debit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:tint="@android:color/black"
-                        app:srcCompat="@drawable/ic_credit_card" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="@string/label_pay_debit"
-                        android:textColor="@android:color/black" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:tint="@android:color/black"
+                            app:srcCompat="@drawable/ic_credit_card" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:text="@string/label_pay_debit"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivCheckAccDebit"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_approved_signal" />
-                </LinearLayout>
+                </RelativeLayout>
 
 
                 <ImageView
@@ -605,32 +638,40 @@
                     android:layout_marginTop="2dp"
                     android:src="@color/grey_300" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/container_boleto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:tint="@android:color/black"
-                        app:srcCompat="@drawable/ic_credit_card" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="@string/label_pay_boleto"
-                        android:textColor="@android:color/black" />
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:tint="@android:color/black"
+                            app:srcCompat="@drawable/ic_credit_card" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:text="@string/label_pay_boleto"
+                            android:textColor="@android:color/black" />
+
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivCheckBoleto"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_approved_signal" />
-                </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -653,32 +694,40 @@
                 android:orientation="vertical">
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/container_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp">
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:tint="@android:color/black"
-                        app:srcCompat="@drawable/ic_credit_card" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="@string/label_pay_using_money"
-                        android:textColor="@android:color/black" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:tint="@android:color/black"
+                            app:srcCompat="@drawable/ic_credit_card" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:text="@string/label_pay_using_money"
+                            android:textColor="@android:color/black" />
+                    </LinearLayout>
 
                     <ImageView
                         android:id="@+id/ivCheckMoney"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
                         app:srcCompat="@drawable/ic_approved_signal" />
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <Button
@@ -729,8 +778,7 @@
                 android:fontFamily="sans-serif-light"
                 android:text="@string/label_order_status"
                 android:textColor="@color/black_title"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <TextView
@@ -739,8 +787,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="26dp"
-            android:text="@string/label_waiting_send_order"
-            android:visibility="gone" />
+            android:text="@string/label_waiting_send_order" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -768,9 +815,16 @@
                 android:fontFamily="sans-serif-light"
                 android:text="@string/label_payment_status"
                 android:textColor="@color/black_title"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivPaymentApproved"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_approved_signal" />
 
         <TextView
             android:id="@+id/tvPaymentStatus"
@@ -796,88 +850,60 @@
             android:textColor="@color/button_post_product_text_color"
             android:visibility="gone" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:alpha="0.6"
-            android:src="@color/grey_300" />
-
         <LinearLayout
+            android:id="@+id/container_payment_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
 
             <ImageView
-                android:id="@+id/statusDelivering"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/status_icon" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:srcCompat="@drawable/ic_padlock" />
 
             <TextView
+                fontPath="fonts/Dosis-Bold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/label_wait_delivery"
+                android:layout_marginTop="8dp"
+                android:text="@string/payment_info_secure"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/deliveryTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="26dp"
-            android:text="@string/label_wait_delivery_desc"
-            android:visibility="gone" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:alpha="0.6"
-            android:src="@color/grey_300" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/statusMeetSeller"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@drawable/status_icon" />
 
             <TextView
+                fontPath="fonts/Dosis-Medium.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/label_go_to_store"
-                android:textColor="@color/black_title"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="8dp"
+                android:text="@string/payment_info_secure_desc"
+                android:textSize="12sp" />
+
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                app:srcCompat="@drawable/ic_shield_security" />
+
+            <TextView
+                fontPath="fonts/Dosis-Bold.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/payment_checkout_secure"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                fontPath="fonts/Dosis-Medium.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/payment_checkout_secure_desc"
+                android:textSize="12sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/sellerAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="26dp"
-            android:text="@string/label_go_to_store_desc"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:src="@color/grey_100" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -888,9 +914,111 @@
             android:src="@color/grey_300" />
 
         <LinearLayout
+            android:id="@+id/container_delivery_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/statusDelivering"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/status_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/label_wait_delivery"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/deliveryTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="26dp"
+                android:text="@string/label_wait_delivery_desc"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.6"
+                android:src="@color/grey_300" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_seller_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/statusMeetSeller"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@drawable/status_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/label_go_to_store"
+                    android:textColor="@color/black_title"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/sellerAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="26dp"
+                android:text="@string/label_go_to_store_desc"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@color/grey_100"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.6"
+                android:src="@color/grey_300" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_review_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/statusReview"
@@ -905,8 +1033,7 @@
                 android:fontFamily="sans-serif-light"
                 android:text="@string/label_review_product"
                 android:textColor="@color/black_title"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
         </LinearLayout>
 
 

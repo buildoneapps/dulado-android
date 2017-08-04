@@ -26,12 +26,15 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
     private int selectedPaymentMethod;
     private int currentProgress;
     private boolean useCupon;
+    private float shippingPrice;
+    private float discount;
+    private int discountPercent;
 
     public CheckoutOverviewPresenter(CheckoutOverviewContract.View view, ICheckoutInteractor interactor, ProductObject product) {
         this.view = view;
         this.interactor = interactor;
         this.product = product;
-        this.cartQuantity = 0;
+        this.cartQuantity = 1;
         this.shippingMethod = -1;
         this.selectedPaymentMethod = -1;
         this.currentProgress = 0;
@@ -43,7 +46,12 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
         view.uncheckAllPaymentMethods();
         view.setProductName(product.getName());
         view.setProductTag(product.getTags());
+        if(product.getProductImages() != null && product.getProductImages().size() > 0) {
+            view.setProductPhoto(product.getProductImages().get(0));
+        }
         view.loadMap();
+        view.setQuantity(cartQuantity);
+        updatePrice();
     }
 
     @Override
@@ -69,6 +77,7 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
 
     @Override
     public void confirmOrder() {
+        view.blockShippingButtons();
         view.setConfirmOrderProgressVisible(true);
         if(!useCupon){
             view.hideCouponContainer();
@@ -127,23 +136,32 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
             view.setQuantity(cartQuantity);
             if (cartQuantity == product.getStoreQuantity()) {
                 view.setIncreaseButtonEnabled(false);
-                return;
             }
             view.setDecreaseButtonEnabled(true);
         }
+        updatePrice();
+    }
+
+    private void updatePrice() {
+        float subTotal = product.getPrice() * cartQuantity;
+        discount = subTotal * discountPercent/100;
+        view.setTotal(subTotal + shippingPrice - discount);
+        view.setSubtotal(subTotal);
+        view.setDiscount(discount);
+        view.setShippingPrice(shippingPrice);
     }
 
     @Override
     public void decreaseQuantity() {
-        if (cartQuantity > 0) {
+        if (cartQuantity > 1) {
             cartQuantity--;
-            if (cartQuantity == 0) {
+            view.setQuantity(cartQuantity);
+            if (cartQuantity == 1) {
                 view.setDecreaseButtonEnabled(false);
-                return;
             }
             view.setIncreaseButtonEnabled(true);
         }
-        view.setQuantity(cartQuantity);
+        updatePrice();
     }
 
     @Override
@@ -179,6 +197,34 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
                     public void onComplete() {
                         view.hideSecurePaymentDialog();
                         nextStep();
+                    }
+                });
+    }
+
+    @Override
+    public void attemptToApplyCoupon() {
+        view.showCouponProgress();
+        Observable.timer(2, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Long>() {
+
+                    @Override
+                    public void onNext(@NonNull Long aLong) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        discountPercent = 10;
+                        updatePrice();
+                        view.showCouponConfirmedIcon();
+                        view.hideCouponProgress();
                     }
                 });
     }

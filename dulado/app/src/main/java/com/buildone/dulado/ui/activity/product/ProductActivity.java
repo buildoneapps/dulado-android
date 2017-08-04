@@ -51,6 +51,14 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     TextView productDescription;
     @BindView(R.id.paymentCard)
     TextView paymentCard;
+    @BindView(R.id.like1)
+    CircleImageView like1;
+    @BindView(R.id.like2)
+    CircleImageView like2;
+    @BindView(R.id.like3)
+    CircleImageView like3;
+    @BindView(R.id.lastFriend)
+    CircleImageView lastFriend;
 
     @Inject
     FirebaseAnalytics firebaseAnalytics;
@@ -73,6 +81,11 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
         AndroidInjection.inject(this);
         presenter.start();
+
+        Glide.with(this).load("https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-19/17438802_1868921930033313_8443440520323137536_a.jpg").centerCrop().into(like1);
+        Glide.with(this).load("https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-19/11326061_1530830197172381_2032328446_a.jpg").centerCrop().into(like2);
+        Glide.with(this).load("https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-19/16585149_379674489062905_6897090931841826816_a.jpg").centerCrop().into(like3);
+        Glide.with(this).load("https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-19/13167239_1035399573193507_1470003426_a.jpg").centerCrop().into(lastFriend);
     }
 
     @Override
@@ -96,8 +109,8 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
     }
 
     @Override
-    public void setProductTags(ArrayList<String> tags) {
-
+    public void setProductTags(String tags) {
+        productTags.setText(tags);
     }
 
     @Override
@@ -112,14 +125,9 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public void loadProductImages(ArrayList<String> imageUrls) {
-        vpAdapter = new PhotoPagerAdapter(getSupportFragmentManager(),imageUrls);
+        vpAdapter = new PhotoPagerAdapter(getSupportFragmentManager(), imageUrls);
         vpPhotos.setAdapter(vpAdapter);
         vpPhotos.setCurrentItem(0);
-    }
-
-    @Override
-    public void setProductQuantity(int i) {
-
     }
 
     @Override
@@ -168,7 +176,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public ProductObject getProduct() {
-        if(product != null) {
+        if (product != null) {
             return product.getProduct();
         }
         return new ProductObject();
@@ -176,7 +184,7 @@ public class ProductActivity extends BaseActivity implements ProductContract.Vie
 
     @Override
     public SearchObject getProductSearch() {
-        if(productSearch != null) {
+        if (productSearch != null) {
             return productSearch.getSearchObject();
         }
         return new SearchObject();

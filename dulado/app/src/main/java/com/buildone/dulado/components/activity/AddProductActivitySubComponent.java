@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.buildone.dulado.contracts.AddProductContract;
+import com.buildone.dulado.interactor.ICheckoutInteractor;
 import com.buildone.dulado.interactor.IProductInteractor;
+import com.buildone.dulado.modules.CheckoutRepositoryModule;
 import com.buildone.dulado.modules.FirebaseModule;
 import com.buildone.dulado.modules.ProductRepositoryModule;
 import com.buildone.dulado.scope.ForApplication;
@@ -27,6 +29,7 @@ import dagger.android.AndroidInjector;
 @Subcomponent(modules = {
         FirebaseModule.class,
         ProductRepositoryModule.class,
+        CheckoutRepositoryModule.class,
         AddProductActivitySubComponent.AddProductActivityModule.class
 })
 public interface AddProductActivitySubComponent extends AndroidInjector<AddProductActivity> {
@@ -46,8 +49,8 @@ public interface AddProductActivitySubComponent extends AndroidInjector<AddProdu
         abstract AddProductContract.View providesView(AddProductActivity activity);
 
         @Provides
-        static AddProductContract.Presenter providesPresenter(AddProductContract.View view, IProductInteractor interactor, @Named("photoUri") String photoUri) {
-            return new AddProductPresenter(view, interactor, photoUri);
+        static AddProductContract.Presenter providesPresenter(AddProductContract.View view, IProductInteractor interactor, ICheckoutInteractor checkoutInteractor, @Named("photoUri") String photoUri) {
+            return new AddProductPresenter(view, interactor, checkoutInteractor, photoUri);
         }
 
         @Provides

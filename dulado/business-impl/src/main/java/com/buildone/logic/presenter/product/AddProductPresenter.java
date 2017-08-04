@@ -1,13 +1,19 @@
 package com.buildone.logic.presenter.product;
 
 import com.buildone.dulado.contracts.AddProductContract;
+import com.buildone.dulado.interactor.ICheckoutInteractor;
 import com.buildone.dulado.interactor.IProductInteractor;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alessandro Pryds on 06/05/2017.
@@ -15,14 +21,16 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class AddProductPresenter implements AddProductContract.Presenter {
     private AddProductContract.View view;
-    private IProductInteractor interactor;
+    private IProductInteractor productInteractor;
+    private ICheckoutInteractor checkoutInteractor;
     private CompositeDisposable disposable;
     private ArrayList<String> items;
     private int selectedPosition;
 
-    public AddProductPresenter(AddProductContract.View view, IProductInteractor interactor, @Named("photoUri") final String photoUri) {
+    public AddProductPresenter(AddProductContract.View view, IProductInteractor productInteractor, ICheckoutInteractor checkoutInteractor, @Named("photoUri") final String photoUri) {
         this.view = view;
-        this.interactor = interactor;
+        this.productInteractor = productInteractor;
+        this.checkoutInteractor = checkoutInteractor;
         this.items = new ArrayList<String>(){{
             add(photoUri);
             add("");
@@ -35,6 +43,8 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     @Override
     public void start() {
         view.initToolbar();
+        view.hideOnlinePaymentLoading();
+        view.hideOnlinePaymentCalculatedValue();
         view.initPhotosRecyclerView(items);
         initSubscriptions();
     }
@@ -114,7 +124,35 @@ public class AddProductPresenter implements AddProductContract.Presenter {
     }
 
     @Override
-    public void enableOnlinePayment(boolean checked) {
+    public void enableOnlinePayment(boolean checked, float price) {
+        if(price == 0){
+            view.showPriceNullError();
+            return;
+        }
+        if(checked){
+            view.showOnlinePurchaseLoading();
+            disposable.add(checkoutInteractor.calculateTaxOnlinePayment(price)
+                    .delay(1, TimeUnit.SECONDS)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableObserver<Double>() {
+                        @Override
+                        public void onNext(@NonNull Double value) {
+                            view.hideOnlinePaymentLoading();
+                            view.showOnlinePaymentCalcultedValue(value);
+                        }
 
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            view.hideOnlinePaymentLoading();
+                            view.uncheckOnlinePayment();
+                           // view.showNetworkError();
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    }));
+        }
     }
 }

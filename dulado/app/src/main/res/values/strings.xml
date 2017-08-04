@@ -42,7 +42,7 @@
     <string name="label_payment_methods">Formas de pagamento</string>
     <string name="label_delivery_methods">Formas de entrega</string>
     <string name="option_payment_online">Aceito o recebimento de pagamento on-line</string>
-    <string name="placeholder_online_payment_value" formatted="false">Você receberá %s em sua carteira se o produto for pago pelos meios de pagamento on-line</string>
+    <string name="placeholder_online_payment_value" formatted="false">Você receberá R$ %s em sua carteira se o produto for pago pelos meios de pagamento on-line</string>
     <string name="button_payment_how_it_works">Como funciona o pagamento online?</string>
     <string name="hint_shipping_method">Selecione os tipos de entrega disponiveis para esse produto</string>
     <string name="option_shipping_pickup">Retirada em mãos</string>
@@ -91,8 +91,9 @@
     <string name="label_product_quantity">Quantas unidades do produto?</string>
     <string name="label_subtotal">Subtotal</string>
     <string name="text_price_empty">R$ 0,00</string>
+    <string name="text_price" formatted="false">R$ %s</string>
     <string name="label_shipping">Frete</string>
-    <string name="label_cupon">Cupom</string>
+    <string name="label_cupon">Desconto</string>
     <string name="text_order_total">Total</string>
     <string name="label_order_status">Status do pedido</string>
     <string name="label_waiting_accept_order">O seu pedido foi realizado e o vendedor foi notificado.\nAguarde o vendedor confirmar o seu pedido.</string>
@@ -103,4 +104,10 @@
     <string name="dialog_title_finishing_payment">Pagamento</string>
     <string name="label_payment_confirmed_status">Pagamento confirmado</string>
     <string name="label_order_accepted">O seu pedido já foi separado pelo vendedor. Para confirmar, realize o pagamento.</string>
+    <string name="payment_info_secure">Sua informação está segura</string>
+    <string name="payment_info_secure_desc">Nós não venderemos ou alugaremos suas informações pessoais de contato para qualquer finalidade de marketing.</string>
+    <string name="payment_checkout_secure">Checkout seguro</string>
+    <string name="payment_checkout_secure_desc">Todas informações são criptografadas e transmitidas sem nenhum risco utilizando um protocolo SSL. Pode confirar na gente!</string>
+    <string name="sample_order_id">Pedido: AX0112</string>
+    <string name="error_price_null">Insira o preço do produto</string>
 </resources>

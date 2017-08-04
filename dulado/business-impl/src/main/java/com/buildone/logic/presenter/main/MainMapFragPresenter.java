@@ -116,7 +116,7 @@ public class MainMapFragPresenter implements MainMapContract.Presenter {
             if (mapReady) {
                 view.enableMapInteraction();
             }
-            view.showToastMessage("Permission Granted");
+            //view.showToastMessage("Permission Granted");
             view.initLocationService();
             return;
         }

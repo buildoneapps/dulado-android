@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/hint_product_price"
-                android:inputType="number"
+                android:inputType="numberDecimal|numberSigned"
                 android:padding="16dp"
                 android:textSize="14sp" />
 

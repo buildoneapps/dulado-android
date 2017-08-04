@@ -1,40 +1,52 @@
 package com.buildone.dulado.ui.activity.checkout;
 
-        import android.graphics.PorterDuff;
-        import android.os.Bundle;
-        import android.support.v4.content.ContextCompat;
-        import android.support.v7.app.AlertDialog;
-        import android.support.v7.widget.Toolbar;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.ProgressBar;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
+import android.graphics.PorterDuff;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
-        import com.buildone.dulado.R;
-        import com.buildone.dulado.application.AppConstants;
-        import com.buildone.dulado.contracts.CheckoutOverviewContract;
-        import com.buildone.dulado.parcel.ProductParcel;
-        import com.buildone.dulado.ui.activity.BaseActivity;
-        import com.bumptech.glide.Glide;
+import com.buildone.dulado.R;
+import com.buildone.dulado.application.AppConstants;
+import com.buildone.dulado.contracts.CheckoutOverviewContract;
+import com.buildone.dulado.parcel.ProductParcel;
+import com.buildone.dulado.ui.activity.BaseActivity;
+import com.bumptech.glide.Glide;
+import com.transitionseverywhere.ChangeBounds;
+import com.transitionseverywhere.Slide;
+import com.transitionseverywhere.Transition;
+import com.transitionseverywhere.TransitionManager;
 
-        import java.util.List;
+import java.util.List;
+import java.util.Locale;
 
-        import javax.inject.Inject;
+import javax.inject.Inject;
 
-        import butterknife.BindView;
-        import butterknife.BindViews;
-        import butterknife.ButterKnife;
-        import butterknife.OnClick;
-        import dagger.android.AndroidInjection;
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 
 public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOverviewContract.View {
 
+    @BindView(R.id.root)
+    ScrollView root;
     @BindView(R.id.ivPhoto)
     ImageView ivPhoto;
     @BindView(R.id.tvProductName)
@@ -126,9 +138,25 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
     ImageButton btnConfirmCoupon;
     @BindView(R.id.container_coupon)
     RelativeLayout containerCoupon;
+    @BindView(R.id.couponProgress)
+    ProgressBar couponProgress;
+    @BindView(R.id.container_payment_info)
+    LinearLayout containerPaymentInfo;
+    @BindView(R.id.ivPaymentApproved)
+    ImageView ivPaymentApproved;
+
+    @BindView(R.id.container_review_title)
+    LinearLayout containerReviewTitle;
+    @BindView(R.id.container_delivery_title)
+    LinearLayout containerDeliveryTitle;
+    @BindView(R.id.container_seller_title)
+    LinearLayout containerSellerTitle;
+
 
     private ProductParcel product;
     private AlertDialog dialog;
+    private int shippingMethod;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +167,6 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
         ButterKnife.bind(this);
         AndroidInjection.inject(this);
         presenter.start();
-
     }
 
     @Override
@@ -158,6 +185,11 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
     @Override
     public void setProductTag(String tags) {
         tvProducTags.setText(tags);
+    }
+
+    @Override
+    public void setProductPhoto(String photoUrl) {
+        Glide.with(this).load(photoUrl).centerCrop().into(ivPhoto);
     }
 
     @Override
@@ -203,13 +235,49 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
             case 2:
                 tvPaymentStatus.setVisibility(View.VISIBLE);
                 showPaymentButton();
+                containerPaymentInfo.setVisibility(View.VISIBLE);
+                root.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        root.smoothScrollTo(0,root.getBottom());
+                    }
+                });
                 break;
             case 3:
-                deliveryTime.setVisibility(View.VISIBLE);
-                sellerAddress.setVisibility(View.VISIBLE);
+                Transition transition = null;
+                transition = new Slide(Gravity.START);
+                transition.setDuration(500);
+                transition.setInterpolator(new AccelerateDecelerateInterpolator());
+                switch (shippingMethod){
+                    case 0:
+                        transition.addTarget(deliveryTime);
+                        transition.addTarget(containerDeliveryTitle);
+                        break;
+                    case 1:
+                        transition.addTarget(containerSellerTitle);
+                        transition.addTarget(mapView);
+                        transition.addTarget(sellerAddress);
+                        break;
+                }
+                transition.addTarget(containerReviewTitle);
+                transition.addTarget(containerReview);
+                TransitionManager.beginDelayedTransition(root, transition);
+                switch (shippingMethod){
+                    case 0:
+                        deliveryTime.setVisibility(View.VISIBLE);
+                        containerDeliveryTitle.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        containerSellerTitle.setVisibility(View.VISIBLE);
+                        sellerAddress.setVisibility(View.VISIBLE);
+                        Glide.with(this).load("https://tr1.cbsistatic.com/hub/i/r/2014/07/09/5ddb5529-bdc9-4656-913d-8cc299ea5e15/resize/770x/245bc93953d16dbfc16d18dd7a6c98af/staticmapgoogle0514.png").centerCrop().into(mapView);
+                        mapView.setVisibility(View.VISIBLE);
+                        break;
+                }
+                containerReviewTitle.setVisibility(View.VISIBLE);
+                containerReview.setVisibility(View.VISIBLE);
                 break;
             case 4:
-                containerReview.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -223,6 +291,7 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
                 statusDelivery.setEnabled(false);
                 statusPaymentMethod.setEnabled(false);
                 hidePaymentMethod();
+                getSupportActionBar().setTitle(getString(R.string.sample_order_id));
                 tvOrderStatus.setText(getString(R.string.label_waiting_accept_order));
                 break;
             case 1:
@@ -231,10 +300,27 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
                 statusOrder.setEnabled(false);
                 break;
             case 2:
+                Animation anim = new ScaleAnimation(
+                    0.01f, 0.85f, // Start and end values for the X axis scaling
+                    0.01f, 0.85f, // Start and end values for the Y axis scaling
+                    Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
+                    Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
+                anim.setFillAfter(true); // Needed to keep the result of the animation
+                anim.setDuration(700);
+                ivPaymentApproved.startAnimation(anim);
+                ivPaymentApproved.setVisibility(View.VISIBLE);
                 tvPaymentStatus.setText(getString(R.string.label_payment_confirmed_status));
                 tvPaymentStatus.setTextColor(ContextCompat.getColor(this, R.color.blue_800));
                 statusPayment.setEnabled(false);
+                containerPaymentInfo.setVisibility(View.GONE);
                 hidePaymentButton();
+
+                Transition transition = new ChangeBounds();
+                transition.setDuration(500);
+                transition.setInterpolator(new AccelerateDecelerateInterpolator());
+                transition.addTarget(tvOrderStatus);
+                TransitionManager.beginDelayedTransition(root, transition);
+                tvOrderStatus.setVisibility(View.GONE);
                 break;
             case 3:
                 statusDelivering.setEnabled(false);
@@ -312,7 +398,6 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
     public void setConfirmOrderProgressVisible(boolean visible) {
         confirmOrderProgress.setVisibility(visible ? View.VISIBLE : View.GONE);
         confirmOrderProgress.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.blue_900), PorterDuff.Mode.SRC_IN);
-
     }
 
     @Override
@@ -331,6 +416,54 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
     @Override
     public void hideCouponContainer() {
         containerCoupon.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setTotal(float value) {
+        totalPrice.setText(String.format(getString(R.string.text_price),String.format(Locale.getDefault(),"%.2f",value)));
+    }
+
+    @Override
+    public void setSubtotal(float value) {
+        productPrice.setText(String.format(getString(R.string.text_price),String.format(Locale.getDefault(),"%.2f",value)));
+    }
+
+    @Override
+    public void setShippingPrice(float value) {
+        shippingPrice.setText(String.format(getString(R.string.text_price),String.format(Locale.getDefault(),"%.2f",value)));
+
+    }
+
+    @Override
+    public void setDiscount(float value) {
+        cupomPrice.setText(String.format(getString(R.string.text_price),String.format(Locale.getDefault(),"%.2f",value)));
+    }
+
+    @Override
+    public void showCouponProgress() {
+        btnConfirmCoupon.setVisibility(View.GONE);
+        couponProgress.setVisibility(View.VISIBLE);
+        couponProgress.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.blue_900), PorterDuff.Mode.SRC_IN);
+    }
+
+    @Override
+    public void hideCouponProgress() {
+        couponProgress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showCouponConfirmedIcon() {
+        btnConfirmCoupon.setVisibility(View.VISIBLE);
+        btnConfirmCoupon.setColorFilter(ContextCompat.getColor(this,R.color.product_price_text_color));
+        containerCoupon.setBackground(ContextCompat.getDrawable(this,R.drawable.shape_rectangle_round_corners_grey_n_green));
+        btnConfirmCoupon.setEnabled(false);
+        etCoupon.setEnabled(false);
+    }
+
+    @Override
+    public void blockShippingButtons() {
+        btnPickup.setEnabled(false);
+        btnDelivery.setEnabled(false);
     }
 
     @OnClick({R.id.btnDecrease,
@@ -354,9 +487,11 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
                 presenter.insertCupon();
                 break;
             case R.id.btnDelivery:
+                shippingMethod = 0;
                 presenter.selectDelivery();
                 break;
             case R.id.btnPickup:
+                shippingMethod = 1;
                 presenter.selectPickup();
                 break;
             case R.id.btnConfirm:
@@ -369,6 +504,7 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
                 presenter.attemptToPurchase();
                 break;
             case R.id.btnConfirmCoupon:
+                presenter.attemptToApplyCoupon();
                 break;
         }
     }
@@ -386,8 +522,8 @@ public class CheckoutOverviewActivity extends BaseActivity implements CheckoutOv
     };
 
     @OnClick({R.id.container_credit_card, R.id.container_debit_card, R.id.container_account_debit, R.id.container_boleto, R.id.container_money})
-    public void onPaymentTouched(View view){
-        switch (view.getId()){
+    public void onPaymentTouched(View view) {
+        switch (view.getId()) {
             case R.id.container_credit_card:
                 presenter.selectPaymentMethod(0);
                 break;
