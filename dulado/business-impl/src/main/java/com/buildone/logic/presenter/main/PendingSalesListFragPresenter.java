@@ -1,7 +1,7 @@
 package com.buildone.logic.presenter.main;
 
 import com.buildone.dulado.contracts.PendingSalesContract;
-import com.buildone.dulado.event.OnProductAddedEvent;
+import com.buildone.dulado.event.OnPendingSaleStateChangedEvent;
 import com.buildone.dulado.interactor.IProductInteractor;
 import com.buildone.dulado.model.PendingSaleObject;
 import com.buildone.dulado.model.SearchObject;
@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -27,36 +26,37 @@ public class PendingSalesListFragPresenter implements PendingSalesContract.Prese
     private IProductInteractor interactor;
     private PendingSalesContract.View view;
     private CompositeDisposable subscriptions;
-    private ArrayList<SearchObject> loadedProducts;
+    private ArrayList<PendingSaleObject> pendingSales;
 
     @Inject
     public PendingSalesListFragPresenter(PendingSalesContract.View view, IProductInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
-        this.loadedProducts = new ArrayList<>();
     }
 
     @Override
     public void start() {
         initSubscriptions();
         view.initListRecyclerView();
+        pendingSales = new ArrayList<>();
         loadProducts();
+
     }
 
     @Override
     public void loadProducts() {
-        view.showLoading();
+        view.showProgress();
         subscriptions.add(interactor.getProducts()
-                .delay(5, TimeUnit.SECONDS)
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<ArrayList<SearchObject>>() {
                     @Override
                     public void onNext(@NonNull ArrayList<SearchObject> searchObjects) {
-                        loadedProducts = searchObjects;
-                        ArrayList<PendingSaleObject> arrayList = new ArrayList<PendingSaleObject>();
-                        arrayList.add(new PendingSaleObject());
-                        view.populateListRecyclerView(arrayList);
+                        pendingSales.add(PendingSaleObject.createTest());
+                        view.populateListRecyclerView(pendingSales);
+                        view.hideEmptyMessage();
+                        view.hideProgress();
                     }
 
                     @Override
@@ -73,22 +73,45 @@ public class PendingSalesListFragPresenter implements PendingSalesContract.Prese
     @Override
     public void initSubscriptions() {
         subscriptions = new CompositeDisposable();
-        subscriptions.add(RxBus.getInstance().getEvents().subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(@NonNull Object o) throws Exception {
-                if(o instanceof OnProductAddedEvent){
-                    OnProductAddedEvent event = (OnProductAddedEvent) o;
-                    //loadedProducts.add(0,event.getProductAdded());
+        subscriptions.add(RxBus.getInstance().getEvents().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Object>() {
+                    @Override
+                    public void onNext(@NonNull Object o) {
+                        if (o instanceof OnPendingSaleStateChangedEvent) {
+                            OnPendingSaleStateChangedEvent event = (OnPendingSaleStateChangedEvent) o;
+                            int index = pendingSales.indexOf(event.getPendingSale());
+                            pendingSales.remove(index);
+                            view.removeItem(index);
 
-                    //view.populateListRecyclerView(loadedProducts);
-                }
-            }
-        }));
+                            if (pendingSales.size() == 0) {
+                                view.showEmptyMessage();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+
+                }));
+    }
+
+    @Override
+    public void refreshList() {
+        loadProducts();
     }
 
     @Override
     public void dispose() {
-        if(!isDisposed()){
+        if (!isDisposed()) {
             subscriptions.dispose();
         }
     }

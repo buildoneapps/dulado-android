@@ -14,13 +14,27 @@ import io.reactivex.disposables.Disposable;
 public interface PendingSalesContract {
     interface View extends BaseView {
         void initListRecyclerView();
+
         void populateListRecyclerView(ArrayList<PendingSaleObject> items);
+
         void showEmptyMessage();
+
+        void removeItem(int index);
+
+        void hideEmptyMessage();
+
+        void hideProgress();
+
+        void showProgress();
     }
 
-    interface Presenter extends Disposable{
+    interface Presenter extends Disposable {
         void start();
+
         void loadProducts();
+
         void initSubscriptions();
+
+        void refreshList();
     }
 }

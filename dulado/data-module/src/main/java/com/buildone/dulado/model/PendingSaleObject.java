@@ -12,6 +12,15 @@ public class PendingSaleObject {
     private String tag;
     private int id;
 
+    public PendingSaleObject() {
+    }
+
+    public PendingSaleObject(String productName, String imageUrl, float price) {
+        this.productName = productName;
+        this.imageUrl = imageUrl;
+        this.price = price;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -35,4 +44,9 @@ public class PendingSaleObject {
     public int getId() {
         return id;
     }
+
+    public static PendingSaleObject createTest(){
+        return  new PendingSaleObject("Bala de chocolate","http://imagens.gimba.com.br/objetosmidia/ExibirObjetoMidia?Id=15422",0.10f);
+    }
+
 }

@@ -8,8 +8,18 @@ import com.buildone.dulado.model.PendingSaleObject;
 
 public class OnPendingSaleStateChangedEvent {
     private final PendingSaleObject pendingSale;
+    private boolean accepted;
 
-    public OnPendingSaleStateChangedEvent(PendingSaleObject pendingSale) {
+    public OnPendingSaleStateChangedEvent(PendingSaleObject pendingSale, boolean accepted) {
         this.pendingSale = pendingSale;
+        this.accepted = accepted;
+    }
+
+    public PendingSaleObject getPendingSale() {
+        return pendingSale;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
     }
 }

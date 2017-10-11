@@ -121,10 +121,14 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
         MenuInflater inflater = getMenuInflater();
         switch (viewPager.getCurrentItem()) {
             case 0:
+            case 1:
                 inflater.inflate(R.menu.menu_main, menu);
                 menu.findItem(R.id.action_map).setVisible(showMapIcon);
                 menu.findItem(R.id.action_list).setVisible(inGridMode);
                 menu.findItem(R.id.action_grid).setVisible(!inGridMode);
+                break;
+            case 2:
+                inflater.inflate(R.menu.menu_pending_sale, menu);
                 break;
         }
         return true;

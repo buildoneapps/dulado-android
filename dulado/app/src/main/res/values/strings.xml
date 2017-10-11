@@ -114,4 +114,6 @@
     <string name="menu_camera">Anunciar</string>
     <string name="menu_grid">Mais opções</string>
     <string name="menu_home">Início</string>
+    <string name="label_empty_pending_sales">Você não tem nenhum pedido pendente.</string>
+    <string name="menu_refresh_text">Atualizar</string>
 </resources>

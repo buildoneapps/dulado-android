@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
@@ -32,11 +35,16 @@ public class PendingSalesListFragment extends BaseFragment implements PendingSal
     @Inject
     PendingSalesContract.Presenter presenter;
 
-    @BindView(R.id.rvNear)
-    RecyclerView rvNear;
+    @BindView(R.id.rvPending)
+    RecyclerView rvPending;
+    @BindView(R.id.progress)
+    ProgressBar progress;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
 
     private Unbinder unbinder;
     private FlexibleAdapter<PendingSaleHolder> listAdapter;
+    private ArrayList<PendingSaleHolder> holders;
 
     //region Android Lifecycle
     public PendingSalesListFragment() {
@@ -61,9 +69,9 @@ public class PendingSalesListFragment extends BaseFragment implements PendingSal
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_pending_list, container, false);
         unbinder = ButterKnife.bind(this, view);
-
+        setHasOptionsMenu(true);
         presenter.start();
         return view;
     }
@@ -80,21 +88,30 @@ public class PendingSalesListFragment extends BaseFragment implements PendingSal
         super.onDestroy();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_update:
+                presenter.refreshList();
+                break;
+        }
+        return true;
+    }
     //endregion
 
     //region PendingSalesContract.View
     @Override
     public void initListRecyclerView() {
-        rvNear.setHasFixedSize(true);
-        rvNear.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        rvPending.setHasFixedSize(true);
+        rvPending.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         listAdapter = new FlexibleAdapter<>();
-        rvNear.setAdapter(listAdapter);
+        rvPending.setAdapter(listAdapter);
 
     }
 
     @Override
     public void populateListRecyclerView(ArrayList<PendingSaleObject> items) {
-        ArrayList<PendingSaleHolder> holders = new ArrayList<>();
+        holders = new ArrayList<>();
         for (PendingSaleObject object : items) {
             holders.add(new PendingSaleHolder(getActivity(), object));
         }
@@ -103,7 +120,29 @@ public class PendingSalesListFragment extends BaseFragment implements PendingSal
 
     @Override
     public void showEmptyMessage() {
+        tvEmpty.setVisibility(View.VISIBLE);
+    }
 
+    @Override
+    public void removeItem(int index) {
+        holders.remove(index);
+        listAdapter.notifyItemRemoved(index);
+        listAdapter.setItems(holders);
+    }
+
+    @Override
+    public void hideEmptyMessage() {
+        tvEmpty.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgress() {
+        progress.setVisibility(View.VISIBLE);
     }
 
     //endregion

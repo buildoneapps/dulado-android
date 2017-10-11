@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Alessandro Pryds on 08/10/2017.
@@ -27,6 +28,8 @@ public class PendingSaleHolder implements FlexibleHolder {
 
     @BindView(R.id.ivProductPhoto)
     ImageView ivProductPhoto;
+    @BindView(R.id.ivUserPhoto)
+    CircleImageView userPhoto;
     @BindView(R.id.tvProductName)
     TextView tvProductName;
     @BindView(R.id.tvPrice)
@@ -45,12 +48,6 @@ public class PendingSaleHolder implements FlexibleHolder {
         return R.layout.recycler_pending_sale_item;
     }
 
-    @Override
-    public void recycle() {
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-    }
 
     @Override
     public void displayView(View rootView) {
@@ -58,13 +55,22 @@ public class PendingSaleHolder implements FlexibleHolder {
         tvProductName.setText(pendingSale.getProductName());
         tvPrice.setText(String.format(context.getString(R.string.text_price), String.format(Locale.getDefault(), "%.2f", pendingSale.getPrice())));
         Glide.with(context).load(pendingSale.getImageUrl()).centerCrop().into(ivProductPhoto);
+        Glide.with(context).load("http://is4.mzstatic.com/image/thumb/Purple111/v4/60/65/e9/6065e9a4-8628-d25d-da1f-b432264c7543/source/200x200bb.jpg").into(userPhoto);
     }
 
-    @OnClick({R.id.ivProductPhoto})
+    @Override
+    public void recycle() {
+
+    }
+
+    @OnClick({R.id.btn_cancel, R.id.btn_accept})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ivProductPhoto:
-                RxBus.getInstance().publish(new OnPendingSaleStateChangedEvent(pendingSale));
+            case R.id.btn_cancel:
+                RxBus.getInstance().publish(new OnPendingSaleStateChangedEvent(pendingSale, false));
+                break;
+            case R.id.btn_accept:
+                RxBus.getInstance().publish(new OnPendingSaleStateChangedEvent(pendingSale, true));
                 break;
         }
     }
