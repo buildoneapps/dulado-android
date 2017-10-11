@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.buildone.dulado.ui.fragments.MainListFragment;
 import com.buildone.dulado.ui.fragments.MainMapFragment;
+import com.buildone.dulado.ui.fragments.PendingSalesListFragment;
 
 /**
  * Created by Alessandro Pryds on 07/05/2017.
@@ -22,6 +23,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
             return MainMapFragment.newInstance();
         case 1:
             return MainListFragment.newInstance();
+        case 2:
+            return PendingSalesListFragment.newInstance();
         default:
             return null;
     }
@@ -29,6 +32,6 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }

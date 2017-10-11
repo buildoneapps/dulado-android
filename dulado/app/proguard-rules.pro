@@ -137,3 +137,8 @@
 
 #dagger2
 -dontwarn com.google.errorprone.annotations.*
+
+#Bottom Nav
+-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+    boolean mShiftingMode;
+}

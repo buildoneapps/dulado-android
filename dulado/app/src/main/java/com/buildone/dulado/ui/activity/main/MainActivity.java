@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,10 +17,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.babic.filip.flexibleadapter.FlexibleAdapter;
 import com.buildone.dulado.R;
@@ -35,6 +36,7 @@ import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.adapter.holder.LiveHolder;
 import com.buildone.dulado.ui.adapter.viewpager.MainPagerAdapter;
+import com.buildone.dulado.utils.BottomNavigationHelper;
 import com.buildone.dulado.utils.CameraIntentHelper;
 import com.buildone.dulado.utils.CameraIntentHelperCallback;
 import com.buildone.dulado.utils.NonSwipeableViewPager;
@@ -46,6 +48,7 @@ import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.Slide;
 import com.transitionseverywhere.Transition;
 import com.transitionseverywhere.TransitionManager;
+import com.transitionseverywhere.TransitionSet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +59,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 
 public class MainActivity extends NavDrawerBaseActivity implements MainContract.View, CameraIntentHelperCallback {
@@ -81,8 +83,8 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     NonSwipeableViewPager viewPager;
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
-    @BindView(R.id.container_create_ad)
-    LinearLayout containerCreateAd;
+    @BindView(R.id.bottomNav)
+    BottomNavigationView bottomNav;
     @BindView(R.id.liveProgress)
     ProgressBar liveProgress;
 
@@ -117,10 +119,14 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        menu.findItem(R.id.action_map).setVisible(showMapIcon);
-        menu.findItem(R.id.action_list).setVisible(inGridMode);
-        menu.findItem(R.id.action_grid).setVisible(!inGridMode);
+        switch (viewPager.getCurrentItem()) {
+            case 0:
+                inflater.inflate(R.menu.menu_main, menu);
+                menu.findItem(R.id.action_map).setVisible(showMapIcon);
+                menu.findItem(R.id.action_list).setVisible(inGridMode);
+                menu.findItem(R.id.action_grid).setVisible(!inGridMode);
+                break;
+        }
         return true;
     }
 
@@ -165,13 +171,13 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch(requestCode){
+        switch (requestCode) {
             case REQUEST_CODE_ADD_PRODUCT:
                 ProductSearchParcel parcel = (ProductSearchParcel) data.getExtras().get(AppConstants.INTENT_TAG_PRODUCT_SEARCH_OBJECT);
                 presenter.addProduct(parcel.getSearchObject());
                 break;
             default:
-                cameraHelper.onActivityResult(requestCode,resultCode,data);
+                cameraHelper.onActivityResult(requestCode, resultCode, data);
                 break;
         }
     }
@@ -191,6 +197,7 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     public void initViewPager() {
         vpAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(vpAdapter);
+        viewPager.setOffscreenPageLimit(4);
         viewPager.setCurrentItem(0);
     }
 
@@ -238,8 +245,20 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
-    public void navigateToChatActivity(int productId) {
+    public void navigateToChatActivity(SearchObject product, String phoneNumber) {
+        try {
+            phoneNumber = phoneNumber.replace("+", "").replace(" ", "");
 
+            Intent sendIntent = new Intent("android.intent.action.MAIN");
+            sendIntent.putExtra("jid", phoneNumber + "@s.whatsapp.net");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Oi tudo bem? Me interessei pelo(a) " + product.getProductName() + ", mas tenho uma dúvida: ");
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.setPackage("com.whatsapp");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Error/n" + e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -296,6 +315,55 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
     }
 
     @Override
+    public void setupBottomNavigation() {
+        BottomNavigationHelper.disableShiftMode(bottomNav);
+        BottomNavigationHelper.removeTextLabel(bottomNav, R.id.menu_camera);
+        BottomNavigationHelper.removeTextLabel(bottomNav, R.id.menu_grid);
+        BottomNavigationHelper.removeTextLabel(bottomNav, R.id.menu_home);
+        BottomNavigationHelper.removeTextLabel(bottomNav, R.id.menu_inbox);
+        BottomNavigationHelper.removeTextLabel(bottomNav, R.id.menu_profile);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_home:
+                        viewPager.setCurrentItem(0);
+                        Slide slideIn = new Slide(Gravity.RIGHT);
+                        ChangeBounds boundsIn = new ChangeBounds();
+                        TransitionSet setIn = new TransitionSet()
+                                .addTransition(slideIn)
+                                .addTransition(boundsIn);
+
+                        TransitionManager.beginDelayedTransition((ViewGroup) findViewById(R.id.root), setIn);
+                        rvLive.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.menu_grid:
+                        viewPager.setCurrentItem(2);
+                        Slide slide = new Slide(Gravity.TOP);
+                        ChangeBounds bounds = new ChangeBounds();
+                        TransitionSet set = new TransitionSet()
+                                .addTransition(slide)
+                                .addTransition(bounds);
+
+                        TransitionManager.beginDelayedTransition((ViewGroup) findViewById(R.id.root), set);
+                        rvLive.setVisibility(View.GONE);
+                        break;
+                    case R.id.menu_camera:
+                        presenter.openCamera();
+                        break;
+                    case R.id.menu_inbox:
+                        break;
+                    case R.id.menu_profile:
+                        break;
+                }
+                invalidateOptionsMenu();
+                return true;
+            }
+        });
+    }
+
+
+    @Override
     public void switchToMap(boolean inGridMode) {
         this.inGridMode = inGridMode;
         viewPager.setCurrentItem(MAP_FRAG_POS);
@@ -340,30 +408,30 @@ public class MainActivity extends NavDrawerBaseActivity implements MainContract.
 
     @Override
     public void showCreateAdButton() {
-        Transition transition = new Slide(Gravity.BOTTOM)
+      /*  Transition transition = new Slide(Gravity.BOTTOM)
                 .setDuration(500)
                 .setInterpolator(new AccelerateInterpolator())
                 .addTarget(containerCreateAd);
         TransitionManager.beginDelayedTransition(containerCreateAd, transition);
-        containerCreateAd.setVisibility(View.VISIBLE);
+        containerCreateAd.setVisibility(View.VISIBLE);*/
     }
 
     @Override
     public void hideCreateAdButton() {
-        Transition transition = new Slide(Gravity.BOTTOM)
+       /* Transition transition = new Slide(Gravity.BOTTOM)
                 .setDuration(500)
                 .setInterpolator(new AccelerateInterpolator())
                 .addTarget(containerCreateAd);
         TransitionManager.beginDelayedTransition(containerCreateAd, transition);
-        containerCreateAd.setVisibility(View.GONE);
+        containerCreateAd.setVisibility(View.GONE);*/
     }
     //endregion
 
     //region Button Actions
-    @OnClick(R.id.container_create_ad)
+   /* @OnClick(R.id.container_create_ad)
     protected void onCreateAdTouched() {
         presenter.onButtonCreateAdTouched();
-    }
+    }*/
     //endregion
 
     //region CameraIntentHelperCallback

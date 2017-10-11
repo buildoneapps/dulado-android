@@ -110,4 +110,8 @@
     <string name="payment_checkout_secure_desc">Todas informações são criptografadas e transmitidas sem nenhum risco utilizando um protocolo SSL. Pode confirar na gente!</string>
     <string name="sample_order_id">Pedido: AX0112</string>
     <string name="error_price_null">Insira o preço do produto</string>
+    <string name="menu_inbox">Caixa de mensagens</string>
+    <string name="menu_camera">Anunciar</string>
+    <string name="menu_grid">Mais opções</string>
+    <string name="menu_home">Início</string>
 </resources>

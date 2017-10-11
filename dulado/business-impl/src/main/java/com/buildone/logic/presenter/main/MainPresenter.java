@@ -58,6 +58,7 @@ public class MainPresenter implements MainContract.Presenter {
         //view.showToastMessage(String.valueOf(someId));
         view.initLiveRecycler();
         view.hideCreateAdButton();
+        view.setupBottomNavigation();
         initSubscriptions();
     }
 
@@ -152,7 +153,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onChatProductTouched(SearchObject product) {
-        view.navigateToChatActivity(product.getId());
+        view.navigateToChatActivity(product, "+5515998560206");
     }
 
     @Override
@@ -175,7 +176,6 @@ public class MainPresenter implements MainContract.Presenter {
         view.setMapButtonVisible(true);
         view.setLiveRecyclerVisible(true);
         view.switchToList(inGridMode);
-
         view.showCreateAdButton();
     }
 
@@ -212,6 +212,11 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void addProduct(SearchObject productAdded) {
         RxBus.getInstance().publish(new OnProductAddedEvent(productAdded));
+    }
+
+    @Override
+    public void openCamera() {
+        view.openCamera();
     }
 
 }

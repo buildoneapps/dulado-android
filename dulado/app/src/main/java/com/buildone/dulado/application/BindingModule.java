@@ -14,6 +14,7 @@ import com.buildone.dulado.components.activity.StoreActivitySubComponent;
 import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
 import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
 import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
+import com.buildone.dulado.components.fragment.PendingSalesFragmentSubComponent;
 import com.buildone.dulado.ui.activity.DiscoverActivity;
 import com.buildone.dulado.ui.activity.EditProfileActivity;
 import com.buildone.dulado.ui.activity.UserProfileActivity;
@@ -25,6 +26,7 @@ import com.buildone.dulado.ui.activity.product.ProductActivity;
 import com.buildone.dulado.ui.activity.store.StoreActivity;
 import com.buildone.dulado.ui.fragments.MainListFragment;
 import com.buildone.dulado.ui.fragments.MainMapFragment;
+import com.buildone.dulado.ui.fragments.PendingSalesListFragment;
 
 import dagger.Binds;
 import dagger.Module;
@@ -97,4 +99,10 @@ public abstract class BindingModule {
     @IntoMap
     @FragmentKey(MainListFragment.class)
     abstract AndroidInjector.Factory<? extends Fragment> bindMainListFragmentInjectorFactory(MainListFragmentSubComponent.Builder builder);
+
+    @Binds
+    @IntoMap
+    @FragmentKey(PendingSalesListFragment.class)
+    abstract AndroidInjector.Factory<? extends Fragment> bindPendingSalesListFragmentInjectorFactory(PendingSalesFragmentSubComponent.Builder builder);
+
 }

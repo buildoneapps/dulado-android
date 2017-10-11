@@ -7,7 +7,7 @@ dependencies {
 ext {
     //Version
     supportLibrary = '25.2.0'
-    dagger = '2.10'
+    dagger = '2.11'
     butterknife = '8.5.1'
     flexibleAdapter = '1.0.2'
     googlePlayVersion = '10.2.1'

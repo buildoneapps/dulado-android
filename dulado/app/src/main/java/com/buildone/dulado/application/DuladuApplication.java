@@ -10,15 +10,15 @@ import com.buildone.dulado.components.application.DaggerDuladuApplicationCompone
 import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasDispatchingActivityInjector;
-import dagger.android.support.HasDispatchingSupportFragmentInjector;
+import dagger.android.HasActivityInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by Alessandro Pryds on 11/04/2017.
  */
 
-public class DuladuApplication extends Application implements HasDispatchingActivityInjector, HasDispatchingSupportFragmentInjector {
+public class DuladuApplication extends Application implements HasSupportFragmentInjector, HasActivityInjector{
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
     @Inject

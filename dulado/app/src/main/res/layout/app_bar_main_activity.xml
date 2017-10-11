@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root"
     android:background="@color/grey_100"
     android:orientation="vertical"
     tools:context="com.buildone.dulado.ui.activity.main.MainActivity">
@@ -36,9 +37,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvLive"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="72dp" />
+                android:layout_height="72dp"
+                android:visibility="gone" />
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
 

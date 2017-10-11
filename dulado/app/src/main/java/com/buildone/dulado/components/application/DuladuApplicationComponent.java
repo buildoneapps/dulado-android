@@ -13,6 +13,7 @@ import com.buildone.dulado.components.activity.StoreActivitySubComponent;
 import com.buildone.dulado.components.activity.UserProfileActivitySubComponent;
 import com.buildone.dulado.components.fragment.MainListFragmentSubComponent;
 import com.buildone.dulado.components.fragment.MainMapFragmentSubComponent;
+import com.buildone.dulado.components.fragment.PendingSalesFragmentSubComponent;
 
 import javax.inject.Singleton;
 
@@ -42,6 +43,7 @@ public interface DuladuApplicationComponent {
             UserProfileActivitySubComponent.class,
             AddProductActivitySubComponent.class,
             EditProfileActivitySubComponent.class,
+            PendingSalesFragmentSubComponent.class,
             MainMapFragmentSubComponent.class,
             MainListFragmentSubComponent.class,
             SearchActivitySubComponent.class,

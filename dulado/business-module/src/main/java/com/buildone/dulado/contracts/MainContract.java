@@ -21,7 +21,7 @@ public interface MainContract {
         void populateLiveRecycler(ArrayList<LiveObject> items);
         void navigateToStoreActivity(int store);
         void navigateToProductActivity(SearchObject searchObject);
-        void navigateToChatActivity(int productId);
+        void navigateToChatActivity(SearchObject productId, String s);
         void navigateToSearchActivity();
         void navigateToAddProductActivity(String photoUri);
 
@@ -41,6 +41,9 @@ public interface MainContract {
 
         void openCamera();
         void showCouldNotTakePhotoMessage();
+
+        void setupBottomNavigation();
+
     }
 
     interface Presenter{
@@ -66,5 +69,7 @@ public interface MainContract {
         void cameraError();
 
         void addProduct(SearchObject productAdded);
+
+        void openCamera();
     }
 }
