@@ -46,7 +46,7 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
         view.uncheckAllPaymentMethods();
         view.setProductName(product.getName());
         view.setProductTag(product.getTags());
-        if(product.getProductImages() != null && product.getProductImages().size() > 0) {
+        if (product.getProductImages() != null && product.getProductImages().size() > 0) {
             view.setProductPhoto(product.getProductImages().get(0));
         }
         view.loadMap();
@@ -79,7 +79,7 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
     public void confirmOrder() {
         view.blockShippingButtons();
         view.setConfirmOrderProgressVisible(true);
-        if(!useCupon){
+        if (!useCupon) {
             view.hideCouponContainer();
         }
         nextStep();
@@ -102,22 +102,23 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
                         view.showPaymentSelected();
                         Observable.timer(4, TimeUnit.SECONDS)
                                 .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread()) .subscribeWith(new DisposableObserver<Long>() {
-                            @Override
-                            public void onNext(@NonNull Long aLong) {
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeWith(new DisposableObserver<Long>() {
+                                    @Override
+                                    public void onNext(@NonNull Long aLong) {
 
-                            }
+                                    }
 
-                            @Override
-                            public void onError(@NonNull Throwable e) {
+                                    @Override
+                                    public void onError(@NonNull Throwable e) {
 
-                            }
+                                    }
 
-                            @Override
-                            public void onComplete() {
-                                nextStep();
-                            }
-                        });
+                                    @Override
+                                    public void onComplete() {
+                                        nextStep();
+                                    }
+                                });
                     }
                 });
     }
@@ -144,7 +145,7 @@ public class CheckoutOverviewPresenter implements CheckoutOverviewContract.Prese
 
     private void updatePrice() {
         float subTotal = product.getPrice() * cartQuantity;
-        discount = subTotal * discountPercent/100;
+        discount = subTotal * discountPercent / 100;
         view.setTotal(subTotal + shippingPrice - discount);
         view.setSubtotal(subTotal);
         view.setDiscount(discount);

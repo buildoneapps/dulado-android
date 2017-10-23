@@ -17,6 +17,7 @@ public class ProductInteractor implements IProductInteractor {
     @Override
     public Observable<ArrayList<SearchObject>> getProducts() {
         ArrayList<SearchObject> objects = new ArrayList<>();
+        objects.add(new SearchObject(1, "Bala de Chocolate", "http://imagens.gimba.com.br/objetosmidia/ExibirObjetoMidia?Id=15422", new SellerObject(1,"https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"),0.10f, "#doce #bala #chocolate"));
         objects.add(new SearchObject(1, "Pão Caseiro", "https://img.cybercook.uol.com.br/imagens/receitas/593/pao-caseiro.jpg?2017", new SellerObject(1,"https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"), 6.50f, "#pao #caseiro #salgado"));
         objects.add(new SearchObject(1, "Mochila Customizada", "https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-15/s750x750/sh0.08/e35/18644806_247549965722065_8052362002602917888_n.jpg", new SellerObject(1,"https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"), 25.00f, "#mochila #custom"));
         objects.add(new SearchObject(1, "Pantufa zumbi", "https://instagram.fsod2-1.fna.fbcdn.net/t51.2885-15/s750x750/sh0.08/e35/18512725_1778767159081839_321805316620550144_n.jpg", new SellerObject(1,"https://s-media-cache-ak0.pinimg.com/avatars/timsinri_1328981577_280.jpg"), 18.00f, "#nerd #pantufa #zumbi"));
